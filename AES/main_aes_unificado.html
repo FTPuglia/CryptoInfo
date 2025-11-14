@@ -66,7 +66,7 @@
             O <strong>AES</strong> (Advanced Encryption Standard) é a cifra de bloco simétrica mais utilizada no mundo, substituindo o DES como padrão. Criado pelos criptógrafos belgas Joan Daemen e Vincent Rijmen (e originalmente nomeado Rijndael), foi adotado pelo governo dos EUA em 2001 (FIPS 197). O AES opera em blocos fixos de 128 bits e suporta chaves de 128, 192 ou 256 bits.
         </p>
         <p class="text-slate-300 mb-4">
-            Ao contrário do DES, o AES não utiliza a Estrutura de Feistel. Ele é baseado em uma <b>Rede de Permutação e Substituição (SPN)</b>, processando o bloco de 128 bits como uma matriz de $4 \times 4$ bytes (o <b>State</b>). O número de rodadas varia de acordo com o tamanho da chave (10, 12 ou 14 rodadas).
+            Ao contrário do DES, o AES não utiliza a Estrutura de Feistel. Ele é baseado em uma <b>Rede de Permutação e Substituição (SPN)</b>, processando o bloco de 128 bits como uma matriz de <i>4 \times 4<i> bytes (o <b>State</b>). O número de rodadas varia de acordo com o tamanho da chave (10, 12 ou 14 rodadas).
         </p>
         <p class="text-slate-300 mb-6">
             O AES é extremamente eficiente em hardware e software e, devido ao seu design robusto e chaves longas (mínimo de 128 bits), é considerado <b>seguro</b> contra ataques de força bruta, sendo o padrão ouro para a maioria das aplicações de segurança atuais.
@@ -79,7 +79,7 @@
     <section id="operacoes-chave" class="content-section-card">
     <h2>As 4 Transformações do AES (Rede SPN)</h2>
     <p class="text-slate-300 mb-6">
-        Cada rodada do AES (exceto a última) aplica quatro transformações sequenciais no bloco de estado ($4 \times 4$ bytes) para garantir a difusão e a confusão.
+        Cada rodada do AES (exceto a última) aplica quatro transformações sequenciais no bloco de estado (<i>4 \times 4</i> bytes) para garantir a difusão e a confusão.
     </p>
 
     <div class="space-y-6">
@@ -107,7 +107,7 @@
                 <span class="text-2xl mr-3 text-cyan-500">&#x271B;</span> 3. MixColumns (Mistura de Colunas)
             </h3>
             <p class="text-slate-300">
-                Esta é a principal operação de <b>difusão</b>. As colunas do estado são transformadas através de uma multiplicação matricial em um campo finito ($GF(2^8)$). Isso garante que cada byte de saída em uma coluna dependa de todos os quatro bytes de entrada da coluna. É omitida na última rodada.
+                Esta é a principal operação de <b>difusão</b>. As colunas do estado são transformadas através de uma multiplicação matricial em um campo finito (<i>GF(2^8)</i>). Isso garante que cada byte de saída em uma coluna dependa de todos os quatro bytes de entrada da coluna. É omitida na última rodada.
             </p>
         </div>
 
@@ -176,7 +176,7 @@
     <section id="simulacao-aes" class="content-section-card">
         <h2>AES Didático: Simulação da Rodada de Transformação</h2>
         <p class="text-slate-300 mb-6">
-            O AES (Rijndael) é baseado em transformações de matrizes. Seu processo envolve várias rodadas, onde o bloco de dados de 128 bits é tratado como uma matriz de $4 \times 4$ bytes (o Estado) e passa pelas quatro transformações principais.
+            O AES (Rijndael) é baseado em transformações de matrizes. Seu processo envolve várias rodadas, onde o bloco de dados de 128 bits é tratado como uma matriz de <i>4 \times 4</i> bytes (o Estado) e passa pelas quatro transformações principais.
         </p>
 
         <p class="text-sm text-slate-400 mb-4">
@@ -450,3 +450,4 @@
 </body>
 
 </html>
+
