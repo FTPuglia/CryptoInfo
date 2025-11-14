@@ -1,0 +1,170 @@
+/* ========================================================================= */
+/* PALETA DE CORES (Padrão do Site):
+/* Fundo Principal (Dark): #1E252C (Azul Ardósia Escuro)
+/* Fundo Secundário: #2C353D (Cinza Metálico)
+/* Texto Geral: #EFEFEF (Branco Suave)
+/* ========================================================================= */
+
+/* ESTILOS GLOBAIS (APLICADOS A TODO O BODY/SITE) */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #1E252C; /* Cor de fundo principal */
+    color: #EFEFEF;     /* Cor do texto geral */
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* CONTAINER PRINCIPAL E SEÇÕES */
+section {
+    padding: 40px 20px;
+    max-width: 1000px; 
+    margin: auto; 
+}
+
+/* CABEÇALHOS DE SEÇÃO */
+section h2 { 
+    color: #00BCD4; /* Cor de destaque (Ciano Turquesa) */
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #2C353D; /* Linha sutil de separação */
+    padding-bottom: 5px;
+}
+
+/* LINKS PADRÃO */
+a {
+    color: #00BCD4; /* Cor de destaque (Ciano Turquesa) */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #00A8BB; /* Ciano mais escuro (Hover) */
+}
+
+/* INPUTS E BOTÕES GLOBAIS */
+input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #00838F; /* Ciano Escuro */
+    background-color: #1E252C; /* Fundo Principal */
+    color: #EFEFEF;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #00BCD4; /* Ciano Turquesa */
+    color: #1E252C;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #00A8BB; /* Ciano mais escuro (Hover) */
+}
+
+/* NAVEGAÇÃO */
+.navbar {
+    background: #2C353D; /* Fundo Secundário */
+    color: #EFEFEF;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #00838F; /* Ciano Escuro */
+}
+
+.navbar h1 {
+    color: #00BCD4; /* Ciano Turquesa */
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar ul li a {
+    color: #EFEFEF;
+    padding: 10px 15px;
+    display: block;
+}
+
+.navbar ul li a:hover {
+    color: #00BCD4; /* Ciano Turquesa */
+}
+
+/* RODAPÉ */
+footer {
+    background: #1E252C; /* Fundo Principal */
+    color: #777;
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid #2C353D; /* Cinza Metálico */
+    font-size: 0.9em;
+}
+
+
+/* ESTILOS ESPECÍFICOS DO DES CRYPTO DEMO (index_des.html) */
+
+.teste-box { 
+    margin-top: 20px; 
+    border: 2px solid #00838F; /* Ciano Escuro */
+    background: #2C353D; /* Fundo Secundário */
+    padding: 20px; 
+    border-radius: 10px; 
+    text-align: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.teste-box input {
+    background-color: #1E252C; /* Fundo principal para inputs */
+    color: #EFEFEF;
+    border: 1px solid #00BCD4; /* Ciano Turquesa */
+}
+
+.teste-box button { 
+    background: #00BCD4; /* Ciano Turquesa */
+    color: #1E252C; 
+    font-weight: bold; 
+}
+
+.teste-box button:hover { 
+    background: #00A8BB; /* Ciano mais escuro (Hover) */
+}
+
+/* SAÍDA DE CÓDIGO/TEXTO */
+pre#saida { 
+    text-align: left; 
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+    background: #1E252C; /* Fundo principal para bloco de saída */
+    color: #FFC107; /* Amarelo Âmbar para saídas de código */
+    padding: 12px; 
+    border-radius: 6px; 
+    min-height: 60px; 
+    border: 1px solid #00838F; /* Ciano Escuro */
+    overflow-x: auto;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.button-group button {
+    margin: 0;
+    flex-grow: 1;
+}

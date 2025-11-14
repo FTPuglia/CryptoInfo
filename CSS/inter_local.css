@@ -1,0 +1,28 @@
+/*
+ * Inter Font Packaging for Offline Use
+ * This contains the @font-face rules required to display Inter.
+ * For true offline use, you would need the WOFF2 files locally
+ * and adjust the src: url() paths.
+ * Since we cannot distribute font files, this CSS file assumes
+ * the user has a system font fallback if the Google CDN is unreachable,
+ * but it still removes the external Google link from the HTML.
+ */
+
+/* If you need the fonts to load reliably offline, you must manually download
+   the woff2 files and place them relative to this CSS file, e.g.,
+   src: url('../fonts/Inter-Regular.woff2') format('woff2');
+*/
+
+/* --- Fallback Definition --- */
+:root {
+    /* Define 'Inter' as a system font fallback */
+    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Ensure body uses the defined font stack */
+body {
+    font-family: var(--font-inter);
+}
+
+/* IMPORTANT: For true offline build, the user MUST manually update
+   this file to point to local font files (woff2/ttf) instead of the Google CDN. */

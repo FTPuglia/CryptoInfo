@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashing e Assinaturas</title>
+    
+    <link rel="icon" type="image/png" href="../logo_azul.png">
+
+    <script src="../CSS/tailwind_local.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <link rel="stylesheet" href="../CSS/inter_local.css">
+
+    <link rel="stylesheet" href="../CSS/estilo_main.css">
+    
+    <style>
+        /* Estilos específicos para a demonstração de Hashing */
+        .hash-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hash-input-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hash-output-box {
+            background-color: #1E252C;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            word-break: break-all;
+            height: 10rem;
+            overflow-y: auto;
+            border: 1px solid var(--color-accent-darker);
+            white-space: pre-wrap; /* Garante que o texto se quebre */
+        }
+        
+        /* Reusing hash-output-box style but allowing dynamic height for hash comparison details */
+        .hash-comparison-details {
+            background-color: #1E252C;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ef4444; /* Borda vermelha para falha */
+            word-break: break-all;
+            height: auto; /* Permite altura dinâmica */
+        }
+
+        .diff-text {
+            color: #FFC107; /* Amarelo Âmbar para caracteres diferentes */
+            font-weight: bold;
+        }
+
+        .integrity-status {
+            font-size: 1.25rem;
+            font-weight: bold;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .status-ok {
+            background-color: rgba(6, 182, 212, 0.2); /* Teal 200 */
+            color: var(--color-accent-lighter);
+            border: 1px solid var(--color-accent);
+        }
+
+        .status-fail {
+            background-color: rgba(239, 68, 68, 0.2); /* Red 500 */
+            color: #ef4444; /* Red 500 */
+            border: 1px solid #ef4444;
+        }
+    </style>
+</head>
+<body class="index-body">
+
+    <div id="three-canvas"></div>
+
+    <div class="navbar fixed top-0 left-0 right-0 z-20 shadow-lg navbar-transparent">
+        <div class="navbar-content max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative z-10">
+            <a href="../index.html" class="flex items-center space-x-2 text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition">
+                <img src="../logo_azul.png" alt="Logo" class="h-8 w-8">
+                <span>CryptoInfo</span>
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
+        <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
+
+        <ul class="space-y-4 text-xl font-medium">
+            <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
+            <li><a href="../DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
+            <li><a href="../DES/simulacao.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Simulação DES Didática</a></li>
+            <li><a href="../Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
+            <li><a href="../RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
+            <li><a href="../Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
+            <li><a href="Hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Funções Hash (SHA/MD5)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Informações Adicionais</strong></li>
+            <li><a href="#" onclick="mostrarAviso('Sobre')" class="text-slate-400 hover:text-cyan-400 transition block py-2 ml-4 text-base">Sobre (Placeholder)</a></li>
+        </ul>
+    </div>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+
+
+    <section id="hashing-assinaturas" class="content-section-card max-w-7xl mx-auto mt-0">
+        <h2>Demonstração de Hashing (SHA-256)</h2>
+        <p class="text-slate-300 mb-6">
+            O hashing é fundamental para a **integridade** e **autenticidade**. Uma função hash (como SHA-256) transforma qualquer entrada em um "resumo" de tamanho fixo.
+        </p>
+
+        <h3 class="text-2xl font-semibold text-cyan-400 mt-8 mb-4 border-b border-slate-600 pb-2">1. Efeito Avalanche</h3>
+        <p class="text-slate-400 mb-4">
+            Mude apenas um caractere em "Documento B" e observe como o hash de saída muda completamente (Efeito Avalanche). O SHA-256 garante um alto nível de confusão.
+        </p>
+
+        <div class="hash-input-group">
+            <div>
+                <label for="inputA" class="block mb-2 text-sm font-medium">Documento A (Original):</label>
+                <textarea id="inputA" rows="5" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" oninput="calculateHashes()" placeholder="A criptografia é essencial para a segurança.">A criptografia é essencial para a segurança.</textarea>
+                <div class="mt-2 text-sm text-slate-400">Hash de A:</div>
+                <div id="hashA" class="hash-output-box">...</div>
+            </div>
+            
+            <div>
+                <label for="inputB" class="block mb-2 text-sm font-medium">Documento B (Modificado):</label>
+                <textarea id="inputB" rows="5" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" oninput="calculateHashes()" placeholder="A criptografia é essencial para a segurança.">A criptografia é essencial para a segurança.</textarea>
+                <div class="mt-2 text-sm text-slate-400">Hash de B:</div>
+                <div id="hashB" class="hash-output-box">...</div>
+            </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold text-cyan-400 mt-12 mb-4 border-b border-slate-600 pb-2">2. Verificação de Integridade (Simulada)</h3>
+        <p class="text-slate-400 mb-4">
+            Simule a verificação da integridade de uma mensagem. O emissor salva o hash original (Passo 1). O destinatário verifica se o hash da mensagem recebida (Passo 2) corresponde ao original.
+        </p>
+
+        <div class="hash-input-group">
+            <div>
+                <label for="integrityMsg" class="block mb-2 text-sm font-medium">Mensagem do Emissor (Antes do Envio):</label>
+                <textarea id="integrityMsg" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Mensagem secreta."></textarea>
+                
+                <button onclick="saveOriginalHash()" class="button-with-shadow w-full mt-4">1. Calcular e Salvar Hash Original</button>
+                <div id="originalHashDisplay" class="mt-2 text-sm text-slate-400 hash-output-box h-auto">Hash Original (SHA-256): Clique acima.</div>
+            </div>
+            
+            <div>
+                <label for="tamperMsg" class="block mb-2 text-sm font-medium">Mensagem Recebida (Destinatário):</label>
+                <textarea id="tamperMsg" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Mensagem secreta."></textarea>
+                
+                <button onclick="verifyIntegrity()" class="button-with-shadow w-full mt-4 bg-yellow-600 hover:bg-yellow-500">2. Verificar Integridade</button>
+                </div>
+        </div>
+        
+        <div id="integrityStatusContainer" class="mt-6">
+            <div id="integrityStatus" class="integrity-status">Aguardando Hash Original...</div>
+            <div id="hashComparisonDetails" class="mt-4 text-sm text-slate-400 hash-comparison-details hidden"></div>
+        </div>
+        
+    </section>
+
+    <footer class="des-page-footer">
+        <p>© 2024 Demonstração de Hashing e Integridade</p>
+    </footer>
+
+    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
+        <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
+            <h3 id="messageTitle" class="text-xl font-bold mb-3 text-cyan-400">Informação</h3>
+            <p id="messageText" class="text-slate-200 mb-4"></p>
+            <button onclick="document.getElementById('messageBox').classList.add('hidden')" class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        // Variável global para armazenar o hash original para o demo de integridade
+        let savedOriginalHash = null;
+
+        /**
+         * Converte um ArrayBuffer de hash em uma string hexadecimal.
+         * @param {ArrayBuffer} buffer - O hash binário.
+         * @returns {string} - A string hexadecimal do hash.
+         */
+        function arrayBufferToHex(buffer) {
+            return Array.from(new Uint8Array(buffer))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        /**
+         * Calcula o SHA-256 de uma string usando a API SubtleCrypto.
+         * @param {string} message - A string a ser hashed.
+         * @returns {Promise<string>} - A promise que resolve com o hash hexadecimal.
+         */
+        async function calculateSHA256(message) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            return arrayBufferToHex(hashBuffer);
+        }
+
+        /**
+         * Compara dois hashes e retorna o HTML formatado com as diferenças destacadas.
+         * @param {string} hash1 - O primeiro hash.
+         * @param {string} hash2 - O segundo hash.
+         * @returns {string} - O HTML da comparação.
+         */
+        function compareHashes(hash1, hash2) {
+            let result = '';
+            for (let i = 0; i < hash1.length; i++) {
+                if (hash1[i] !== hash2[i]) {
+                    // Adiciona a classe diff-text para destacar a mudança
+                    result += `<span class="diff-text">${hash2[i]}</span>`;
+                } else {
+                    result += hash2[i];
+                }
+            }
+            return result;
+        }
+
+        /**
+         * Executa o cálculo e a comparação de hashes para o Efeito Avalanche.
+         */
+        async function calculateHashes() {
+            const inputA = document.getElementById('inputA').value;
+            const inputB = document.getElementById('inputB').value;
+            const hashA_el = document.getElementById('hashA');
+            const hashB_el = document.getElementById('hashB');
+
+            if (inputA.length === 0 || inputB.length === 0) {
+                hashA_el.textContent = '...';
+                hashB_el.textContent = '...';
+                return;
+            }
+
+            try {
+                const hashA = await calculateSHA256(inputA);
+                const hashB = await calculateSHA256(inputB);
+
+                hashA_el.textContent = hashA;
+                // Compara o hash de B com A e destaca as diferenças
+                hashB_el.innerHTML = compareHashes(hashA, hashB);
+                
+            } catch (error) {
+                console.error("Erro ao calcular hash:", error);
+                hashA_el.textContent = 'Erro ao calcular hash.';
+                hashB_el.textContent = 'Erro ao calcular hash.';
+            }
+        }
+        
+        // Inicializa o demo do Efeito Avalanche
+        document.addEventListener('DOMContentLoaded', calculateHashes);
+
+        /* --- Lógica para o Demo de Integridade --- */
+        
+        /**
+         * Calcula o hash da mensagem original e armazena globalmente.
+         */
+        async function saveOriginalHash() {
+            const integrityMsg = document.getElementById('integrityMsg').value;
+            const originalHashDisplay = document.getElementById('originalHashDisplay');
+            const integrityStatus = document.getElementById('integrityStatus');
+            const hashComparisonDetails = document.getElementById('hashComparisonDetails');
+
+
+            if (integrityMsg.trim() === "") {
+                integrityStatus.textContent = "Erro: Digite uma mensagem para salvar.";
+                integrityStatus.className = "integrity-status status-fail";
+                hashComparisonDetails.classList.add('hidden');
+                return;
+            }
+
+            try {
+                savedOriginalHash = await calculateSHA256(integrityMsg);
+                originalHashDisplay.textContent = `Hash Original (SHA-256): ${savedOriginalHash}`;
+                document.getElementById('tamperMsg').value = integrityMsg; // Copia a mensagem para o campo de tampering
+                integrityStatus.textContent = "Hash original salvo. Tente modificar a mensagem ao lado.";
+                integrityStatus.className = "integrity-status status-ok";
+                
+                // Clear and hide comparison details when saving new hash
+                hashComparisonDetails.classList.add('hidden');
+                hashComparisonDetails.innerHTML = '';
+
+            } catch (error) {
+                console.error("Erro ao salvar hash:", error);
+                integrityStatus.textContent = "Erro ao salvar hash.";
+                integrityStatus.className = "integrity-status status-fail";
+            }
+        }
+
+        /**
+         * Verifica se o hash da mensagem modificada corresponde ao hash original salvo.
+         */
+        async function verifyIntegrity() {
+            const tamperMsg = document.getElementById('tamperMsg').value;
+            const integrityStatus = document.getElementById('integrityStatus');
+            const hashComparisonDetails = document.getElementById('hashComparisonDetails');
+
+            // Clear previous details
+            hashComparisonDetails.classList.add('hidden');
+            hashComparisonDetails.innerHTML = '';
+
+            if (!savedOriginalHash) {
+                integrityStatus.textContent = "Erro: Primeiro, salve o Hash Original (Passo 1).";
+                integrityStatus.className = "integrity-status status-fail";
+                return;
+            }
+
+            try {
+                const newHash = await calculateSHA256(tamperMsg);
+
+                if (newHash === savedOriginalHash) {
+                    integrityStatus.textContent = "SUCESSO! Integridade OK. O hash corresponde.";
+                    integrityStatus.className = "integrity-status status-ok";
+                } else {
+                    integrityStatus.textContent = "FALHA! Integridade COMPROMETIDA. Detalhes abaixo.";
+                    integrityStatus.className = "integrity-status status-fail";
+                    
+                    // Display details below the status bar in a full-width box
+                    hashComparisonDetails.innerHTML = `
+                        <p class="font-bold text-lg mb-2 text-red-400">Diferença de Hash</p>
+                        <p class="mb-1 text-slate-300">Hash Original (Emissor):</p>
+                        <div class="font-mono text-cyan-200 break-all">${savedOriginalHash}</div>
+                        <p class="mt-3 mb-1 text-slate-300">Hash Recebido (Destinatário):</p>
+                        <div class="font-mono text-red-400 break-all">${newHash}</div>
+                    `;
+                    hashComparisonDetails.classList.remove('hidden');
+                    hashComparisonDetails.style.borderColor = '#ef4444'; // Apply red border on failure
+                }
+            } catch (error) {
+                console.error("Erro ao verificar integridade:", error);
+                integrityStatus.textContent = "Erro ao verificar integridade.";
+                integrityStatus.className = "integrity-status status-fail";
+            }
+        }
+
+        // Função alert() substituída por modal personalizado
+        window.alert = function(message) {
+            console.warn("Alerta: ", message);
+            const status = document.getElementById('integrityStatus');
+            status.innerHTML = `<span class="text-red-400">[AVISO] ${message}</span>`;
+            status.className = "integrity-status status-fail";
+        };
+    </script>
+    
+    <script src="../JS/main.js"></script>
+</body>
+</html>

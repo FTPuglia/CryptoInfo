@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptografia RSA - Demo & Simulação</title>
+
+    <link rel="icon" type="image/png" href="../logo_azul.png">
+    
+    <script src="../CSS/tailwind_local.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="../CSS/inter_local.css">
+    <link rel="stylesheet" href="../CSS/estilo_main.css">
+    <link rel="stylesheet" href="../CSS/des_styles.css"> 
+
+    </head>
+<body class="index-body">
+
+    <div id="three-canvas"></div>
+
+    <div class="navbar fixed top-0 left-0 right-0 z-20 shadow-lg navbar-transparent">
+        <div class="navbar-content max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative z-10">
+            <a href="../index.html" class="flex items-center space-x-2 text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition">
+                <img src="../logo_azul.png" alt="Logo" class="h-8 w-8">
+                <span>CryptoInfo</span>
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
+        <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
+
+        <ul class="space-y-4 text-xl font-medium">
+            <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
+            <li><a href="../DES/main_des_unificado.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
+            <li><a href="../AES/main_aes_unificado.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
+            <li><a href="../Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
+            <li><a href="rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Criptografia RSA</a></li>
+            <li><a href="../Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
+            <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Informações Adicionais</strong></li>
+            <li><a href="#" onclick="mostrarAviso('Sobre')" class="text-slate-400 hover:text-cyan-400 transition block py-2 ml-4 text-base">Sobre (Placeholder)</a></li>
+        </ul>
+    </div>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+
+    
+    <section id="introducao" class="content-section-card bg-gray-800 p-6 rounded-lg shadow-2xl mb-8">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        Introdução à Criptografia RSA
+    </h2>
+    
+    <p class="text-slate-300 mb-4">
+        O algoritmo <strong>RSA</strong> (Rivest, Shamir e Adleman) representa o alicerce da <strong>criptografia de chave pública</strong>. Sua importância reside na capacidade de estabelecer comunicação segura sem a necessidade de uma chave secreta pré-compartilhada, um conceito que revolucionou a segurança digital (SSL/TLS, assinaturas).
+    </p>
+
+    <p class="text-slate-300 mb-4">
+        Diferente dos sistemas simétricos, o RSA opera com um **par de chaves**. A **Chave Pública** (composta pelos valores $E$ e $N$) é aberta e usada por qualquer pessoa para <strong>criptografar</strong> a mensagem ($M$). A **Chave Privada** (composta por $D$ e $N$), no entanto, é mantida em total sigilo pelo destinatário e é a única capaz de <strong>descriptografar</strong> o texto cifrado ($C$).
+    </p>
+    
+    <p class="text-slate-300 mb-6">
+        A segurança do RSA baseia-se na matemática da **fatoração de números primos**. O processo de geração de chaves começa com a escolha de dois números primos grandes e secretos ($P$ e $Q$). O Módulo $N$ é o produto de $P$ e $Q$. A dificuldade computacional em descobrir $P$ e $Q$ a partir do valor conhecido de $N$ é o que protege a chave privada ($D$), que depende da função $\phi$ (Totiente de Euler, calculado como $(P-1) \cdot (Q-1)$). Assim, a simulação demonstra o ciclo completo: desde a geração de todos esses elementos matemáticos ($P, Q, N, \phi, E, D$) até a aplicação da <strong>Exponenciação Modular</strong> para transformar a mensagem $M$ no cifrado $C$ e, por fim, a recuperação de $M$ utilizando $D$.
+    </p>
+</section>
+
+    <section id="principios-matematicos" class="content-section-card">
+        <h2>A Fundo: Princípios Matemáticos (Geração de Chaves)</h2>
+        <p class="text-slate-300 mb-6">
+            O processo de geração de chaves RSA é a essência de sua segurança, dependendo de quatro passos fundamentais da teoria dos números:
+        </p>
+
+        <div class="space-y-6">
+            
+            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                    1. Escolha de Primos (p e q)
+                </h3>
+                <p class="text-slate-300">
+                    O usuário escolhe dois números primos grandes e distintos, $p$ e $q$. Quanto maiores eles forem, mais segura será a criptografia.
+                </p>
+            </div>
+
+            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                    2. Cálculo do Módulo (n) e da Função Totiente (φ)
+                </h3>
+                <p class="text-slate-300">
+                    O <strong>Módulo</strong> $n$ é calculado por $n = p \cdot q$. Ele será parte de ambas as chaves (pública e privada). A <strong>Função Totiente de Euler</strong> $\phi(n)$ é calculada por $\phi(n) = (p-1)(q-1)$. Este valor é crucial para a chave privada e deve ser mantido em segredo.
+                </p>
+            </div>
+
+            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                    3. Chave Pública (e)
+                </h3>
+                <p class="text-slate-300">
+                    O expoente público $e$ é escolhido de forma que $1 < e < \phi(n)$ e que $e$ seja <strong>coprimo</strong> a $\phi(n)$ (ou seja, $\text{mdc}(e, \phi(n)) = 1$). O par $(e, n)$ é a <strong>Chave Pública</strong>.
+                </p>
+            </div>
+
+            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                    4. Chave Privada (d)
+                </h3>
+                <p class="text-slate-300">
+                    O expoente privado $d$ é o <strong>inverso multiplicativo</strong> de $e$ no módulo $\phi(n)$. Ele é calculado através do Algoritmo Estendido de Euclides, satisfazendo a equação $d \cdot e \equiv 1 \pmod{\phi(n)}$. O par $(d, n)$ é a <strong>Chave Privada</strong>.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="funcoes-rsa" class="content-section-card">
+        <h2>Funções Essenciais: Criptografia e Assinatura</h2>
+        
+        <p class="text-slate-300 mb-8 font-semibold">
+            O RSA não é usado apenas para confidencialidade (criptografia), mas também para garantir <strong>integridade</strong> e <strong>autenticidade</strong> (assinaturas digitais). As duas operações principais seguem a mesma lógica de exponenciação modular.
+        </p>
+
+        <div class="space-y-8">
+            
+            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+                <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
+                    <span class="text-2xl mr-3 font-mono text-cyan-400"></span> Confidencialidade (Criptografar)
+                </h3>
+                <p class="text-slate-300">
+                    Para criptografar uma mensagem $M$ (onde $M < n$), utiliza-se a Chave Pública do destinatário $(e, n)$.
+                </p>
+                <div class="mt-3 p-3 bg-slate-800 rounded text-center text-lg font-mono text-white">
+                    $$C = M^e \pmod{n}$$
+                    <span class="text-xs text-slate-400 block mt-1">Onde $C$ é o texto cifrado.</span>
+                </div>
+            </div>
+
+            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+                <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center">
+                    <span class="text-2xl mr-3 font-mono text-green-400"></span> Autenticidade (Descriptografar/Assinar)
+                </h3>
+                <p class="text-slate-300">
+                    Para descriptografar o texto cifrado $C$, o destinatário utiliza sua Chave Privada $(d, n)$.
+                </p>
+                <div class="mt-3 p-3 bg-slate-800 rounded text-center text-lg font-mono text-white">
+                    $$M = C^d \pmod{n}$$
+                    <span class="text-xs text-slate-400 block mt-1">Onde $M$ é o texto original.</span>
+                </div>
+                <p class="text-slate-300 mt-4">
+                    <strong>Assinatura Digital:</strong> O processo de assinatura é idêntico à descriptografia, mas feito pelo remetente com sua própria chave privada. O receptor usa a chave pública do remetente para verificar.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="simulacao-rsa" class="content-section-card">
+        <h2>RSA Didático: Geração de Chaves e Teste Simples</h2>
+        <p class="text-slate-300 mb-6">
+            Para fins didáticos, utilizaremos números primos e mensagem (M) pequenos. **Estes números são inseguros** e servem apenas para demonstrar a matemática por trás do RSA.
+        </p>
+
+        <p class="text-sm text-slate-400 mb-4">
+             <strong>Foco da Simulação:</strong> Demonstrar o cálculo dos parâmetros $(n, \phi(n), e, d)$ e como a exponenciação modular cifra e decifra a mensagem.
+        </p>
+
+        <label for="pInput" class="block mb-2 text-sm font-medium">Primo p (Ex: 17):</label>
+        <input type="number" id="pInput" value="17" min="1"
+            class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono mb-3">
+
+        <label for="qInput" class="block mb-2 text-sm font-medium">Primo q (Ex: 11):</label>
+        <input type="number" id="qInput" value="11" min="1"
+            class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono mb-3">
+            
+        <label for="mInput" class="block mb-2 text-sm font-medium">Mensagem M (Número, Ex: 88):</label>
+        <input type="number" id="mInput" value="88" min="1"
+            class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono">
+
+        <button id="iniciarBtn" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
+            Executar Geração de Chaves e Cripto
+        </button>
+
+        <div id="stepsArea" class="mt-8 p-4 bg-slate-700 rounded-lg shadow-inner">
+            <h3 class="text-xl font-bold text-cyan-400 mb-4">Saída da Simulação</h3>
+            <p class="text-slate-400">Insira os primos (p, q) e a mensagem (M) e clique em 'Executar' para ver os cálculos.</p>
+        </div>
+    </section>
+
+
+    <footer class="des-page-footer">
+        <p>© 2024 Demonstração RSA para Fins Educacionais</p>
+    </footer>
+
+    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
+        <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
+            <h3 id="messageTitle" class="text-xl font-bold mb-3 text-cyan-400">Informação</h3>
+            <p id="messageText" class="text-slate-200 mb-4"></p>
+            <button onclick="document.getElementById('messageBox').classList.add('hidden')" class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
+        </div>
+    </div>
+
+
+    <script>
+        // Função de toggle menu principal (CÓDIGO CORRIGIDO DO MENU)
+        function toggleMenu(show) {
+            const drawer = document.getElementById('mobile-menu-drawer');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            if (show === undefined) {
+                show = drawer.classList.contains('transform-translate-x-full');
+            }
+
+            if (show) {
+                drawer.classList.remove('hidden');
+                overlay.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    drawer.classList.remove('transform-translate-x-full');
+                    overlay.classList.remove('opacity-0');
+                    overlay.classList.add('opacity-100');
+                }, 10); 
+                
+            } else {
+                drawer.classList.add('transform-translate-x-full');
+                overlay.classList.remove('opacity-100');
+                overlay.classList.add('opacity-0');
+                
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    drawer.classList.add('hidden');
+                }, 300); 
+            }
+        }
+        
+        document.getElementById('mobile-menu-toggle').onclick = (event) => {
+            event.stopPropagation(); // IMPEDE A PROPAGAÇÃO DO CLIQUE
+            toggleMenu();
+        };
+
+        // Função de placeholder para os itens do menu
+        function mostrarAviso(titulo) {
+            toggleMenu(false); 
+            
+            document.getElementById('messageTitle').textContent = titulo;
+            document.getElementById('messageText').textContent = 'Esta é uma seção de placeholder. O conteúdo será adicionado em breve.';
+            document.getElementById('messageBox').classList.remove('hidden');
+        }
+
+    </script>
+    
+    <script src="../JS/rsa_script.js"></script> 
+    
+    <script src="../JS/main.js"></script>
+<script>
+    // Função de toggle menu principal (CORRIGIDA)
+    function toggleMenu(show) {
+        const drawer = document.getElementById('mobile-menu-drawer');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        
+        // 1. Determina o estado atual ou o estado desejado
+        // Verifica se o menu está fechado (contém a classe de transformação que o esconde)
+        if (show === undefined) {
+            show = drawer.classList.contains('transform-translate-x-full');
+        }
+
+        if (show) {
+            // ABRIR
+            // Remove 'hidden' para tornar visível
+            drawer.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+            
+            // Pequeno atraso para garantir que a remoção do 'hidden' 
+            // ocorra antes de começar a transição de opacidade/posição (fluxo de transição CSS)
+            setTimeout(() => {
+                drawer.classList.remove('transform-translate-x-full');
+                overlay.classList.remove('opacity-0');
+                overlay.classList.add('opacity-100');
+            }, 10); 
+            
+        } else {
+            // FECHAR
+            drawer.classList.add('transform-translate-x-full');
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0');
+            
+            // Aguarda o fim da transição (300ms) antes de esconder o elemento
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                drawer.classList.add('hidden');
+            }, 300); 
+        }
+    }
+    
+    // Associa o clique ao botão hambúrguer (mobile-menu-toggle)
+    // O event.stopPropagation() é CRUCIAL para evitar que o clique "borbulhe"
+    // e seja interpretado pelo overlay, fechando o menu imediatamente.
+    document.getElementById('mobile-menu-toggle').onclick = (event) => {
+        event.stopPropagation(); // IMPEDE A PROPAGAÇÃO DO CLIQUE
+        toggleMenu();
+    };
+
+    // Função de placeholder para os itens do menu
+    function mostrarAviso(titulo) {
+        // Primeiro, feche o menu (se estiver aberto)
+        toggleMenu(false); 
+        
+        // Em seguida, mostre o aviso
+        document.getElementById('messageTitle').textContent = titulo;
+        document.getElementById('messageText').textContent = 'Esta é uma seção de placeholder. O conteúdo será adicionado em breve.';
+        document.getElementById('messageBox').classList.remove('hidden');
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+/* ========================================================================= */
+/* PALETA DE CORES (Neutras e Profissionais - Foco Ciano):
+/* Fundo Principal (Dark): #1E252C (Azul Ardósia Escuro)
+/* Fundo Secundário: #2C353D (Cinza Metálico)
+/* Destaque Principal: #00BCD4 (Ciano Turquesa) - REVERTIDO
+/* Destaque Escuro/Sombra: #00838F (Ciano Escuro) - REVERTIDO
+/* Texto Geral: #EFEFEF (Branco Suave)
+/* Resultados/Chave Secundária: #FFC107 (Amarelo Âmbar) - REVERTIDO
+/* ========================================================================= */
+
+
+/* ========================================================================= */
+/* ESTILOS GERAIS E LAYOUT */
+/* ========================================================================= */
+
+
+.container { 
+    max-width:800px; /* Aumentei a largura para melhor visualização */
+    margin:auto; 
+    background:#2C353D; 
+    padding:25px; 
+    border-radius:10px; 
+    text-align:center; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+h2 { 
+    color:#00BCD4; /* Ciano Turquesa */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00838F; /* Ciano Escuro */
+    padding-bottom: 10px;
+}
+
+input, button { 
+    padding:10px; 
+    margin:10px 5px; 
+    border-radius:5px; 
+    border:none; 
+    font-size:1em; 
+}
+
+input {
+    background: #1E252C;
+    color: #EFEFEF;
+    border: 1px solid #00838F; /* Ciano Escuro */
+    width: 90%;
+    max-width: 300px;
+}
+
+button#iniciarBtn {
+    background: #00BCD4; /* Ciano Turquesa */
+    color: #1E252C;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button#iniciarBtn:hover {
+    background: #00A8BB; /* Ciano mais escuro */
+}
+
+
+/* ========================================================================= */
+/* ESTILOS DAS ETAPAS DA SIMULAÇÃO */
+/* ========================================================================= */
+
+#stepsArea {
+    margin-top: 30px;
+    text-align: left;
+    background: #1E252C; /* Fundo Principal */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #00838F; /* Ciano Escuro */
+}
+
+#stepsArea strong {
+    color: #00BCD4; /* Ciano Turquesa */
+    display: block;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+#stepsArea h4 {
+    color: #00A8BB; /* Ciano mais escuro */
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px dashed #00838F;
+    padding-bottom: 5px;
+}
+
+#stepsArea ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 10px 0;
+}
+
+#stepsArea li {
+    background: #2C353D;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    border-left: 4px solid #00BCD4; /* Ciano Turquesa */
+}
+
+/* ESTILOS PARA BYTES, CHAVES E SAÍDAS */
+
+.byte-list { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; 
+    margin-top: 10px; 
+    justify-content: center; 
+    margin-bottom: 15px;
+}
+
+.byte { 
+    background: #3B4751; 
+    color: #EFEFEF; 
+    padding: 6px 10px; 
+    border-radius: 4px; 
+    font-family: monospace; 
+    font-weight: bold;
+    min-width: 90px; 
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.char-repr { 
+    color: #FFC107; /* Amarelo Âmbar */
+    display: block; 
+    font-size: 1.2em; 
+    margin-bottom: 3px;
+}
+
+.sub-key-box { 
+    background: #00838F; /* Ciano Escuro (Cor de destaque para Chave) */
+    color: #EFEFEF; 
+    padding: 8px; 
+    border-radius: 5px; 
+    font-weight: bold; 
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center; 
+}
+
+.xor-box {
+    background: #00BCD4; /* Ciano Turquesa (Resultado final do XOR) */
+    color: #1E252C; 
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 800;
+    margin-top: 15px;
+}
+
+.final-output {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid #00BCD4; /* Ciano Turquesa */
+    border-radius: 8px;
+    background: #2C353D;
+}
+
+.final-output strong {
+    color: #FFC107; /* Amarelo Âmbar */
+    font-size: 1em;
+}
+
+#keyDisplay {
+    background: #00838F; /* Ciano Escuro */
+    color: #EFEFEF;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+/* ========================================================================= */
+/* ESTILOS ESPECÍFICOS PARA A MATRIZ AES */
+
+.aes-matrix {
+    display: grid;
+    /* 4 colunas com largura automática e conteúdo alinhado */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 5px; /* Espaçamento entre as células */
+    max-width: 400px; /* Limita a largura da matriz */
+    margin: 15px auto;
+    border: 1px solid #475569; /* Borda da matriz */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.aes-row {
+    /* No AES, a matriz é vista por colunas de bytes (daí 4 colunas no grid),
+       mas se você a desenhar linha por linha, o grid deve dar conta.
+       A estrutura HTML que você usou no JS não precisa de .aes-row, mas vou adaptá-la para o grid. */
+    display: contents; 
+}
+
+.aes-cell {
+    background-color: #1E293B; /* Fundo escuro */
+    color: #E2E8F0; /* Cor do texto claro */
+    padding: 8px 5px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9em;
+    font-family: 'Inter', monospace;
+    font-weight: 500;
+}
+/* Estilo para o grid de bytes (Subchave e Saída Cifrada) */
+.key-byte-list {
+    display: grid;
+    /* Define 8 colunas para os 16 bytes, facilitando a visualização dos 128 bits (16 bytes) */
+    grid-template-columns: repeat(8, 1fr); 
+    gap: 4px; /* Espaçamento menor para caber 8 colunas */
+    margin: 10px 0;
+    max-width: 100%;
+}
+
+.key-byte-cell {
+    background-color: #1e3a53; /* Cor ligeiramente diferente para distinguir da matriz principal */
+    color: #E2E8F0;
+    padding: 5px 3px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.8em;
+    /* Ajustes de layout interno */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.2;
+}
+
+/* ========================================================================= */
+
+/* Estilo para as caixas de cálculo simples no RSA */
+.math-step-simple {
+    /* Garante que o texto dentro não quebre muito, mas centraliza */
+    overflow-x: auto; 
+    white-space: nowrap; 
+    padding: 10px;
+}
+

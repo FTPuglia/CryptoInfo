@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifra de Vigenère</title>
+
+    <link rel="icon" type="image/png" href="../logo_azul.png">
+    
+    <script src="../CSS/tailwind_local.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <link rel="stylesheet" href="../CSS/inter_local.css">
+
+    <link rel="stylesheet" href="../CSS/estilo_main.css">
+    
+</head>
+<body class="index-body">
+
+    <div id="three-canvas"></div>
+
+    <div class="navbar fixed top-0 left-0 right-0 z-20 shadow-lg navbar-transparent">
+        <div class="navbar-content max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative z-10">
+            <a href="../index.html" class="flex items-center space-x-2 text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition">
+                <img src="../logo_azul.png" alt="Logo" class="h-8 w-8">
+                <span>CryptoInfo</span>
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
+        <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
+
+        <ul class="space-y-4 text-xl font-medium">
+            <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
+            <li><a href="../DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
+            <li><a href="../DES/simulacao.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Simulação DES Didática</a></li>
+            <li><a href="vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Cifra de Vigenère</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
+            <li><a href="../RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
+            <li><a href="../Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
+            <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Informações Adicionais</strong></li>
+            <li><a href="#" onclick="mostrarAviso('Sobre')" class="text-slate-400 hover:text-cyan-400 transition block py-2 ml-4 text-base">Sobre (Placeholder)</a></li>
+        </ul>
+    </div>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+
+
+    <section class="content-section-card mx-auto mt-20">
+        <h2>Página Placeholder: Cifra de Vigenère</h2>
+        <p>A Cifra de Vigenère, um método de criptografia de substituição polialfabética, possui notável relevância histórica por ter sido considerada inquebrável por séculos. Diferentemente dos sistemas monoalfabéticos que utilizam um único alfabeto de substituição para toda a mensagem (como a Cifra de César), a Vigenère emprega uma chave de palavra para determinar múltiplos alfabetos de substituição. Essa abordagem, que altera o deslocamento da cifra a cada letra da mensagem (ou de acordo com o comprimento da chave), mascarava a frequência das letras do texto original, que é a principal vulnerabilidade dos esquemas monoalfabéticos. Sua invenção e popularização, atribuídas erroneamente a Blaise de Vigenère, mas formalizada por Giovan Battista Bellaso no século XVI, representou um avanço significativo na segurança das comunicações. Manteve-se como um método de alta segurança para a época até o século XIX, quando o criptoanalista Charles Babbage (e independentemente Friedrich Kasiski) desenvolveu o método de Kasiski, que explora a repetição de sequências de letras para deduzir o comprimento da chave, e posteriormente, a chave em si.</p>
+        <br><br>
+
+       <p> A principal distinção técnica entre a Cifra de Vigenère e a Cifra de César reside no seu grau de complexidade e segurança. A Cifra de César é o exemplo mais simples de cifra de substituição monoalfabética, onde cada letra do texto claro é substituída por uma letra a uma distância fixa (o deslocamento, que é a chave) no alfabeto. A Vigenère, por outro lado, é uma cifra de substituição polialfabética: enquanto a Cifra de César usa apenas um deslocamento fixo para toda a mensagem (chave de tamanho 1), a Vigenère utiliza uma sequência de deslocamentos determinada por uma chave de palavra, tornando o padrão de substituição significativamente mais difícil de discernir por inspeção ou análise de frequência direta.</p>
+        <p>Aguarde a implementação da demonstração interativa para criptografar e decriptografar usando chaves longas e a tabela Vigenère.</p>
+    </section>
+
+    <footer class="des-page-footer">
+        <p>© 2024 Demonstração DES para Fins Educacionais</p>
+    </footer>
+
+    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
+        <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
+            <h3 id="messageTitle" class="text-xl font-bold mb-3 text-cyan-400">Informação</h3>
+            <p id="messageText" class="text-slate-200 mb-4"></p>
+            <button onclick="document.getElementById('messageBox').classList.add('hidden')" class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
+        </div>
+    </div>
+    
+    <script src="../JS/main.js"></script>
+</body>
+</html>

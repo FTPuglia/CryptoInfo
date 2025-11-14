@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptografia DES - Demo & Simulação</title>
+
+    <link rel="icon" type="image/png" href="../logo_azul.png">
+    
+    <script src="../CSS/tailwind_local.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="../CSS/inter_local.css">
+    <link rel="stylesheet" href="../CSS/estilo_main.css">
+    <link rel="stylesheet" href="../CSS/des_styles.css"> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+</head>
+<body class="index-body">
+
+    <div id="three-canvas"></div>
+
+    <div class="navbar fixed top-0 left-0 right-0 z-20 shadow-lg navbar-transparent">
+        <div class="navbar-content max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative z-10">
+            <a href="../index.html" class="flex items-center space-x-2 text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition">
+                <img src="../logo_azul.png" alt="Logo" class="h-8 w-8">
+                <span>CryptoInfo</span>
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
+        <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
+
+        <ul class="space-y-4 text-xl font-medium">
+            <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
+            <li><a href="main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Criptografia DES</a></li>
+            <li><a href="#simulacao-feistel" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Simulação DES Didática</a></li>
+            <li><a href="../Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
+            <li><a href="../RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
+            <li><a href="../Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
+            <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Informações Adicionais</strong></li>
+            <li><a href="#" onclick="mostrarAviso('Sobre')" class="text-slate-400 hover:text-cyan-400 transition block py-2 ml-4 text-base">Sobre (Placeholder)</a></li>
+        </ul>
+    </div>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+
+    
+    <section id="introducao" class="content-section-card">
+        <h2>Introdução ao DES</h2>
+        <p class="text-slate-300 mb-4">
+            O <strong>DES</strong> (Data Encryption Standard) é um dos algoritmos de criptografia de chave simétrica mais influentes da história. Desenvolvido no início dos anos 70 pela IBM e adotado como padrão federal nos EUA em 1977 (FIPS 46), ele opera em <strong>blocos fixos de 64 bits</strong>. O DES revolucionou a segurança da informação ao ser o primeiro padrão de criptografia amplamente aceito.
+        </p>
+        <p class="text-slate-300 mb-4">
+            Sua arquitetura é baseada na <strong>Cifra de Feistel</strong>, uma estrutura que permite que a criptografia e a descriptografia usem a mesma lógica, facilitando a implementação de hardware. O processo envolve 16 rodadas iterativas de substituições e permutações.
+        </p>
+        <p class="text-slate-300 mb-6">
+            No entanto, o DES utiliza uma <strong>chave efetiva de apenas 56 bits</strong> (dentro de uma chave de 64 bits, onde 8 bits são usados para paridade). Devido ao aumento exponencial do poder computacional, esse tamanho de chave é hoje considerado <strong>obsoleto e inseguro</strong> contra ataques de força bruta, sendo substituído pelo seu sucessor, o AES. Por isso, o DES é um marco didático importante, ideal para entender os fundamentos das cifras de bloco antes de estudar algoritmos modernos.
+        </p>
+        <p>
+            <strong>Aviso:</strong> A criptografia DES deve ser usada apenas para demonstração ou aprendizado. Para aplicações de segurança modernas, utilize <strong>AES-256</strong> ou o <strong>Triple DES (3DES)</strong>, embora este último também esteja em fase de descontinuação.
+        </p>
+    </section>
+
+    <section id="operacoes-chave" class="content-section-card">
+    <h2>A Fundo: As Operações-Chave do DES</h2>
+    <p class="text-slate-300 mb-6">
+        O poder de embaralhamento e difusão do DES vem de uma sequência de quatro tipos de operações: Permutações, Geração de Subchaves, Função de Feistel, e as Caixas-S (S-Boxes).
+    </p>
+
+    <div class="space-y-6">
+        
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                <span class="text-2xl mr-3 text-cyan-500"></span> 1. Permutação Inicial e Final
+            </h3>
+            <p class="text-slate-300">
+                A primeira operação no bloco de 64 bits é a <strong>Permutação Inicial</strong>, que reorganiza os bits de acordo com uma tabela fixa. O objetivo é aumentar a <strong>difusão</strong> rapidamente, garantindo que um único bit de entrada afete muitos bits da saída. A última etapa da criptografia é a <strong>Permutação Final</strong>, que é a inversa da Permutação Inicial.
+            </p>
+        </div>
+
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                <span class="text-2xl mr-3 text-cyan-500"></span> 2. Geração de Subchaves
+            </h3>
+            <p class="text-slate-300">
+                A chave principal de 56 bits é transformada em 16 subchaves diferentes, uma para cada rodada de Feistel. 
+            </p>
+        </div>
+
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                <span class="text-2xl mr-3 text-cyan-500"></span> 3. Estrutura de Feistel
+            </h3>
+            <p class="text-slate-300">
+                É a estrutura central que divide o bloco de 64 bits em metades esquerda (L) e direita (R). A cada rodada, a metade direita é usada na <strong>Função F</strong> (juntamente com a subchave da rodada) e o resultado é combinado com a metade esquerda através de uma operação <strong>XOR</strong>. Em seguida, as metades são trocadas.
+            </p>
+        </div>
+
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                <span class="text-2xl mr-3 text-cyan-500"></span> 4. Caixas de Substituição (S-Boxes)
+            </h3>
+            <p class="text-slate-300">
+                As <strong>S-Boxes</strong> são a parte mais crucial do DES para a segurança, sendo a única operação <strong>não-linear</strong>. Elas recebem 6 bits de entrada e produzem 4 bits de saída, introduzindo a propriedade de <strong>confusão</strong>. A escolha e o design dessas caixas são considerados o ponto forte do algoritmo.
+            </p>
+        </div>
+    </div>
+</section>
+    
+    <section id="modos-operacao" class="content-section-card">
+    <h2>Modos de Operação: Como o DES Criptografa Mensagens Longas</h2>
+    
+    <p class="text-slate-300 mb-4 font-semibold">
+        Um <strong>Modo de Operação</strong> é um esquema algorítmico que permite a uma cifra de bloco (como o DES) criptografar dados de tamanho arbitrário. Ele define como a segurança e a aleatoriedade são mantidas ao longo de uma mensagem inteira, controlando o <strong>encadeamento</strong> dos blocos.
+    </p>
+
+    <p class="text-slate-300 mb-8">
+        O DES, por processar 64 bits de cada vez, requer um modo para lidar com mensagens maiores de forma segura. A escolha do modo é crucial para a segurança final da aplicação.
+    </p>
+
+    <div class="space-y-8">
+        
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+            <h3 class="text-xl font-bold text-red-300 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-red-400"></span> 1. Electronic Codebook (ECB) - Livro de Códigos Eletrônico
+            </h3>
+            <p class="text-slate-300">
+                É o modo mais simples, onde cada bloco de 64 bits do texto claro é criptografado <strong>independentemente</strong> dos outros usando a mesma chave. Sua principal desvantagem é a <strong>falta de aleatoriedade</strong>: blocos idênticos de entrada produzem saídas idênticas, permitindo a detecção de padrões. <strong>Não é seguro para a maioria dos dados longos.</strong>
+            </p>
+        </div>
+
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+            <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-cyan-400"></span> 2. Cipher Block Chaining (CBC) - Encadeamento de Blocos Cifrados
+            </h3>
+            <p class="text-slate-300">
+                O modo CBC introduz encadeamento ao combinar (via <strong>XOR</strong>) o bloco de texto claro atual com o <strong>bloco cifrado anterior</strong> antes da criptografia. Isso garante que blocos de texto claro idênticos resultem em blocos cifrados diferentes, ocultando padrões e introduzindo aleatoriedade. Requer um <strong>Vetor de Inicialização (IV)</strong> para o primeiro bloco.
+            </p>
+        </div>
+
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+            <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-green-400"></span> 3. Cipher Feedback (CFB) - Realimentação de Cifra
+            </h3>
+            <p class="text-slate-300">
+                O CFB opera como uma <strong>cifra de fluxo</strong>, permitindo o processamento em unidades menores que o bloco (ex: 8 bits). O mecanismo usa o <strong>Texto Cifrado anterior</strong> ($C_{i-1}$) como entrada para o DES. Devido a essa realimentação, <strong>um erro de transmissão em um bloco cifrado se propagará</strong> e corrompe a descriptografia de vários blocos seguintes, sendo uma desvantagem em canais ruidosos.
+            </p>
+        </div>
+
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+            <h3 class="text-xl font-bold text-purple-400 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-purple-400"></span> 4. Output Feedback (OFB) - Realimentação de Saída
+            </h3>
+            <p class="text-slate-300">
+                O OFB também é uma cifra de fluxo, mas gera o <strong>fluxo de chave (keystream)</strong> de forma totalmente independente do texto claro e do texto cifrado. O que é realimentado é a <strong>saída da própria função DES</strong>. Por não depender do texto cifrado, <strong>erros de transmissão não se propagam</strong>: apenas o bloco onde o erro ocorreu será afetado, tornando-o ideal para canais ruidosos ou com alta taxa de erros.
+            </p>
+        </div>
+    </div>
+</section>
+
+    <section id="simulacao-feistel" class="content-section-card">
+        <h2>DES Didático: Simulação da Rodada de Feistel</h2>
+        <p class="text-slate-300 mb-6">
+            O <strong>DES</strong> (Data Encryption Standard) é um exemplo de Cifra de Feistel. Seu processo envolve 16 rodadas, onde o bloco de dados é dividido em duas metades (L e R) e uma função de rodada é aplicada iterativamente.
+        </p>
+
+        <p class="text-sm text-slate-400 mb-4">
+             <strong>Foco da Simulação:</strong> Demonstração visual de como o bloco de dados é processado em uma rodada do DES: $L_{i} = R_{i-1}$ e $R_{i} = L_{i-1} \oplus f(R_{i-1}, K_i)$.
+        </p>
+
+        <label for="msgInput" class="block mb-2 text-sm font-medium">Mensagem (Máx. 8 caracteres para um único bloco de 64 bits):</label>
+        <input type="text" id="msgInput" value="CRIPTDES" maxlength="8"
+            class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono">
+
+        <button id="iniciarBtn" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
+            Executar Rodada 1 da Criptografia DES
+        </button>
+
+        <div id="stepsArea" class="mt-8 p-4 bg-slate-700 rounded-lg shadow-inner">
+            <h3 class="text-xl font-bold text-cyan-400 mb-4">Saída da Simulação</h3>
+            <p class="text-slate-400">Insira a mensagem acima e clique em 'Executar' para ver os passos de uma Rodada Feistel.</p>
+        </div>
+    </section>
+
+    <section id="demo-criptografia" class="content-section-card">
+        <h2>Teste a Criptografia DES</h2>
+        <p class="text-slate-300 mb-6">
+            Utilize esta seção para criptografar ou descriptografar textos usando a biblioteca <strong>CryptoJS</strong>. A chave deve ter 8 caracteres.
+        </p>
+        
+        <div class="space-y-4">
+            <div>
+                <label for="entrada" class="block mb-2 text-sm font-medium">Texto de Entrada:</label>
+                <textarea id="entrada" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Digite a mensagem a ser criptografada/decriptografada."></textarea>
+            </div>
+            
+            <div>
+                <label for="chave" class="block mb-2 text-sm font-font-medium">Chave (8 caracteres ideal):</label>
+                <input type="text" id="chave" value="12345678" maxlength="8" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 pt-2">
+                <button onclick="criptografar()" class="button-with-shadow bg-cyan-600 hover:bg-cyan-500">
+                    Criptografar (Encrypt)
+                </button>
+                <button onclick="decriptografar()" class="button-with-shadow bg-blue-600 hover:bg-blue-500">
+                    Descriptografar (Decrypt)
+                </button>
+                <button onclick="limparCampos()" class="button-with-shadow bg-slate-600 hover:bg-slate-500 col-span-2">
+                    Limpar
+                </button>
+            </div>
+            
+            <div class="pt-4">
+                <label class="block mb-2 text-sm font-medium">Saída (Ciphertext / Plaintext):</label>
+                <div id="saida" class="w-full p-3 bg-slate-700 rounded-md h-24 overflow-y-auto border border-slate-600 break-words text-slate-200">
+                    (a saída aparecerá aqui)
+                </div>
+                <button onclick="copiarSaida()" class="button-with-shadow w-full mt-2 bg-slate-800 hover:bg-slate-700 text-sm">
+                    Copiar Saída
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
+        <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
+            <h3 id="messageTitle" class="text-xl font-bold mb-3 text-cyan-400">Informação</h3>
+            <p id="messageText" class="text-slate-200 mb-4"></p>
+            <button onclick="document.getElementById('messageBox').classList.add('hidden')" class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
+        </div>
+    </div>
+
+
+    <script>
+        function criptografar() {
+            const entrada = document.getElementById('entrada').value;
+            const chave = document.getElementById('chave').value;
+            const saida = document.getElementById('saida');
+            if (!entrada || !chave) {
+                saida.textContent = 'Erro: Campos de entrada e chave não podem estar vazios.';
+                return;
+            }
+            try {
+                // A chave DES deve ser estritamente de 8 caracteres (56 bits efetivos).
+                if (chave.length !== 8) {
+                    saida.textContent = 'Erro: A chave DES deve ter exatamente 8 caracteres para esta demonstração.';
+                    return;
+                }
+                const ciphertext = CryptoJS.DES.encrypt(entrada, chave).toString();
+                saida.textContent = ciphertext;
+            } catch (error) {
+                console.error("Erro durante a criptografia:", error);
+                saida.textContent = 'Erro de Execução na Criptografia.';
+            }
+        }
+
+        function decriptografar() {
+            const entrada = document.getElementById('entrada').value; 
+            const chave = document.getElementById('chave').value;
+            const saida = document.getElementById('saida');
+
+            if (!entrada || !chave) {
+                saida.textContent = 'Erro: Campos de entrada e chave não podem estar vazios.';
+                return;
+            }
+
+            try {
+                 // A chave DES deve ser estritamente de 8 caracteres (56 bits efetivos).
+                if (chave.length !== 8) {
+                    saida.textContent = 'Erro: A chave DES deve ter exatamente 8 caracteres para esta demonstração.';
+                    return;
+                }
+                const bytes = CryptoJS.DES.decrypt(entrada, chave);
+                const plaintext = bytes.toString(CryptoJS.enc.Utf8);
+                
+                if (plaintext === "") {
+                    saida.textContent = 'Decriptografia falhou. Chave incorreta ou Ciphertext inválido.';
+                } else {
+                    saida.textContent = plaintext;
+                }
+            } catch (error) {
+                console.error("Erro durante a decriptografia:", error);
+                saida.textContent = 'Erro de Execução na Decriptografia.';
+            }
+        }
+
+        function limparCampos() {
+            document.getElementById('entrada').value = '';
+            document.getElementById('chave').value = '12345678'; // Valor padrão de 8 caracteres
+            document.getElementById('saida').textContent = '(a saída aparecerá aqui)';
+        }
+
+        function copiarSaida() {
+            const saida = document.getElementById('saida').textContent;
+            if (saida && saida !== '(a saída aparecerá aqui)') {
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = saida;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                try {
+                    document.execCommand('copy');
+                    console.log('Saída copiada para a área de transferência!');
+                } catch (err) {
+                    console.error('Falha ao tentar copiar o texto:', err);
+                }
+                document.body.removeChild(tempTextArea);
+            }
+        }
+    </script>
+    
+    <script src="../JS/des_script.js"></script> 
+    
+    <script src="../JS/main.js"></script>
+
+</body>
+</html>

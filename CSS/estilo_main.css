@@ -1,0 +1,349 @@
+/* * ESTILOS CENTRAIS (Cyan Dark Theme)
+ * Centralizado para uso em todas as páginas: index.html, main_des.html, simulacao.html
+ */
+
+/* Variáveis de Cor (Cyan Theme) */
+:root {
+    --color-bg-primary: #1E252C;    /* Fundo Principal Escuro */
+    --color-bg-secondary: #2C353D;  /* Fundo de Cards e Barras */
+    --color-accent: #06B6D4;        /* Cor de destaque principal: Cyan */
+    --color-text: #EFEFEF;          /* Cor do Texto Principal */
+    --color-accent-darker: #0891B2; /* Sombra/Borda para 3D button */
+    --color-accent-lighter: #22D3EE;/* Hover para botões e detalhes */
+    --color-dark-text: #1E252C;     /* Texto para fundos claros/ciano */
+}
+
+/* =======================================================
+   ESTILOS GLOBAIS COMUNS A TODAS AS PÁGINAS
+   ======================================================= */
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--color-bg-primary); 
+    color: var(--color-text);     
+    line-height: 1.6;
+    min-height: 100vh;
+    font-size: 16pt;
+}
+
+/* Estilos de Botão Comuns (Usados no main_des e simulacao) */
+button {
+    background-color: var(--color-accent);
+    color: var(--color-dark-text); /* Texto Escuro */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
+    box-shadow: 0 3px 0 var(--color-accent-darker);
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: var(--color-accent-lighter);
+    box-shadow: 0 3px 0 var(--color-accent-darker); /* Mantém sombra para efeito 3D */
+}
+
+button:active {
+    transform: translateY(2px); /* Efeito de 'press' */
+    box-shadow: 0 1px 0 var(--color-accent-darker);
+}
+
+/* Estilos de Input/Textarea Comuns */
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid var(--color-accent-darker);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text);
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: var(--color-accent-lighter);
+    outline: none;
+}
+
+
+/* Estilos para Blocos de Código (Pré-formatado) */
+pre {
+    background-color: var(--color-bg-primary);
+    border: 1px solid var(--color-bg-secondary);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+/* Estilos para links */
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--color-accent-lighter);
+}
+
+
+/* =======================================================
+   ESTILOS DE SEÇÃO E CARDS (main_des, rsa, hashing, etc.)
+   ======================================================= */
+
+.content-section-card {
+    background-color: var(--color-bg-secondary);
+    padding: 2.5rem;
+    width: 90%;
+    margin-top: 2rem; /* Adicionado margem superior */
+    margin-bottom: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    position: relative; 
+    z-index: 1; 
+}
+
+.content-section-card h2 {
+    color: var(--color-accent-lighter);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-accent-darker);
+    padding-bottom: 0.5rem;
+}
+
+.des-body, .rsa-body, .hashing-body {
+    /* Garante que o conteúdo não fique sob o navbar fixo */
+    padding-top: 5rem; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Navbar para páginas de conteúdo (main_des, etc.) */
+.navbar {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--color-accent);
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.navbar a:hover {
+    color: var(--color-accent);
+}
+
+/* =======================================================
+   ESTILOS ESPECÍFICOS DE SIMULAÇÃO (Simulação de Feistel)
+   ======================================================= */
+.simulacao-body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 20px;
+}
+
+/* Renamed to .simulation-container to match .content-section-card visual style */
+.simulation-container {
+    background-color: var(--color-bg-secondary);
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.simulation-container h2 {
+    font-size: 2rem; /* h2 ligeiramente menor na simulação */
+    border-bottom: 2px solid var(--color-accent-darker);
+}
+
+input[type="text"] {
+    margin: 0.5rem 0 1.5rem;
+}
+
+#keyDisplay {
+    background-color: var(--color-bg-primary);
+    padding: 0.75rem;
+    margin: 0.5rem 0 1.5rem;
+    border: 1px dashed var(--color-accent);
+    border-radius: 0.3rem;
+    font-family: monospace;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+/* Desktop Viewport Styles (min-width: 1024px) */
+/* Aumenta o container principal de conteúdo e simulação para desktops usando vw. */
+@media (min-width: 1024px) { 
+    /* Aumenta o container principal de conteúdo (e.g., main_des) */
+    .content-section-card {
+        /* Set max-width to 80% of the viewport width (vw) */
+        max-width: 75vw; 
+    }
+
+    /* Aumenta o container da simulação to match */
+    .simulation-container {
+        /* Set max-width to 70% of the viewport width (vw) for a slightly narrower inner element */
+        max-width: 70vw; 
+    }
+}
+
+
+/* =======================================================
+   ESTILOS PARA PÁGINA INICIAL (index.html)
+   ======================================================= */
+
+/* Estilos para o corpo da página inicial */
+.index-body {
+    /* Adiciona padding superior para não esconder o conteúdo sob o navbar fixo */
+    padding-top: 5rem; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* NavBar com 75% de Transparência (25% Opacidade) */
+.navbar-transparent {
+    background-color: rgba(30, 37, 44, 0.25); /* Alpha 0.25 */
+    backdrop-filter: blur(5px); /* Tailwind: backdrop-blur-sm (5px) */
+}
+
+/* Estilo para os Cards de Conteúdo (Snippet Cards) */
+.content-snippet-card {
+    /* Cor de fundo alterada de slate-700 para CYAN (var(--color-accent)) */
+    background-color: var(--color-accent);
+    color: var(--color-dark-text); /* Texto Escuro para Legibilidade */
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.content-snippet-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(6, 182, 212, 0.6); /* Sombra mais intensa de ciano */
+}
+
+.content-snippet-card h3 {
+    color: var(--color-dark-text);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+.content-snippet-card p {
+    color: var(--color-dark-text);
+    font-size: 0.95rem;
+}
+
+/* Grid layout responsivo */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+@media (min-width: 640px) { /* sm */
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) { /* lg */
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* =======================================================
+   ESTILOS DE DRAWER/MENU MÓVEL (index.html)
+   ======================================================= */
+
+.mobile-menu-drawer {
+    position: fixed;
+    top: 0;
+    right: 0; 
+    width: 80%; 
+    max-width: 300px; 
+    height: 100vh;
+    background-color: var(--color-bg-secondary); 
+    padding: 2rem 1.5rem;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); 
+    z-index: 50;
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 40;
+    transition: opacity 0.3s ease;
+}
+
+/* Transições para o Drawer */
+.mobile-menu-drawer.transition-transform {
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Classes de Transformação para o Drawer (RTL) */
+.transform-translate-x-full {
+    transform: translateX(100%); 
+}
+
+.transform-translate-x-0 {
+    transform: translateX(0); 
+}
+
+/* =======================================================
+   ESTILOS DO CANVAS 3D
+   ======================================================= */
+#three-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10; 
+}

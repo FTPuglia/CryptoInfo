@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHKE: Troca de Chaves Diffie-Hellman</title>
+
+    <link rel="icon" type="image/png" href="../logo_azul.png">
+    
+    <script src="../CSS/tailwind_local.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <link rel="stylesheet" href="../CSS/inter_local.css">
+
+    <link rel="stylesheet" href="../CSS/estilo_main.css">
+    
+    <style>
+        /* Estilos específicos para a demonstração Diffie-Hellman */
+        .dh-exchange-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .dh-exchange-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .party-card {
+            background-color: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-accent-darker);
+            min-height: 200px; /* Garante altura mínima para alinhamento */
+        }
+        
+        /* Estilo para a seção do atacante, que ocupa a largura total */
+        .attacker-card {
+            grid-column: 1 / -1;
+            background-color: #2C353D;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border: 2px solid #ef4444; /* Vermelho para indicar ameaça */
+            margin-top: 2rem;
+        }
+
+        .public-key-display {
+            background-color: #1E252C;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-accent-lighter);
+            text-align: center;
+        }
+
+        .color-mix-result {
+            height: 50px; /* Reduzido para dar espaço ao novo conteúdo */
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            transition: background-color 0.5s ease-in-out;
+            border: 2px solid var(--color-text);
+        }
+
+        .final-secret-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Estilo para o Slider (Range Input) */
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: #4A5568;
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 182, 212, 0.5);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 182, 212, 0.5);
+        }
+
+        /* Estilos de Status para o painel de ataque */
+        .integrity-status {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .status-ok { background-color: #16A34A; color: #ECFDF5; }
+        .status-fail { background-color: #DC2626; color: #FEF2F2; }
+        .status-ok-light { background-color: #4B5563; color: #E5E7EB; }
+
+    </style>
+</head>
+<body class="index-body">
+
+    <div id="three-canvas"></div>
+
+    <div class="navbar fixed top-0 left-0 right-0 z-20 shadow-lg navbar-transparent">
+        <div class="navbar-content max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative z-10">
+            <a href="../index.html" class="flex items-center space-x-2 text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition">
+                <img src="../logo_azul.png" alt="Logo" class="h-8 w-8">
+                <span>CryptoInfo</span>
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
+        <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
+
+        <ul class="space-y-4 text-xl font-medium">
+            <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
+            <li><a href="../DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
+            <li><a href="../DES/simulacao.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Simulação DES Didática</a></li>
+            <li><a href="../Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
+            <li><a href="../RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
+            <li><a href="extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Diffie-Hellman (DHKE)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
+            <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Informações Adicionais</strong></li>
+            <li><a href="#" onclick="mostrarAviso('Sobre')" class="text-slate-400 hover:text-cyan-400 transition block py-2 ml-4 text-base">Sobre (Placeholder)</a></li>
+        </ul>
+    </div>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+
+
+    <section id="diffie-hellman" class="content-section-card max-w-7xl mx-auto mt-0">
+        <h2>Simulação: Troca de Chaves Diffie-Hellman</h2>
+        <p class="text-slate-300 mb-6">
+            O **Diffie-Hellman** permite que duas partes (Alice e Bob) estabeleçam um **segredo compartilhado** ($S$) sobre um canal não seguro, baseando-se na dificuldade do **logaritmo discreto**.
+        </p>
+        
+        <p class="text-sm text-slate-400 mb-6">
+            **Parâmetros Públicos Fixos:** $g=5$ (gerador) e $p=23$ (módulo primo). O Segredo Privado ($a, b$) é escolhido aleatoriamente no intervalo pequeno de $[2, 15]$.
+        </p>
+
+        <button onclick="runDiffieHellman()" class="button-with-shadow w-full max-w-sm mx-auto block mb-8 bg-cyan-600 hover:bg-cyan-500">
+            Executar Nova Troca de Chaves
+        </button>
+
+        <div class="dh-exchange-container">
+            <div class="party-card">
+                <h3 class="text-xl font-bold text-cyan-400 mb-3">Alice</h3>
+                <p>1. Secreto Privado Alice (a): <span id="secretA" class="font-mono text-red-400">?</span></p>
+                <p>2. Chave Pública Enviada A: $A = 5^a \pmod{23}$:</p>
+                <div id="publicKeyA" class="public-key-display">...</div>
+
+                <h4 class="font-semibold mt-4">3. Segredo Compartilhado:</h4>
+                <p>Cálculo: $S_A = B^a \pmod{23}$: <span id="finalSecretA" class="final-secret-display text-green-400">...</span></p>
+                <div id="colorResultA" class="color-mix-result"></div>
+            </div>
+
+            <div class="party-card">
+                <h3 class="text-xl font-bold text-cyan-400 mb-3">Bob</h3>
+                <p>1. Secreto Privado Bob (b): <span id="secretB" class="font-mono text-red-400">?</span></p>
+                <p>2. Chave Pública Enviada B: $B = 5^b \pmod{23}$:</p>
+                <div id="publicKeyB" class="public-key-display">...</div>
+
+                <h4 class="font-semibold mt-4">3. Segredo Compartilhado:</h4>
+                <p>Cálculo: $S_B = A^b \pmod{23}$: <span id="finalSecretB" class="final-secret-display text-green-400">...</span></p>
+                <div id="colorResultB" class="color-mix-result"></div>
+            </div>
+            
+            <div class="attacker-card">
+                <h3 class="text-2xl font-bold text-red-400 mb-4">Ataque de Força Bruta (Eve)</h3>
+                <p class="text-sm text-slate-400 mb-4">
+                    **Objetivo:** Eve intercepta $A$, $B$, $g=5$ e $p=23$. Ela tenta adivinhar o **Segredo Privado de Alice (a)** resolvendo o problema do Logaritmo Discreto ($a = \log_{g}A \pmod p$).
+                    Use o controle deslizante para testar todos os $a$ possíveis ($2 \le a \le 15$).
+                </p>
+
+                <div class="mb-4">
+                    <label for="eveGuess" class="block mb-2 font-semibold text-slate-200">
+                        Tentativa de Secreto Privado $a'$ (Eve): <span id="eveGuessValue" class="text-cyan-400 font-mono">2</span>
+                    </label>
+                    <input type="range" id="eveGuess" min="2" max="15" value="2" oninput="checkEveGuess(this.value)">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="font-medium text-slate-300">Chave Pública Real de Alice ($A$):</p>
+                        <div id="realKeyA_Eve" class="public-key-display text-cyan-400">...</div>
+                    </div>
+                    <div>
+                        <p class="font-medium text-slate-300">Chave Pública Calculada por Eve ($A'$):</p>
+                        <div id="guessedKeyA_Eve" class="public-key-display text-yellow-400">...</div>
+                    </div>
+                </div>
+
+                <div id="eveStatus" class="integrity-status mt-6 mb-4 text-center status-ok-light">Tente adivinhar o segredo privado 'a'...</div>
+                
+                <div class="flex space-x-4">
+                    <button onclick="revealSecrets()" id="revealBtn" class="button-with-shadow flex-1 bg-red-600 hover:bg-red-500">
+                        Revelar Segredos Reais ($a$ e $b$)
+                    </button>
+                    <button onclick="runDiffieHellman()" class="button-with-shadow flex-1 bg-slate-600 hover:bg-slate-500">
+                        Nova Troca (Limpar Ataque)
+                    </button>
+                </div>
+            </div>
+        </div>
+        <p id="matchStatus" class="text-center mt-6 text-xl font-bold text-yellow-400"></p>
+        
+    </section>
+
+    <footer class="des-page-footer">
+        <p>© 2024 Demonstração de Diffie-Hellman e Logaritmo Discreto</p>
+    </footer>
+
+    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
+        <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
+            <h3 id="messageTitle" class="text-xl font-bold mb-3 text-cyan-400">Informação</h3>
+            <p id="messageText" class="text-slate-200 mb-4"></p>
+            <button onclick="document.getElementById('messageBox').classList.add('hidden')" class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
+        </div>
+    </div>
+    
+    <script>
+        // Envolve todo o código JavaScript em um IIFE para isolar o escopo e evitar a
+        // redeclaração de variáveis globais.
+        (function() {
+            // Parâmetros Públicos
+            const P = 23; // Módulo Primo (p)
+            const G = 5;  // Gerador (g)
+            const MAX_SECRET = 15; // Limite superior para os números secretos privados (a e b)
+            const MIN_SECRET = 2; // Limite inferior
+
+            // Objeto de Estado para manter os valores da troca atual
+            let dhState = {
+                secretoAlice: 0,
+                secretoBob: 0,
+                publicKeyA: 0,
+                publicKeyB: 0,
+                sharedSecret: 0,
+            };
+
+            /**
+             * Implementação otimizada de exponenciação modular (base^exp mod mod).
+             * @param {number} base
+             * @param {number} exponent
+             * @param {number} modulus
+             * @returns {number} O resultado de (base^exponent) mod modulus.
+             */
+            function power(base, exponent, modulus) {
+                if (modulus === 1) return 0;
+                let result = 1;
+                base = base % modulus;
+                while (exponent > 0) {
+                    if (exponent % 2 === 1) {
+                        result = (result * base) % modulus;
+                    }
+                    exponent = Math.floor(exponent / 2);
+                    base = (base * base) % modulus;
+                }
+                return result;
+            }
+
+            /**
+             * Mapeia um valor numérico (0 a P-1) para uma cor HSL.
+             * @param {number} value - O valor do segredo compartilhado (0 a P-1).
+             * @returns {string} - A string de cor HSL.
+             */
+            function mapValueToColor(value) {
+                const hue = (value / P) * 360; 
+                return `hsl(${hue}, 70%, 50%)`;
+            }
+            
+            /**
+             * Inicializa o painel do atacante.
+             */
+            function resetEvePanel() {
+                const slider = document.getElementById('eveGuess');
+                slider.min = MIN_SECRET;
+                slider.max = MAX_SECRET;
+                slider.value = MIN_SECRET;
+                
+                document.getElementById('eveGuessValue').textContent = MIN_SECRET;
+                document.getElementById('realKeyA_Eve').textContent = dhState.publicKeyA;
+
+                const eveStatus = document.getElementById('eveStatus');
+                eveStatus.textContent = "Tente adivinhar o segredo privado 'a'... deslize!";
+                eveStatus.className = "integrity-status status-ok-light"; // Reset class to default light
+
+                // Calculate the public key for the initial guess (a=MIN_SECRET)
+                document.getElementById('guessedKeyA_Eve').textContent = power(G, MIN_SECRET, P);
+
+                document.getElementById('secretA').textContent = '?';
+                document.getElementById('secretB').textContent = '?';
+                document.getElementById('revealBtn').disabled = false;
+            }
+
+            /**
+             * Executa toda a simulação Diffie-Hellman.
+             */
+            function runDiffieHellman() {
+                // 1. Escolha de segredos privados (a e b)
+                // Garante que a e b estejam no intervalo [MIN_SECRET, MAX_SECRET]
+                const secretoAlice = Math.floor(Math.random() * (MAX_SECRET - MIN_SECRET + 1)) + MIN_SECRET; 
+                const secretoBob = Math.floor(Math.random() * (MAX_SECRET - MIN_SECRET + 1)) + MIN_SECRET; 
+
+                // 2. Cálculo das Chaves Públicas (A e B)
+                const publicKeyA = power(G, secretoAlice, P); // A = g^a mod p
+                const publicKeyB = power(G, secretoBob, P); // B = g^b mod p
+
+                // 3. Cálculo do Segredo Compartilhado Final (S)
+                // Alice recebe B (publicKeyB), calcula S = B^a mod p
+                const sharedSecretAlice = power(publicKeyB, secretoAlice, P); 
+                // Bob recebe A (publicKeyA), calcula S = A^b mod p
+                const sharedSecretBob = power(publicKeyA, secretoBob, P);
+
+                // Atualiza o estado da troca
+                dhState = {
+                    secretoAlice: secretoAlice,
+                    secretoBob: secretoBob,
+                    publicKeyA: publicKeyA,
+                    publicKeyB: publicKeyB,
+                    sharedSecret: sharedSecretAlice,
+                };
+
+
+                // 4. Atualização da UI (Alice)
+                document.getElementById('publicKeyA').textContent = publicKeyA;
+                document.getElementById('finalSecretA').textContent = sharedSecretAlice;
+                document.getElementById('colorResultA').style.backgroundColor = mapValueToColor(sharedSecretAlice);
+
+                // 5. Atualização da UI (Bob)
+                document.getElementById('publicKeyB').textContent = publicKeyB;
+                document.getElementById('finalSecretB').textContent = sharedSecretBob;
+                document.getElementById('colorResultB').style.backgroundColor = mapValueToColor(sharedSecretBob);
+                
+                // 6. Verificação e Status
+                const matchStatus = document.getElementById('matchStatus');
+                if (sharedSecretAlice === sharedSecretBob) {
+                    matchStatus.textContent = `✅ Segredo Compartilhado (S=${sharedSecretAlice}) é IDÊNTICO.`;
+                    matchStatus.classList.remove('text-red-400');
+                    matchStatus.classList.add('text-green-400');
+                } else {
+                    matchStatus.textContent = `❌ Segredos NÃO correspondem! (Erro interno na simulação)`;
+                    matchStatus.classList.remove('text-green-400');
+                    matchStatus.classList.add('text-red-400');
+                }
+
+                // 7. Reseta e Inicializa o Painel do Atacante (Eve)
+                resetEvePanel();
+            }
+
+            /**
+             * Função para a Eve tentar adivinhar o segredo 'a' de Alice.
+             * @param {string} guessedSecretoAliceString - O segredo privado (a) que Eve está testando.
+             */
+            function checkEveGuess(guessedSecretoAliceString) {
+                const guessedSecretoAlice = parseInt(guessedSecretoAliceString, 10);
+                document.getElementById('eveGuessValue').textContent = guessedSecretoAlice;
+
+                const guessedKeyA_Eve = document.getElementById('guessedKeyA_Eve');
+                const eveStatus = document.getElementById('eveStatus');
+                
+                // 1. Eve calcula a chave pública A' = g^a' mod p
+                const A_prime = power(G, guessedSecretoAlice, P); 
+                guessedKeyA_Eve.textContent = A_prime;
+                
+                // 2. Compara A' com a chave pública real A
+                if (A_prime === dhState.publicKeyA) {
+                    // Eve encontrou o segredo!
+                    
+                    // Eve agora calcula o segredo compartilhado S
+                    const S_Eve = power(dhState.publicKeyB, guessedSecretoAlice, P);
+                    
+                    eveStatus.textContent = `🚨 SUCESSO! Logaritmo Discreto resolvido! a = ${guessedSecretoAlice}. Segredo Compartilhado (S=${S_Eve}) Descoberto!`;
+                    eveStatus.className = "integrity-status status-fail";
+                    
+                    document.getElementById('realKeyA_Eve').textContent = `${dhState.publicKeyA} (SEGURANÇA QUEBRADA!)`;
+                    
+                } else {
+                    // Tentativa incorreta
+                    eveStatus.textContent = `Tentativa ${guessedSecretoAlice} falhou. A' (${A_prime}) ≠ A Real (${dhState.publicKeyA})`;
+                    eveStatus.className = "integrity-status status-ok-light";
+                }
+            }
+
+            /**
+             * Revela os segredos privados reais para fins educacionais.
+             */
+            function revealSecrets() {
+                document.getElementById('secretA').textContent = dhState.secretoAlice;
+                document.getElementById('secretB').textContent = dhState.secretoBob;
+                document.getElementById('eveStatus').textContent = `Os segredos eram a=${dhState.secretoAlice} e b=${dhState.secretoBob}.`;
+                document.getElementById('eveStatus').className = "integrity-status status-ok";
+                document.getElementById('revealBtn').disabled = true;
+            }
+            
+            // Atribui as funções ao escopo global para que os botões e o slider possam encontrá-las
+            window.runDiffieHellman = runDiffieHellman;
+            window.checkEveGuess = checkEveGuess;
+            window.revealSecrets = revealSecrets;
+
+            // Roda a simulação na primeira carga para inicializar a tela
+            document.addEventListener('DOMContentLoaded', runDiffieHellman);
+        })(); // O IIFE é invocado imediatamente
+    </script>
+    
+    <script src="../JS/main.js"></script>
+</body>
+</html>
