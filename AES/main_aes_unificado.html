@@ -63,16 +63,16 @@
     <section id="introducao" class="content-section-card">
         <h2>Introdução ao AES (Advanced Encryption Standard)</h2>
         <p class="text-slate-300 mb-4">
-            O <strong>AES</strong> (Advanced Encryption Standard) é a cifra de bloco simétrica mais utilizada no mundo, substituindo o DES como padrão. Criado pelos criptógrafos belgas Joan Daemen e Vincent Rijmen (e originalmente nomeado **Rijndael**), foi adotado pelo governo dos EUA em 2001 (FIPS 197). O AES opera em **blocos fixos de 128 bits** e suporta chaves de **128, 192 ou 256 bits**.
+            O <strong>AES</strong> (Advanced Encryption Standard) é a cifra de bloco simétrica mais utilizada no mundo, substituindo o DES como padrão. Criado pelos criptógrafos belgas Joan Daemen e Vincent Rijmen (e originalmente nomeado Rijndael), foi adotado pelo governo dos EUA em 2001 (FIPS 197). O AES opera em blocos fixos de 128 bits e suporta chaves de 128, 192 ou 256 bits.
         </p>
         <p class="text-slate-300 mb-4">
-            Ao contrário do DES, o AES não utiliza a Estrutura de Feistel. Ele é baseado em uma **Rede de Permutação e Substituição (SPN)**, processando o bloco de 128 bits como uma matriz de $4 \times 4$ bytes (o **State**). O número de rodadas varia de acordo com o tamanho da chave (10, 12 ou 14 rodadas).
+            Ao contrário do DES, o AES não utiliza a Estrutura de Feistel. Ele é baseado em uma <b>Rede de Permutação e Substituição (SPN)</b>, processando o bloco de 128 bits como uma matriz de $4 \times 4$ bytes (o <b>State</b>). O número de rodadas varia de acordo com o tamanho da chave (10, 12 ou 14 rodadas).
         </p>
         <p class="text-slate-300 mb-6">
-            O AES é extremamente eficiente em hardware e software e, devido ao seu design robusto e chaves longas (mínimo de 128 bits), é considerado **seguro** contra ataques de força bruta, sendo o padrão ouro para a maioria das aplicações de segurança atuais.
+            O AES é extremamente eficiente em hardware e software e, devido ao seu design robusto e chaves longas (mínimo de 128 bits), é considerado <b>seguro</b> contra ataques de força bruta, sendo o padrão ouro para a maioria das aplicações de segurança atuais.
         </p>
         <p>
-            <strong>Recomendação:</strong> Para segurança moderna, utilize o modo **AES-256** com o modo de operação **GCM** (Galois/Counter Mode), que oferece autenticação integrada.
+            <strong>Recomendação:</strong> Para segurança moderna, utilize o modo <b>AES-256</b> com o modo de operação <b>GCM</b> (Galois/Counter Mode), que oferece autenticação integrada.
         </p>
     </section>
 
@@ -89,7 +89,7 @@
                 <span class="text-2xl mr-3 text-cyan-500">&#x273F;</span> 1. SubBytes (Substituição de Bytes)
             </h3>
             <p class="text-slate-300">
-                Esta é a camada de **confusão**. Cada byte do estado é substituído por um byte correspondente em uma tabela de busca fixa (a **S-Box**). Essa substituição é não-linear e serve para obscurecer a relação entre o texto claro e o texto cifrado, tornando o ataque de força bruta a única opção para obter a chave.
+                Esta é a camada de <b>confusão</b>. Cada byte do estado é substituído por um byte correspondente em uma tabela de busca fixa (a <b>S-Box</b>). Essa substituição é não-linear e serve para obscurecer a relação entre o texto claro e o texto cifrado, tornando o ataque de força bruta a única opção para obter a chave.
             </p>
         </div>
 
@@ -98,7 +98,7 @@
                 <span class="text-2xl mr-3 text-cyan-500">&#x21C9;</span> 2. ShiftRows (Deslocamento de Linhas)
             </h3>
             <p class="text-slate-300">
-                Esta é a camada de **difusão**. As linhas da matriz de estado são ciclicamente deslocadas para a esquerda em diferentes offsets: a primeira linha não se move, a segunda é deslocada por 1 byte, a terceira por 2 bytes e a quarta por 3 bytes. Isso garante que os bytes de uma coluna se espalhem por colunas diferentes na próxima rodada.
+                Esta é a camada de <b>difusão</b>. As linhas da matriz de estado são ciclicamente deslocadas para a esquerda em diferentes offsets: a primeira linha não se move, a segunda é deslocada por 1 byte, a terceira por 2 bytes e a quarta por 3 bytes. Isso garante que os bytes de uma coluna se espalhem por colunas diferentes na próxima rodada.
             </p>
         </div>
 
@@ -107,7 +107,7 @@
                 <span class="text-2xl mr-3 text-cyan-500">&#x271B;</span> 3. MixColumns (Mistura de Colunas)
             </h3>
             <p class="text-slate-300">
-                Esta é a principal operação de **difusão**. As colunas do estado são transformadas através de uma multiplicação matricial em um campo finito ($GF(2^8)$). Isso garante que cada byte de saída em uma coluna dependa de todos os quatro bytes de entrada da coluna. É omitida na última rodada.
+                Esta é a principal operação de <b>difusão</b>. As colunas do estado são transformadas através de uma multiplicação matricial em um campo finito ($GF(2^8)$). Isso garante que cada byte de saída em uma coluna dependa de todos os quatro bytes de entrada da coluna. É omitida na última rodada.
             </p>
         </div>
 
@@ -116,7 +116,7 @@
                 <span class="text-2xl mr-3 text-cyan-500">&#x2295;</span> 4. AddRoundKey (Adição da Chave de Rodada)
             </h3>
             <p class="text-slate-300">
-                Esta é a única operação que usa a chave. O estado é combinado com a **Subchave de Rodada** (Round Key) de 128 bits, usando a operação **XOR** (ou adição módulo 2). A Subchave de Rodada é derivada da chave principal através do **Key Schedule** (Geração de Chave de Rodada).
+                Esta é a única operação que usa a chave. O estado é combinado com a <b>Subchave de Rodada</b> (Round Key) de 128 bits, usando a operação <b>XOR</b> (ou adição módulo 2). A Subchave de Rodada é derivada da chave principal através do <b>Key Schedule</b> (Geração de Chave de Rodada).
             </p>
         </div>
     </div>
@@ -158,7 +158,7 @@
                 <span class="text-2xl mr-3 font-mono text-green-400"></span> 3. Counter Mode (CTR) - Modo Contador
             </h3>
             <p class="text-slate-300">
-                O modo **CTR** transforma a cifra de bloco em uma cifra de fluxo, sendo altamente eficiente e paralelizado. Ele gera um fluxo de chave (**keystream**) criptografando um **contador** único para cada bloco (junto com um nonce). O texto claro é então combinado com esse keystream via **XOR**. Sua grande vantagem é a velocidade e a tolerância a erros de transmissão.
+                O modo <b>CTR</b> transforma a cifra de bloco em uma cifra de fluxo, sendo altamente eficiente e paralelizado. Ele gera um fluxo de chave (<b>keystream</b>) criptografando um <b>contador</b> único para cada bloco (junto com um nonce). O texto claro é então combinado com esse keystream via <b>XOR</b>. Sua grande vantagem é a velocidade e a tolerância a erros de transmissão.
             </p>
         </div>
 
@@ -167,7 +167,7 @@
                 <span class="text-2xl mr-3 font-mono text-purple-400"></span> 4. Galois/Counter Mode (GCM) - Modo Galois/Contador
             </h3>
             <p class="text-slate-300">
-                O **GCM** é um modo de **Criptografia Autenticada** (Authenticated Encryption, AE). Ele utiliza o CTR para criptografar os dados e, simultaneamente, utiliza a multiplicação no campo de Galois para calcular uma **tag de autenticação (MAC)**. Isso garante tanto a confidencialidade quanto a integridade e autenticidade da mensagem, sendo o modo **mais recomendado** para a maioria dos protocolos modernos (como TLS/SSL).
+                O <b>GCM</b> é um modo de <b>Criptografia Autenticada</b> (Authenticated Encryption, AE). Ele utiliza o CTR para criptografar os dados e, simultaneamente, utiliza a multiplicação no campo de Galois para calcular uma <b>tag de autenticação (MAC)</b>. Isso garante tanto a confidencialidade quanto a integridade e autenticidade da mensagem, sendo o modo <b>mais recomendado</b> para a maioria dos protocolos modernos (como TLS/SSL).
             </p>
         </div>
     </div>
@@ -448,4 +448,5 @@
 
 </script>
 </body>
+
 </html>
