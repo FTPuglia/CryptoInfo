@@ -69,11 +69,11 @@
     </p>
 
     <p class="text-slate-300 mb-4">
-        Diferente dos sistemas simétricos, o RSA opera com um **par de chaves**. A **Chave Pública** (composta pelos valores $E$ e $N$) é aberta e usada por qualquer pessoa para <strong>criptografar</strong> a mensagem ($M$). A **Chave Privada** (composta por $D$ e $N$), no entanto, é mantida em total sigilo pelo destinatário e é a única capaz de <strong>descriptografar</strong> o texto cifrado ($C$).
+        Diferente dos sistemas simétricos, o RSA opera com um <b>par de chaves</b>. A <b>Chave Pública</b> (composta pelos valores <i>E</i> e <i>N</i>) é aberta e usada por qualquer pessoa para <strong>criptografar</strong> a mensagem (<i>M</i>). A <b>Chave Privada</b> (composta por <i>D</i> e <i>N</i>), no entanto, é mantida em total sigilo pelo destinatário e é a única capaz de <strong>descriptografar</strong> o texto cifrado (<i>C</i>).
     </p>
     
     <p class="text-slate-300 mb-6">
-        A segurança do RSA baseia-se na matemática da **fatoração de números primos**. O processo de geração de chaves começa com a escolha de dois números primos grandes e secretos ($P$ e $Q$). O Módulo $N$ é o produto de $P$ e $Q$. A dificuldade computacional em descobrir $P$ e $Q$ a partir do valor conhecido de $N$ é o que protege a chave privada ($D$), que depende da função $\phi$ (Totiente de Euler, calculado como $(P-1) \cdot (Q-1)$). Assim, a simulação demonstra o ciclo completo: desde a geração de todos esses elementos matemáticos ($P, Q, N, \phi, E, D$) até a aplicação da <strong>Exponenciação Modular</strong> para transformar a mensagem $M$ no cifrado $C$ e, por fim, a recuperação de $M$ utilizando $D$.
+        A segurança do RSA baseia-se na matemática da <b>fatoração de números primos</b>. O processo de geração de chaves começa com a escolha de dois números primos grandes e secretos (<i>P</i> e <i>Q</i>). O Módulo <i>N</i> é o produto de <i>P</i> e <i>Q</i>. A dificuldade computacional em descobrir <i>P</i> e <i>Q</i> a partir do valor conhecido de <i>N</i> é o que protege a chave privada (<i>D</i>), que depende da função <i>\phi</i> (Totiente de Euler, calculado como <i>(P-1) \cdot (Q-1)</i>). Assim, a simulação demonstra o ciclo completo: desde a geração de todos esses elementos matemáticos (<i>P, Q, N, \phi, E, D</i>) até a aplicação da <strong>Exponenciação Modular</strong> para transformar a mensagem <i>M</i> no cifrado <i>C</i> e, por fim, a recuperação de <i>M</i> utilizando <i>D</i>.
     </p>
 </section>
 
@@ -90,7 +90,7 @@
                     1. Escolha de Primos (p e q)
                 </h3>
                 <p class="text-slate-300">
-                    O usuário escolhe dois números primos grandes e distintos, $p$ e $q$. Quanto maiores eles forem, mais segura será a criptografia.
+                    O usuário escolhe dois números primos grandes e distintos, <i>p</i> e <i>q</i>. Quanto maiores eles forem, mais segura será a criptografia.
                 </p>
             </div>
 
@@ -99,7 +99,7 @@
                     2. Cálculo do Módulo (n) e da Função Totiente (φ)
                 </h3>
                 <p class="text-slate-300">
-                    O <strong>Módulo</strong> $n$ é calculado por $n = p \cdot q$. Ele será parte de ambas as chaves (pública e privada). A <strong>Função Totiente de Euler</strong> $\phi(n)$ é calculada por $\phi(n) = (p-1)(q-1)$. Este valor é crucial para a chave privada e deve ser mantido em segredo.
+                    O <strong>Módulo</strong> <i>n</i> é calculado por <i>n = p \cdot q</i>. Ele será parte de ambas as chaves (pública e privada). A <strong>Função Totiente de Euler</strong> <i>\phi(n)</i> é calculada por <i>\phi(n) = (p-1)(q-1)</i>. Este valor é crucial para a chave privada e deve ser mantido em segredo.
                 </p>
             </div>
 
@@ -108,7 +108,7 @@
                     3. Chave Pública (e)
                 </h3>
                 <p class="text-slate-300">
-                    O expoente público $e$ é escolhido de forma que $1 < e < \phi(n)$ e que $e$ seja <strong>coprimo</strong> a $\phi(n)$ (ou seja, $\text{mdc}(e, \phi(n)) = 1$). O par $(e, n)$ é a <strong>Chave Pública</strong>.
+                    O expoente público <i>e</i> é escolhido de forma que <i>1 < e < \phi(n)</i> e que <i>e</i> seja <strong>coprimo</strong> a <i>\phi(n)</i> (ou seja, <i>\text{mdc}(e, \phi(n)) = 1</i>). O par <i>(e, n)</i> é a <strong>Chave Pública</strong>.
                 </p>
             </div>
 
@@ -117,7 +117,7 @@
                     4. Chave Privada (d)
                 </h3>
                 <p class="text-slate-300">
-                    O expoente privado $d$ é o <strong>inverso multiplicativo</strong> de $e$ no módulo $\phi(n)$. Ele é calculado através do Algoritmo Estendido de Euclides, satisfazendo a equação $d \cdot e \equiv 1 \pmod{\phi(n)}$. O par $(d, n)$ é a <strong>Chave Privada</strong>.
+                    O expoente privado <i>d</i> é o <strong>inverso multiplicativo</strong> de <i>e</i> no módulo <i>\phi(n)</i>. Ele é calculado através do Algoritmo Estendido de Euclides, satisfazendo a equação <i>d \cdot e \equiv 1 \pmod{\phi(n)}</i>. O par <i>(d, n)</i> é a <strong>Chave Privada</strong>.
                 </p>
             </div>
         </div>
@@ -137,11 +137,11 @@
                     <span class="text-2xl mr-3 font-mono text-cyan-400"></span> Confidencialidade (Criptografar)
                 </h3>
                 <p class="text-slate-300">
-                    Para criptografar uma mensagem $M$ (onde $M < n$), utiliza-se a Chave Pública do destinatário $(e, n)$.
+                    Para criptografar uma mensagem <i>M</i> (onde <i>M < n</i>), utiliza-se a Chave Pública do destinatário <i>(e, n)</i>.
                 </p>
                 <div class="mt-3 p-3 bg-slate-800 rounded text-center text-lg font-mono text-white">
-                    $$C = M^e \pmod{n}$$
-                    <span class="text-xs text-slate-400 block mt-1">Onde $C$ é o texto cifrado.</span>
+                    <i><i>C = M^e \pmod{n}</i></i>
+                    <span class="text-xs text-slate-400 block mt-1">Onde <i>C</i> é o texto cifrado.</span>
                 </div>
             </div>
 
@@ -150,11 +150,11 @@
                     <span class="text-2xl mr-3 font-mono text-green-400"></span> Autenticidade (Descriptografar/Assinar)
                 </h3>
                 <p class="text-slate-300">
-                    Para descriptografar o texto cifrado $C$, o destinatário utiliza sua Chave Privada $(d, n)$.
+                    Para descriptografar o texto cifrado <i>C</i>, o destinatário utiliza sua Chave Privada <i>(d, n)</i>.
                 </p>
                 <div class="mt-3 p-3 bg-slate-800 rounded text-center text-lg font-mono text-white">
-                    $$M = C^d \pmod{n}$$
-                    <span class="text-xs text-slate-400 block mt-1">Onde $M$ é o texto original.</span>
+                    <i><i>M = C^d \pmod{n}</i></i>
+                    <span class="text-xs text-slate-400 block mt-1">Onde <i>M</i> é o texto original.</span>
                 </div>
                 <p class="text-slate-300 mt-4">
                     <strong>Assinatura Digital:</strong> O processo de assinatura é idêntico à descriptografia, mas feito pelo remetente com sua própria chave privada. O receptor usa a chave pública do remetente para verificar.
@@ -166,11 +166,11 @@
     <section id="simulacao-rsa" class="content-section-card">
         <h2>RSA Didático: Geração de Chaves e Teste Simples</h2>
         <p class="text-slate-300 mb-6">
-            Para fins didáticos, utilizaremos números primos e mensagem (M) pequenos. **Estes números são inseguros** e servem apenas para demonstrar a matemática por trás do RSA.
+            Para fins didáticos, utilizaremos números primos e mensagem (M) pequenos. <b>Estes números são inseguros</b> e servem apenas para demonstrar a matemática por trás do RSA.
         </p>
 
         <p class="text-sm text-slate-400 mb-4">
-             <strong>Foco da Simulação:</strong> Demonstrar o cálculo dos parâmetros $(n, \phi(n), e, d)$ e como a exponenciação modular cifra e decifra a mensagem.
+             <strong>Foco da Simulação:</strong> Demonstrar o cálculo dos parâmetros <i>(n, \phi(n), e, d)</i> e como a exponenciação modular cifra e decifra a mensagem.
         </p>
 
         <label for="pInput" class="block mb-2 text-sm font-medium">Primo p (Ex: 17):</label>
@@ -321,4 +321,5 @@
 
 </script>
 </body>
+
 </html>
