@@ -166,11 +166,11 @@
     <section id="diffie-hellman" class="content-section-card max-w-7xl mx-auto mt-0">
         <h2>Simulação: Troca de Chaves Diffie-Hellman</h2>
         <p class="text-slate-300 mb-6">
-            O **Diffie-Hellman** permite que duas partes (Alice e Bob) estabeleçam um **segredo compartilhado** ($S$) sobre um canal não seguro, baseando-se na dificuldade do **logaritmo discreto**.
+            O <b>Diffie-Hellman</b> permite que duas partes (Alice e Bob) estabeleçam um <b>segredo compartilhado</b> (<i>S</i>) sobre um canal não seguro, baseando-se na dificuldade do <b>logaritmo discreto</b>.
         </p>
         
         <p class="text-sm text-slate-400 mb-6">
-            **Parâmetros Públicos Fixos:** $g=5$ (gerador) e $p=23$ (módulo primo). O Segredo Privado ($a, b$) é escolhido aleatoriamente no intervalo pequeno de $[2, 15]$.
+            <b>Parâmetros Públicos Fixos:</b> <i>g=5</i> (gerador) e <i>p=23</i> (módulo primo). O Segredo Privado (<i>a, b</i>) é escolhido aleatoriamente no intervalo pequeno de <i>[2, 15]</i>.
         </p>
 
         <button onclick="runDiffieHellman()" class="button-with-shadow w-full max-w-sm mx-auto block mb-8 bg-cyan-600 hover:bg-cyan-500">
@@ -181,46 +181,46 @@
             <div class="party-card">
                 <h3 class="text-xl font-bold text-cyan-400 mb-3">Alice</h3>
                 <p>1. Secreto Privado Alice (a): <span id="secretA" class="font-mono text-red-400">?</span></p>
-                <p>2. Chave Pública Enviada A: $A = 5^a \pmod{23}$:</p>
+                <p>2. Chave Pública Enviada A: <i>A = 5^a \pmod{23}</i>:</p>
                 <div id="publicKeyA" class="public-key-display">...</div>
 
                 <h4 class="font-semibold mt-4">3. Segredo Compartilhado:</h4>
-                <p>Cálculo: $S_A = B^a \pmod{23}$: <span id="finalSecretA" class="final-secret-display text-green-400">...</span></p>
+                <p>Cálculo: <i>S_A = B^a \pmod{23}</i>: <span id="finalSecretA" class="final-secret-display text-green-400">...</span></p>
                 <div id="colorResultA" class="color-mix-result"></div>
             </div>
 
             <div class="party-card">
                 <h3 class="text-xl font-bold text-cyan-400 mb-3">Bob</h3>
                 <p>1. Secreto Privado Bob (b): <span id="secretB" class="font-mono text-red-400">?</span></p>
-                <p>2. Chave Pública Enviada B: $B = 5^b \pmod{23}$:</p>
+                <p>2. Chave Pública Enviada B: <i>B = 5^b \pmod{23}</i>:</p>
                 <div id="publicKeyB" class="public-key-display">...</div>
 
                 <h4 class="font-semibold mt-4">3. Segredo Compartilhado:</h4>
-                <p>Cálculo: $S_B = A^b \pmod{23}$: <span id="finalSecretB" class="final-secret-display text-green-400">...</span></p>
+                <p>Cálculo: <i>S_B = A^b \pmod{23}</i>: <span id="finalSecretB" class="final-secret-display text-green-400">...</span></p>
                 <div id="colorResultB" class="color-mix-result"></div>
             </div>
             
             <div class="attacker-card">
                 <h3 class="text-2xl font-bold text-red-400 mb-4">Ataque de Força Bruta (Eve)</h3>
                 <p class="text-sm text-slate-400 mb-4">
-                    **Objetivo:** Eve intercepta $A$, $B$, $g=5$ e $p=23$. Ela tenta adivinhar o **Segredo Privado de Alice (a)** resolvendo o problema do Logaritmo Discreto ($a = \log_{g}A \pmod p$).
-                    Use o controle deslizante para testar todos os $a$ possíveis ($2 \le a \le 15$).
+                    <b>Objetivo:</b> Eve intercepta <i>A</i>, <i>B</i>, <i>g=5</i> e <i>p=23</i>. Ela tenta adivinhar o <b>Segredo Privado de Alice (a)</b> resolvendo o problema do Logaritmo Discreto (<i>a = \log_{g}A \pmod p</i>).
+                    Use o controle deslizante para testar todos os <i>a</i> possíveis (<i>2 \le a \le 15</i>).
                 </p>
 
                 <div class="mb-4">
                     <label for="eveGuess" class="block mb-2 font-semibold text-slate-200">
-                        Tentativa de Secreto Privado $a'$ (Eve): <span id="eveGuessValue" class="text-cyan-400 font-mono">2</span>
+                        Tentativa de Secreto Privado <i>a'</i> (Eve): <span id="eveGuessValue" class="text-cyan-400 font-mono">2</span>
                     </label>
                     <input type="range" id="eveGuess" min="2" max="15" value="2" oninput="checkEveGuess(this.value)">
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <p class="font-medium text-slate-300">Chave Pública Real de Alice ($A$):</p>
+                        <p class="font-medium text-slate-300">Chave Pública Real de Alice (<i>A</i>):</p>
                         <div id="realKeyA_Eve" class="public-key-display text-cyan-400">...</div>
                     </div>
                     <div>
-                        <p class="font-medium text-slate-300">Chave Pública Calculada por Eve ($A'$):</p>
+                        <p class="font-medium text-slate-300">Chave Pública Calculada por Eve (<i>A'</i>):</p>
                         <div id="guessedKeyA_Eve" class="public-key-display text-yellow-400">...</div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
                 
                 <div class="flex space-x-4">
                     <button onclick="revealSecrets()" id="revealBtn" class="button-with-shadow flex-1 bg-red-600 hover:bg-red-500">
-                        Revelar Segredos Reais ($a$ e $b$)
+                        Revelar Segredos Reais (<i>a</i> e <i>b</i>)
                     </button>
                     <button onclick="runDiffieHellman()" class="button-with-shadow flex-1 bg-slate-600 hover:bg-slate-500">
                         Nova Troca (Limpar Ataque)
@@ -439,4 +439,5 @@
     
     <script src="../JS/main.js"></script>
 </body>
+
 </html>
