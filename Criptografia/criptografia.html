@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução à Criptografia - Conceitos Fundamentais</title>
+
+    <link rel="icon" type="image/png" href="../logo_azul.png">
+    
+    <script src="../CSS/tailwind_local.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="../CSS/inter_local.css">
+    <link rel="stylesheet" href="../CSS/estilo_main.css">
+</head>
+<body class="index-body">
+
+    <div id="three-canvas"></div>
+
+    <div class="navbar fixed top-0 left-0 right-0 z-20 shadow-lg navbar-transparent">
+        <div class="navbar-content max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative z-10">
+            <a href="../index.html" class="flex items-center space-x-2 text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition">
+                <img src="../logo_azul.png" alt="Logo" class="h-8 w-8">
+                <span>CryptoInfo</span>
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
+        <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
+
+        <ul class="space-y-4 text-xl font-medium">
+            <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
+            <li><a href="criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 active">Conceitos Fundamentais</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
+            <li><a href="../DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
+            <li><a href="../AES/main_aes.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
+            <li><a href="../Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
+            
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
+            <li><a href="../RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
+            <li><a href="../Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
+            <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
+        </ul>
+    </div>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+
+
+    <section id="introducao" class="content-section-card max-w-7xl mx-auto mt-0">
+        <h2>Criptografia: O que é?</h2>
+        <p class="text-slate-300 mb-6">
+            A criptografia é o estudo e a aplicação de técnicas que permitem transformar uma informação legível em algo ilegível para qualquer pessoa não autorizada. O objetivo principal é garantir a <strong class="text-cyan-400">confidencialidade</strong> da comunicação.
+        </p>
+
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700 mb-6">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3">Mensagem Original vs. Mensagem Oculta</h3>
+            <p class="text-slate-300">
+                O processo começa com o <strong class="text-green-300">Texto Simples</strong> (Plaintext), que é a mensagem que você pode ler. Ao aplicar a criptografia (também chamada de cifragem), ele se torna o <strong class="text-red-300">Texto Cifrado</strong> (Ciphertext). O Texto Cifrado é o resultado embaralhado que, se interceptado, não fará sentido.<br/><br/>
+                Para voltar o Texto Cifrado ao Texto Claro, é necessário o processo de <strong class="text-cyan-400">decriptação</strong>.
+            </p>
+        </div>
+    </section>
+
+    <section id="componentes" class="content-section-card max-w-7xl mx-auto">
+        <h2>Os Pilares da Criptografia</h2>
+        <p class="text-slate-300 mb-6">
+            Toda operação de criptografia moderna depende de dois componentes críticos.
+        </p>
+
+        <div class="space-y-6">
+            
+            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                    <span class="text-2xl mr-3 text-cyan-500">&#x270E;</span> O Algoritmo
+                </h3>
+                <p class="text-slate-300">
+                    O algoritmo é a <strong class="text-cyan-300">fórmula ou regra matemática</strong> usada para misturar o texto claro e transformá-lo em texto cifrado. É o método de cifragem em si (por exemplo, <b>AES, RSA</b>). Na criptografia moderna, o tipo de algoritmo é público e conhecido por todos. A segurança não depende do algoritmo ser secreto.
+                </p>
+            </div>
+
+            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                    <span class="text-2xl mr-3 text-cyan-500">&#x1F511;</span> A Chave (Key)
+                </h3>
+                <p class="text-slate-300">
+                    A chave é o <strong class="text-cyan-300">valor secreto</strong>, uma sequência de números ou caracteres, que é inserida no algoritmo. É como a senha que desbloqueia o processo de decriptação. Se o algoritmo é o cadeado, a chave é o segredo para abri-lo. A segurança da criptografia depende <strong class="text-red-300">exclusivamente</strong> da chave ser mantida em segredo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tipos" class="content-section-card max-w-7xl mx-auto">
+        <h2>Tipos de Criptografia</h2>
+        
+        <div class="space-y-8 mt-6">
+            
+            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+                <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
+                    <span class="text-2xl mr-3 font-mono text-cyan-400">&#x269B;</span> Criptografia Simétrica (Chave Única)
+                </h3>
+                <p class="text-slate-300">
+                    Neste modelo, o emissor e o receptor usam a <strong class="text-cyan-300">mesma chave secreta</strong> tanto para cifrar quanto para decifrar a mensagem. É um sistema muito rápido e eficiente, ideal para proteger grandes quantidades de dados, sua vulnerabilidade principal é como compartilhar essa chave única de forma segura entre as duas partes.
+                </p>
+            </div>
+
+            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+                <h3 class="text-xl font-bold text-purple-400 mb-2 flex items-center">
+                    <span class="text-2xl mr-3 font-mono text-purple-400">&#x269C;</span> Criptografia Assimétrica (Par de Chaves)
+                </h3>
+                <p class="text-slate-300">
+                    Também conhecida como Criptografia de Chave Pública, ela utiliza <strong class="text-purple-300">duas chaves diferentes</strong>: uma <strong class="text-green-300">Pública</strong> (que pode ser compartilhada) e uma <strong class="text-red-300">Privada</strong> (que deve ser mantida secreta). O que é cifrado com uma só pode ser decifrado com a outra, resolvendo o problema de compartilhamento da chave e é essencial para a autenticação e troca segura de variados tipos de informação.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="des-page-footer">
+        <p>2025 Projeto CryptoInfo</p>
+    </footer>
+
+    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
+        <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
+            <h3 id="messageTitle" class="text-xl font-bold mb-3 text-cyan-400">Informação</h3>
+            <p id="messageText" class="text-slate-200 mb-4"></p>
+            <button onclick="document.getElementById('messageBox').classList.add('hidden')" class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
+        </div>
+    </div>
+
+
+    <script src="../JS/main.js"></script> 
+    
+    <script>
+        // Função de toggle menu principal (Reutilizada do template)
+        function toggleMenu(show) {
+            const drawer = document.getElementById('mobile-menu-drawer');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            if (show === undefined) {
+                show = drawer.classList.contains('transform-translate-x-full');
+            }
+
+            if (show) {
+                drawer.classList.remove('hidden');
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    drawer.classList.remove('transform-translate-x-full');
+                    overlay.classList.remove('opacity-0');
+                    overlay.classList.add('opacity-100');
+                }, 10); 
+            } else {
+                drawer.classList.add('transform-translate-x-full');
+                overlay.classList.remove('opacity-100');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    drawer.classList.add('hidden');
+                }, 300); 
+            }
+        }
+        
+        document.getElementById('mobile-menu-toggle').onclick = (event) => {
+            event.stopPropagation();
+            toggleMenu();
+        };
+
+        // Função de placeholder para os itens do menu, se necessário.
+        function mostrarAviso(titulo) {
+            toggleMenu(false); 
+            document.getElementById('messageTitle').textContent = titulo;
+            document.getElementById('messageText').textContent = 'Esta é uma seção de placeholder. O conteúdo será adicionado em breve.';
+            document.getElementById('messageBox').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
