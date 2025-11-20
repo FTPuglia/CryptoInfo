@@ -60,13 +60,13 @@
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
 
     
-    <section id="introducao" class="content-section-card max-w-7xl mx-auto mt-0">
+    <section id="introducao" class="content-section-card max-w-7xl mx-auto py-8">
         <h2>Introdução ao AES (Advanced Encryption Standard)</h2>
         <p class="text-slate-300 mb-4">
             O <strong>AES</strong> (Advanced Encryption Standard) é a cifra de bloco simétrica mais utilizada no mundo, substituindo o DES como padrão. Criado pelos criptógrafos belgas Joan Daemen e Vincent Rijmen (e originalmente nomeado Rijndael), foi adotado pelo governo dos EUA em 2001 (FIPS 197). O AES opera em blocos fixos de 128 bits e suporta chaves de 128, 192 ou 256 bits.
         </p>
         <p class="text-slate-300 mb-4">
-            Ao contrário do DES, o AES não utiliza a Estrutura de Feistel. Ele é baseado em uma <b>Rede de Permutação e Substituição (SPN)</b>, processando o bloco de 128 bits como uma matriz de <i>4 \times 4<i> bytes (o <b>State</b>). O número de rodadas varia de acordo com o tamanho da chave (10, 12 ou 14 rodadas).
+            Ao contrário do DES, o AES não utiliza a Estrutura de Feistel. Ele é baseado em uma <b>Rede de Permutação e Substituição (SPN)</b>, processando o bloco de 128 bits como uma matriz de <i>4 \times 4</i> bytes (o <b>State</b>). O número de rodadas varia de acordo com o tamanho da chave (10, 12 ou 14 rodadas).
         </p>
         <p class="text-slate-300 mb-6">
             O AES é extremamente eficiente em hardware e software e, devido ao seu design robusto e chaves longas (mínimo de 128 bits), é considerado <b>seguro</b> contra ataques de força bruta, sendo o padrão ouro para a maioria das aplicações de segurança atuais.
@@ -76,7 +76,7 @@
         </p>
     </section>
 
-    <section id="operacoes-chave" class="content-section-card max-w-7xl mx-auto mt-0">
+    <section id="operacoes-chave" class="content-section-card max-w-7xl mx-auto py-8">
     <h2>As 4 Transformações do AES (Rede SPN)</h2>
     <p class="text-slate-300 mb-6">
         Cada rodada do AES (exceto a última) aplica quatro transformações sequenciais no bloco de estado (<i>4 \times 4</i> bytes) para garantir a difusão e a confusão.
@@ -122,7 +122,7 @@
     </div>
 </section>
     
-    <section id="modos-operacao" class="content-section-card">
+    <section id="modos-operacao" class="content-section-card max-w-7xl mx-auto py-8">
     <h2>Modos de Operação: Como o AES Criptografa Mensagens Longas</h2>
     
     <p class="text-slate-300 mb-4 font-semibold">
@@ -173,7 +173,7 @@
     </div>
 </section>
 
-    <section id="simulacao-aes" class="content-section-card">
+    <section id="simulacao-aes" class="content-section-card max-w-7xl mx-auto py-8">
         <h2>AES Didático: Simulação da Rodada de Transformação</h2>
         <p class="text-slate-300 mb-6">
             O AES (Rijndael) é baseado em transformações de matrizes. Seu processo envolve várias rodadas, onde o bloco de dados de 128 bits é tratado como uma matriz de <i>4 \times 4</i> bytes (o Estado) e passa pelas quatro transformações principais.
@@ -197,7 +197,7 @@
         </div>
     </section>
 
-    <section id="demo-criptografia" class="content-section-card">
+    <section id="demo-criptografia" class="content-section-card max-w-7xl mx-auto py-8">
         <h2>Teste a Criptografia AES (CryptoJS)</h2>
         <p class="text-slate-300 mb-6">
             Utilize esta seção para criptografar ou descriptografar textos usando a biblioteca <strong>CryptoJS</strong>. O AES usa chaves de 128, 192 ou 256 bits (16, 24 ou 32 caracteres).
@@ -239,7 +239,7 @@
     </section>
 
     <footer class="des-page-footer">
-        <p>© 2024 Demonstração AES para Fins Educacionais</p>
+        <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
     </footer>
 
     <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
