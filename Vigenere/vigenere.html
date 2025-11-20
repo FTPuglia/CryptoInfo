@@ -59,18 +59,125 @@
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
 
 
-    <section class="content-section-card mx-auto mt-20">
-        <h2>Cifra de Vigenère</h2>
-        <p>A Cifra de Vigenère, um método de criptografia de substituição polialfabética, possui notável relevância histórica por ter sido considerada inquebrável por séculos. Diferentemente dos sistemas monoalfabéticos que utilizam um único alfabeto de substituição para toda a mensagem (como a Cifra de César), a Vigenère emprega uma chave de palavra para determinar múltiplos alfabetos de substituição. Essa abordagem, que altera o deslocamento da cifra a cada letra da mensagem (ou de acordo com o comprimento da chave), mascarava a frequência das letras do texto original, que é a principal vulnerabilidade dos esquemas monoalfabéticos. Sua invenção e popularização, atribuídas erroneamente a Blaise de Vigenère, mas formalizada por Giovan Battista Bellaso no século XVI, representou um avanço significativo na segurança das comunicações. Manteve-se como um método de alta segurança para a época até o século XIX, quando o criptoanalista Charles Babbage (e independentemente Friedrich Kasiski) desenvolveu o método de Kasiski, que explora a repetição de sequências de letras para deduzir o comprimento da chave, e posteriormente, a chave em si.</p>
-        <br><br>
+<section class="content-section-card max-w-7xl mx-auto mt-0">
+    <h2>Cifra de Vigenère</h2>
+    
+    <p class="text-slate-300 mb-6">
+        A Cifra de Vigenère, um método de criptografia de <strong class="text-cyan-400">substituição polialfabética</strong>, possui notável relevância histórica por ter sido considerada inquebrável por séculos. Diferentemente dos sistemas monoalfabéticos que utilizam um único alfabeto de substituição para toda a mensagem (como a Cifra de César), a Vigenère emprega uma chave de palavra para determinar múltiplos alfabetos de substituição. Essa abordagem, que altera o deslocamento da cifra a cada letra da mensagem (ou de acordo com o comprimento da chave), mascarava a frequência das letras do texto original, que é a principal vulnerabilidade dos esquemas monoalfabéticos. Sua invenção e popularização, atribuídas erroneamente a Blaise de Vigenère, mas formalizada por Giovan Battista Bellaso no século XVI, representou um avanço significativo na segurança das comunicações. Manteve-se como um método de alta segurança para a época até o século XIX, quando o criptoanalista Charles Babbage (e independentemente Friedrich Kasiski) desenvolveu o <strong class="text-cyan-400">Método de Kasiski</strong>, que explora a repetição de sequências de letras para deduzir o comprimento da chave, e posteriormente, a chave em si.
+    </p>
 
-       <p> A principal distinção técnica entre a Cifra de Vigenère e a Cifra de César reside no seu grau de complexidade e segurança. A Cifra de César é o exemplo mais simples de cifra de substituição monoalfabética, onde cada letra do texto claro é substituída por uma letra a uma distância fixa (o deslocamento, que é a chave) no alfabeto. A Vigenère, por outro lado, é uma cifra de substituição polialfabética: enquanto a Cifra de César usa apenas um deslocamento fixo para toda a mensagem (chave de tamanho 1), a Vigenère utiliza uma sequência de deslocamentos determinada por uma chave de palavra, tornando o padrão de substituição significativamente mais difícil de discernir por inspeção ou análise de frequência direta.</p>
-        <p>Aguarde a implementação da demonstração interativa para criptografar e decriptografar usando chaves longas e a tabela Vigenère.</p>
-    </section>
+    <h3 class="text-2xl font-bold text-cyan-400 mt-8 mb-4 border-t border-slate-700 pt-6">Mecânica da Cifra de César: O Caso Base (Monoalfabético)</h3>
 
-    <footer class="des-page-footer">
-        <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
-    </footer>
+    <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700 mb-6">
+        <p class="text-slate-300">
+            A Cifra de César é o exemplo mais simples de cifra de substituição. Seu funcionamento é baseado em um <strong class="text-red-300">deslocamento fixo</strong> (a chave, geralmente um número de 1 a 25) aplicado a <strong class="text-red-300">todas</strong> as letras do texto. Se a chave for 3, a letra 'A' sempre se torna 'D', 'B' sempre se torna 'E', e assim por diante. Quando se chega ao final do alfabeto, o processo 'dá a volta' (wrap-around) para o início (o 'Z' com chave 3 se torna 'C').
+        </p>
+        <p class="text-slate-300 mt-3">
+            O problema é que esse método mantém as <strong class="text-red-300">propriedades estatísticas</strong> da linguagem. Por exemplo, a letra mais frequente no texto cifrado será o equivalente cifrado da letra mais frequente no idioma (geralmente 'E' em português/inglês). Apenas uma análise de frequência é suficiente para quebrá-la rapidamente.
+        </p>
+    </div>
+
+    <h3 class="text-2xl font-bold text-cyan-400 mt-8 mb-4 border-t border-slate-700 pt-6">Mecânica da Cifra de Vigenère: A Evolução (Polialfabética)</h3>
+
+    <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700 mb-6">
+        <p class="text-slate-300">
+            A Vigenère aprimora César usando uma <strong class="text-green-300">chave de palavra</strong>. Em vez de um deslocamento fixo, cada letra do texto claro recebe um deslocamento diferente, determinado pela letra correspondente da chave.
+        </p>
+        <ul class="list-disc list-inside space-y-2 mt-4 text-slate-300">
+            <li><strong class="text-cyan-300">Chave em Repetição:</strong> Se a chave for "SEGREDO" e o texto for muito longo, a palavra "SEGREDO" é repetida sequencialmente abaixo do texto claro para garantir que cada letra do texto tenha uma letra da chave correspondente.</li>
+            <li><strong class="text-cyan-300">Deslocamento Variável:</strong> A letra da chave determina o valor do deslocamento (A=0, B=1, C=2...). Por exemplo, se a letra do texto claro for 'C' (valor 2) e a letra da chave for 'K' (valor 10), o deslocamento total é 12, resultando em 'M'.</li>
+            <li><strong class="text-cyan-300">Segurança Estatística:</strong> Como um mesmo caractere ('E', por exemplo) pode ser cifrado como 'R', 'F', ou 'T' dependendo da letra da chave que está sendo aplicada naquele momento, a frequência real das letras é <strong class="text-green-300">distribuída uniformemente</strong> no texto cifrado, tornando a análise de frequência inútil.</li>
+        </ul>
+    </div>
+    
+    <p class="text-slate-300 mt-6">A diferença entre um único deslocamento e múltiplos deslocamentos controlados por uma chave de palavra é o que elevou a Vigenère de uma cifra elementar para um desafio criptográfico sério em sua época. A demonstração interativa a seguir ilustra essa mudança de um deslocamento fixo (César) para o deslocamento variável (Vigenère).</p>
+    
+</section>
+
+    <section id="demo-caesar" class="content-section-card max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-700">
+    <h2>Demonstração Interativa: Cifra de César</h2>
+    <p class="text-slate-300 mb-6">
+        Experimente a cifra monoalfabética mais simples. O deslocamento (chave) é fixo para toda a mensagem. A animação visualiza o alfabeto resultante.
+    </p>
+
+    <div class="space-y-4 p-5 bg-slate-800 rounded-xl shadow-xl border border-slate-700">
+        <div class="grid md:grid-cols-3 gap-4 items-center">
+            <div class="col-span-2">
+                <label for="caesarInput" class="block text-sm font-medium text-slate-200 mb-1">Texto Claro/Cifrado (Apenas letras A-Z):</label>
+                <input type="text" id="caesarInput" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-md text-slate-100 placeholder-slate-400 uppercase tracking-widest focus:ring-cyan-500 focus:border-cyan-500" value="CRIPTOGRAFIA" placeholder="Digite o texto aqui">
+            </div>
+            <div>
+                <label for="caesarKey" class="block text-sm font-medium text-slate-200 mb-1">Chave (Deslocamento 1-25):</label>
+                <input type="number" id="caesarKey" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-md text-slate-100 focus:ring-cyan-500 focus:border-cyan-500" value="3" min="1" max="25" oninput="updateCaesarAnimation()">
+            </div>
+        </div>
+
+        <div class="flex space-x-4 pt-2">
+            <button onclick="caesarEncrypt()" class="w-1/2 p-3 rounded-md font-bold transition duration-300 bg-cyan-600 hover:bg-cyan-500 text-slate-900 shadow-md">Cifrar Texto</button>
+            <button onclick="caesarDecrypt()" class="w-1/2 p-3 rounded-md font-bold transition duration-300 bg-slate-700 hover:bg-slate-600 text-cyan-400 border border-cyan-400">Decifrar Texto</button>
+        </div>
+
+        <div id="caesarVisualization" class="mt-6 p-4 bg-slate-900 rounded-lg border border-cyan-600 shadow-inner">
+            <h4 class="text-lg font-bold text-cyan-400 mb-2">Visualização do Deslocamento (Chave <span id="currentKeyCaesar">3</span>):</h4>
+            <div class="flex justify-between font-mono text-sm text-slate-400 mb-1">
+                A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+            </div>
+            <div class="flex justify-between font-mono text-xl font-bold mt-2" id="shiftedAlphabet">
+                </div>
+        </div>
+
+        <div class="mt-4">
+            <label class="block text-sm font-medium text-slate-200 mb-1">Saída (Texto Cifrado/Decifrado):</label>
+            <div id="caesarOutput" class="w-full p-3 min-h-[40px] bg-slate-900 rounded-md border border-cyan-500 text-lg font-mono text-green-300 break-all transition duration-300">
+                (Saída)
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="demo-vigenere" class="content-section-card max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-700">
+    <h2>Demonstração Interativa: Cifra de Vigenère</h2>
+    <p class="text-slate-300 mb-6">
+        Observe como a chave de palavra altera o alfabeto de substituição para cada letra do texto, demonstrando a natureza polialfabética.
+    </p>
+
+    <div class="space-y-4 p-5 bg-slate-800 rounded-xl shadow-xl border border-slate-700">
+        <div class="grid md:grid-cols-2 gap-4 items-center">
+            <div>
+                <label for="vigenereInput" class="block text-sm font-medium text-slate-200 mb-1">Texto Claro/Cifrado (Apenas letras A-Z):</label>
+                <input type="text" id="vigenereInput" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-md text-slate-100 placeholder-slate-400 uppercase tracking-widest focus:ring-cyan-500 focus:border-cyan-500" value="CRYPTOGRAPHY" placeholder="Digite o texto aqui">
+            </div>
+            <div>
+                <label for="vigenereKey" class="block text-sm font-medium text-slate-200 mb-1">Chave (Palavra - Apenas letras A-Z):</label>
+                <input type="text" id="vigenereKey" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-md text-slate-100 uppercase tracking-widest focus:ring-cyan-500 focus:border-cyan-500" value="SECRET" placeholder="Digite a chave (palavra)">
+            </div>
+        </div>
+
+        <div class="flex space-x-4 pt-2">
+            <button onclick="vigenereEncrypt()" class="w-1/2 p-3 rounded-md font-bold transition duration-300 bg-cyan-600 hover:bg-cyan-500 text-slate-900 shadow-md">Cifrar Texto</button>
+            <button onclick="vigenereDecrypt()" class="w-1/2 p-3 rounded-md font-bold transition duration-300 bg-slate-700 hover:bg-slate-600 text-cyan-400 border border-cyan-400">Decifrar Texto</button>
+        </div>
+
+        <div class="mt-4">
+            <label class="block text-sm font-medium text-slate-200 mb-1">Saída (Texto Cifrado/Decifrado):</label>
+            <div id="vigenereOutput" class="w-full p-3 min-h-[40px] bg-slate-900 rounded-md border border-cyan-500 text-lg font-mono text-green-300 break-all transition duration-300">
+                (Saída)
+            </div>
+        </div>
+        
+        <div id="vigenereProcess" class="mt-4 p-4 bg-slate-900 rounded-lg border border-slate-700 shadow-inner hidden">
+            <h4 class="text-lg font-bold text-cyan-400 mb-2">Detalhes do Processo (Letra por Letra):</h4>
+            <div id="vigenereProcessContent" class="font-mono text-sm text-slate-300 space-y-2 overflow-x-auto whitespace-nowrap">
+                </div>
+        </div>
+    </div>
+</section>
+    
+</section>
+
+<footer class="des-page-footer">
+    <p>© 2025 Projeto Cryptoinfo, para fins educacionais</p>
+</footer>
 
     <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
         <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
@@ -81,6 +188,263 @@
     </div>
     
     <script src="../JS/main.js"></script>
+    
+<script>
+    const ALPHABET_SIZE = 26;
+    const A_CODE = 'A'.charCodeAt(0);
+
+    // =======================================================
+    // FUNÇÕES AUXILIARES
+    // =======================================================
+
+    /**
+     * Limpa e valida o texto de entrada (apenas letras A-Z, maiúsculas).
+     * @param {string} text O texto bruto.
+     * @returns {string} O texto limpo e em maiúsculas.
+     */
+    function cleanText(text) {
+        return text.toUpperCase().replace(/[^A-Z]/g, '');
+    }
+
+    /**
+     * Exibe uma mensagem de erro no modal personalizado.
+     * @param {string} title Título da mensagem.
+     * @param {string} message A mensagem de erro.
+     */
+    function displayError(title, message) {
+        // Assume que 'window.mostrarAviso' foi ajustada ou está definida no escopo global
+        // Se a função 'mostrarAviso' tiver apenas 1 argumento, use-o.
+        // Vou usar 2 argumentos como no seu template mais recente.
+        const messageBox = document.getElementById('messageBox');
+        if (messageBox) {
+            document.getElementById('messageTitle').textContent = title;
+            document.getElementById('messageText').textContent = message;
+            messageBox.classList.remove('hidden');
+            messageBox.classList.add('flex');
+        } else {
+            console.error(`[ERRO] ${title}: ${message}`);
+        }
+    }
+    
+    // Função global toggleMenu, necessária para o mobile-menu e o modal
+    window.toggleMenu = function(show) {
+        const drawer = document.getElementById('mobile-menu-drawer');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        
+        if (show === undefined) {
+            show = drawer.classList.contains('transform-translate-x-full');
+        }
+
+        if (show) {
+            drawer.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                drawer.classList.remove('transform-translate-x-full');
+                overlay.classList.remove('opacity-0');
+                overlay.classList.add('opacity-100');
+            }, 10); 
+        } else {
+            drawer.classList.add('transform-translate-x-full');
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                drawer.classList.add('hidden');
+            }, 300); 
+        }
+    }
+
+
+    // =======================================================
+    // LÓGICA DA CIFRA DE CÉSAR (CORRIGIDA)
+    // =======================================================
+
+    /**
+     * Core da Cifra de César.
+     */
+    function caesarCipher(text, key, direction) {
+        let result = '';
+        const offset = key * direction;
+
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            const charCode = char.charCodeAt(0);
+
+            if (charCode >= A_CODE && charCode < A_CODE + ALPHABET_SIZE) {
+                let charIndex = charCode - A_CODE;
+                let newIndex = (charIndex + offset) % ALPHABET_SIZE;
+                
+                if (newIndex < 0) {
+                    newIndex += ALPHABET_SIZE;
+                }
+                
+                result += String.fromCharCode(A_CODE + newIndex);
+            } else {
+                result += char; 
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Funções de UI para César.
+     */
+    window.caesarEncrypt = function() {
+        const input = cleanText(document.getElementById('caesarInput').value);
+        const key = parseInt(document.getElementById('caesarKey').value);
+
+        if (!input || isNaN(key)) {
+            displayError("Entrada Inválida", "Por favor, insira o texto e uma chave numérica válida.");
+            return;
+        }
+
+        const output = caesarCipher(input, key, 1);
+        document.getElementById('caesarOutput').textContent = output;
+    }
+
+    window.caesarDecrypt = function() {
+        const input = cleanText(document.getElementById('caesarInput').value);
+        const key = parseInt(document.getElementById('caesarKey').value);
+        
+        if (!input || isNaN(key)) {
+            displayError("Entrada Inválida", "Por favor, insira o texto e uma chave numérica válida.");
+            return;
+        }
+
+        const output = caesarCipher(input, key, -1);
+        document.getElementById('caesarOutput').textContent = output;
+    }
+
+    /**
+     * Atualiza a animação/visualização do alfabeto cifrado. (FIXED)
+     */
+    window.updateCaesarAnimation = function() {
+        const keyInput = document.getElementById('caesarKey');
+        const key = parseInt(keyInput.value);
+        const shiftedAlphabetDiv = document.getElementById('shiftedAlphabet');
+        const currentKeySpan = document.getElementById('currentKeyCaesar');
+
+        if (isNaN(key) || key < 1 || key > 25) {
+            shiftedAlphabetDiv.innerHTML = '<span class="text-red-400">Chave inválida.</span>';
+            currentKeySpan.textContent = "??";
+            return;
+        }
+        
+        currentKeySpan.textContent = key;
+        
+        const shiftedLetters = []; // Array para coletar os elementos <span>
+        
+        for (let i = 0; i < ALPHABET_SIZE; i++) {
+            let charIndex = (i + key) % ALPHABET_SIZE;
+            let shiftedChar = String.fromCharCode(A_CODE + charIndex);
+            
+            let colorClass = 'text-green-300';
+            
+            // Adiciona o elemento span ao array
+            shiftedLetters.push(`<span class="transition-transform duration-300 hover:scale-110 ${colorClass}">${shiftedChar}</span>`);
+        }
+        
+        // CORREÇÃO: Junta os elementos <span> com um espaço.
+        // Isso evita a corrupção do HTML que ocorria com .split('').join(' ').
+        shiftedAlphabetDiv.innerHTML = shiftedLetters.join(' ');
+    }
+
+
+    // =======================================================
+    // LÓGICA DA CIFRA DE VIGENÈRE
+    // =======================================================
+
+    function vigenereCipher(text, keyWord, direction) {
+        let result = '';
+        let processHtml = '<div class="grid grid-cols-4 text-cyan-300 font-bold mb-2 border-b border-slate-600 pb-1"><span>Índice</span><span>Texto</span><span>Chave</span><span>Saída</span></div>';
+        
+        const cleanKey = cleanText(keyWord);
+        if (cleanKey.length === 0) {
+             return {output: "", processHtml: '<span class="text-red-400">Chave de palavra não pode ser vazia.</span>'};
+        }
+
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            const charCode = char.charCodeAt(0);
+
+            if (charCode >= A_CODE && charCode < A_CODE + ALPHABET_SIZE) {
+                const keyIndex = i % cleanKey.length;
+                const keyChar = cleanKey[keyIndex];
+                const keyShift = keyChar.charCodeAt(0) - A_CODE; 
+
+                let textIndex = charCode - A_CODE;
+                let newIndex;
+
+                if (direction === 1) { // Cifrar
+                    newIndex = (textIndex + keyShift) % ALPHABET_SIZE;
+                } else { // Decifrar
+                    newIndex = (textIndex - keyShift) % ALPHABET_SIZE;
+                    if (newIndex < 0) {
+                        newIndex += ALPHABET_SIZE;
+                    }
+                }
+                
+                const resultChar = String.fromCharCode(A_CODE + newIndex);
+                result += resultChar;
+
+                processHtml += `
+                    <div class="grid grid-cols-4 py-1 hover:bg-slate-700/50 rounded-sm">
+                        <span class="text-slate-400">${i}</span>
+                        <span class="text-green-300">${char} (${textIndex})</span>
+                        <span class="text-cyan-300">${keyChar} (${keyShift})</span>
+                        <span class="text-red-300 font-bold">${resultChar} (${newIndex})</span>
+                    </div>
+                `;
+
+            } else {
+                result += char; 
+            }
+        }
+
+        return {output: result, processHtml: processHtml};
+    }
+
+    /**
+     * Funções de UI para Vigenère.
+     */
+    window.vigenereEncrypt = function() {
+        const input = document.getElementById('vigenereInput').value;
+        const key = document.getElementById('vigenereKey').value;
+        const cleanInput = cleanText(input);
+
+        if (cleanInput.length === 0 || cleanText(key).length === 0) {
+            displayError("Entrada Inválida", "Por favor, insira o texto e uma chave de palavra válida (apenas letras A-Z).");
+            return;
+        }
+
+        const {output, processHtml} = vigenereCipher(cleanInput, key, 1);
+        document.getElementById('vigenereOutput').textContent = output;
+        document.getElementById('vigenereProcessContent').innerHTML = processHtml;
+        document.getElementById('vigenereProcess').classList.remove('hidden');
+    }
+
+    window.vigenereDecrypt = function() {
+        const input = document.getElementById('vigenereInput').value;
+        const key = document.getElementById('vigenereKey').value;
+        const cleanInput = cleanText(input);
+
+        if (cleanInput.length === 0 || cleanText(key).length === 0) {
+            displayError("Entrada Inválida", "Por favor, insira o texto e uma chave de palavra válida (apenas letras A-Z).");
+            return;
+        }
+
+        const {output, processHtml} = vigenereCipher(cleanInput, key, -1);
+        document.getElementById('vigenereOutput').textContent = output;
+        document.getElementById('vigenereProcessContent').innerHTML = processHtml;
+        document.getElementById('vigenereProcess').classList.remove('hidden');
+    }
+
+    // Inicializa a animação do César na carga da página
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCaesarAnimation();
+    });
+</script>
+
 </body>
 
 </html>
