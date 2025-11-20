@@ -59,187 +59,215 @@
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
 
     
-    <section id="introducao" class="content-section-card">
-        <h2>Introdução ao DES</h2>
-        <p class="text-slate-300 mb-4">
-            O <strong>DES</strong> (Data Encryption Standard) é um dos algoritmos de criptografia de chave simétrica mais influentes da história. Desenvolvido no início dos anos 70 pela IBM e adotado como padrão federal nos EUA em 1977 (FIPS 46), ele opera em <strong>blocos fixos de 64 bits</strong>. O DES revolucionou a segurança da informação ao ser o primeiro padrão de criptografia amplamente aceito.
-        </p>
-        <p class="text-slate-300 mb-4">
-            Sua arquitetura é baseada na <strong>Cifra de Feistel</strong>, uma estrutura que permite que a criptografia e a descriptografia usem a mesma lógica, facilitando a implementação de hardware. O processo envolve 16 rodadas iterativas de substituições e permutações.
-        </p>
-        <p class="text-slate-300 mb-6">
-            No entanto, o DES utiliza uma <strong>chave efetiva de apenas 56 bits</strong> (dentro de uma chave de 64 bits, onde 8 bits são usados para paridade). Devido ao aumento exponencial do poder computacional, esse tamanho de chave é hoje considerado <strong>obsoleto e inseguro</strong> contra ataques de força bruta, sendo substituído pelo seu sucessor, o AES. Por isso, o DES é um marco didático importante, ideal para entender os fundamentos das cifras de bloco antes de estudar algoritmos modernos.
-        </p>
-        <p>
-            <strong>Aviso:</strong> A criptografia DES deve ser usada apenas para demonstração ou aprendizado. Para aplicações de segurança modernas, utilize <strong>AES-256</strong> ou o <strong>Triple DES (3DES)</strong>, embora este último também esteja em fase de descontinuação.
-        </p>
-    </section>
-
-    <section id="operacoes-chave" class="content-section-card">
-    <h2>A Fundo: As Operações-Chave do DES</h2>
-    <p class="text-slate-300 mb-6">
-        O poder de embaralhamento e difusão do DES vem de uma sequência de quatro tipos de operações: Permutações, Geração de Subchaves, Função de Feistel, e as Caixas-S (S-Boxes).
+<section id="introducao" class="content-section-card">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        Introdução ao Data Encryption Standard (DES)
+    </h2>
+    <p class="text-slate-300 mb-4">
+        O <strong class="text-yellow-300">DES</strong> (Data Encryption Standard) é um dos algoritmos de <strong class="text-cyan-400">criptografia de chave simétrica</strong> mais influentes da história. Desenvolvido pela IBM e adotado como padrão federal nos EUA em 1977, ele opera em <strong class="text-green-300">blocos fixos de 64 bits</strong>. O DES foi um marco na segurança da informação, sendo o primeiro padrão de criptografia amplamente aceito.
     </p>
+    <div class="bg-slate-800 p-4 rounded-xl shadow-md border border-slate-700 mb-4">
+        <p class="text-slate-300">
+            Sua arquitetura é baseada na <strong class="text-green-300">Cifra de Feistel</strong>, uma estrutura que divide o bloco de dados e garante que a criptografia e a descriptografia usem a mesma lógica, facilitando a implementação em hardware. O processo de criptografia envolve <strong class="text-cyan-400">16 rodadas</strong> iterativas de substituições e permutações.
+        </p>
+    </div>
+    <p class="text-slate-300 mb-6">
+        O DES utiliza uma <strong class="text-red-400">chave efetiva de apenas 56 bits</strong> (dos 64 bits totais, 8 são para paridade). Devido ao aumento exponencial do poder computacional, esse tamanho de chave é hoje considerado <strong class="text-red-400">obsoleto e inseguro</strong> contra ataques de força bruta. Ele foi substituído pelo seu sucessor, o <strong class="text-yellow-300">AES</strong>. O DES, contudo, permanece um marco didático crucial para entender os fundamentos das cifras de bloco.
+    </p>
+    <p class="text-sm p-3 border-l-4 border-red-500 bg-red-900/30 text-red-300">
+        <strong class="text-red-300">⚠️ Aviso de Segurança:</strong> A criptografia DES deve ser usada apenas para demonstração ou aprendizado. Para aplicações de segurança modernas, utilize <strong class="text-green-300">AES-256</strong> ou o <strong class="text-yellow-300">Triple DES (3DES)</strong>, embora este último também esteja em fase de descontinuação.
+    </p>
+</section>
 
+---
+
+<section id="operacoes-chave" class="content-section-card">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        A Fundo: As Quatro Operações-Chave do DES
+    </h2>
+    <p class="text-slate-300 mb-6">
+        O poder de embaralhamento (<strong class="text-red-400">Confusão</strong>) e difusão (<strong class="text-red-400">Difusão</strong>) do DES vem de uma sequência de quatro tipos de operações que se repetem a cada rodada.
+    </p>
+    
     <div class="space-y-6">
         
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
             <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                <span class="text-2xl mr-3 text-cyan-500"></span> 1. Permutação Inicial e Final
+                <span class="text-2xl mr-3 text-cyan-500 font-mono">1.</span> Permutação Inicial (IP) e Final (FP)
             </h3>
             <p class="text-slate-300">
-                A primeira operação no bloco de 64 bits é a <strong>Permutação Inicial</strong>, que reorganiza os bits de acordo com uma tabela fixa. O objetivo é aumentar a <strong>difusão</strong> rapidamente, garantindo que um único bit de entrada afete muitos bits da saída. A última etapa da criptografia é a <strong>Permutação Final</strong>, que é a inversa da Permutação Inicial.
+                A primeira operação no bloco de <code class="text-yellow-300">64 bits</code> é a <strong class="text-cyan-300">Permutação Inicial (IP)</strong>, que reorganiza os bits de acordo com uma tabela fixa. O objetivo é aumentar a <strong class="text-green-300">difusão</strong> rapidamente. A última etapa da criptografia é a <strong class="text-cyan-300">Permutação Final (FP)</strong>, que é a inversa de IP, restaurando a ordem original dos bits.
             </p>
         </div>
 
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
             <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                <span class="text-2xl mr-3 text-cyan-500"></span> 2. Geração de Subchaves
+                <span class="text-2xl mr-3 text-cyan-500 font-mono">2.</span> Geração de Subchaves (<code class="text-yellow-300">K<sub>i</sub></code>)
             </h3>
             <p class="text-slate-300">
-                A chave principal de 56 bits é transformada em 16 subchaves diferentes, uma para cada rodada de Feistel. 
+                A chave principal de <code class="text-yellow-300">56 bits</code> é processada através de permutações e <strong class="text-cyan-300">deslocamentos circulares</strong> para gerar <strong class="text-green-300">16 subchaves</strong> diferentes, $K_{1}$ a $K_{16}$, cada uma com <code class="text-yellow-300">48 bits</code>, uma para cada rodada de Feistel.
             </p>
         </div>
 
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
             <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                <span class="text-2xl mr-3 text-cyan-500"></span> 3. Estrutura de Feistel
+                <span class="text-2xl mr-3 text-cyan-500 font-mono">3.</span> Estrutura e Função de Feistel
             </h3>
             <p class="text-slate-300">
-                É a estrutura central que divide o bloco de 64 bits em metades esquerda (L) e direita (R). A cada rodada, a metade direita é usada na <strong>Função F</strong> (juntamente com a subchave da rodada) e o resultado é combinado com a metade esquerda através de uma operação <strong>XOR</strong>. Em seguida, as metades são trocadas.
+                A <strong class="text-green-300">Estrutura de Feistel</strong> é o coração do algoritmo, dividindo o bloco de <code class="text-yellow-300">64 bits</code> em metades esquerda (<code class="text-yellow-300">L</code>) e direita (<code class="text-yellow-300">R</code>). A cada rodada, a metade direita é usada na <strong class="text-cyan-300">Função F</strong> (juntamente com a subchave <code class="text-yellow-300">K<sub>i</sub></code>) e o resultado é combinado com a metade esquerda através de uma operação <strong class="text-yellow-300">XOR</strong>. Em seguida, as metades são trocadas.
             </p>
         </div>
 
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
             <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                <span class="text-2xl mr-3 text-cyan-500"></span> 4. Caixas de Substituição (S-Boxes)
+                <span class="text-2xl mr-3 text-cyan-500 font-mono">4.</span> Caixas de Substituição (<strong class="text-red-400">S-Boxes</strong>)
             </h3>
             <p class="text-slate-300">
-                As <strong>S-Boxes</strong> são a parte mais crucial do DES para a segurança, sendo a única operação <strong>não-linear</strong>. Elas recebem 6 bits de entrada e produzem 4 bits de saída, introduzindo a propriedade de <strong>confusão</strong>. A escolha e o design dessas caixas são considerados o ponto forte do algoritmo.
+                As <strong class="text-red-400">S-Boxes</strong> (Substitution Boxes) são a parte mais crucial do DES para a segurança, sendo a única operação <strong class="text-red-400">não-linear</strong>. Elas recebem <code class="text-yellow-300">6 bits</code> de entrada e produzem <code class="text-yellow-300">4 bits</code> de saída, introduzindo a propriedade de <strong class="text-green-300">confusão</strong>. O design e a ordem dessas caixas foram objeto de controvérsia inicial, mas hoje são considerados o ponto forte do algoritmo.
             </p>
         </div>
     </div>
 </section>
-    
-    <section id="modos-operacao" class="content-section-card">
-    <h2>Modos de Operação: Como o DES Criptografa Mensagens Longas</h2>
-    
-    <p class="text-slate-300 mb-4 font-semibold">
-        Um <strong>Modo de Operação</strong> é um esquema algorítmico que permite a uma cifra de bloco (como o DES) criptografar dados de tamanho arbitrário. Ele define como a segurança e a aleatoriedade são mantidas ao longo de uma mensagem inteira, controlando o <strong>encadeamento</strong> dos blocos.
-    </p>
 
-    <p class="text-slate-300 mb-8">
-        O DES, por processar 64 bits de cada vez, requer um modo para lidar com mensagens maiores de forma segura. A escolha do modo é crucial para a segurança final da aplicação.
-    </p>
+---
+
+<section id="modos-operacao" class="content-section-card">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        Modos de Operação: Criptografia de Mensagens Longas
+    </h2>
+    
+    <div class="bg-slate-800 p-4 rounded-xl shadow-md border border-slate-700 mb-6">
+        <p class="text-slate-300 font-semibold">
+            Um <strong class="text-cyan-300">Modo de Operação</strong> é um esquema algorítmico que permite a uma cifra de bloco (como o DES) lidar com dados de tamanho arbitrário. Ele define como a segurança e a aleatoriedade são mantidas ao longo de uma mensagem inteira, controlando o <strong class="text-yellow-300">encadeamento</strong> e a dependência dos blocos.
+        </p>
+    </div>
+
+    
 
     <div class="space-y-8">
         
         <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
             <h3 class="text-xl font-bold text-red-300 mb-2 flex items-center">
-                <span class="text-2xl mr-3 font-mono text-red-400"></span> 1. Electronic Codebook (ECB) - Livro de Códigos Eletrônico
+                <span class="text-2xl mr-3 font-mono text-red-400">1.</span> Electronic Codebook (ECB)
             </h3>
             <p class="text-slate-300">
-                É o modo mais simples, onde cada bloco de 64 bits do texto claro é criptografado <strong>independentemente</strong> dos outros usando a mesma chave. Sua principal desvantagem é a <strong>falta de aleatoriedade</strong>: blocos idênticos de entrada produzem saídas idênticas, permitindo a detecção de padrões. <strong>Não é seguro para a maioria dos dados longos.</strong>
+                É o modo mais simples: cada bloco de <code class="text-yellow-300">64 bits</code> é criptografado <strong class="text-red-400">independentemente</strong> usando a mesma chave. Sua falha é a <strong class="text-red-400">falta de aleatoriedade</strong>: blocos idênticos de entrada produzem saídas idênticas, permitindo a detecção de padrões. <strong class="text-red-400">NÃO deve ser usado</strong> para criptografia de dados genéricos.
             </p>
         </div>
 
         <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
             <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
-                <span class="text-2xl mr-3 font-mono text-cyan-400"></span> 2. Cipher Block Chaining (CBC) - Encadeamento de Blocos Cifrados
+                <span class="text-2xl mr-3 font-mono text-cyan-400">2.</span> Cipher Block Chaining (CBC)
             </h3>
             <p class="text-slate-300">
-                O modo CBC introduz encadeamento ao combinar (via <strong>XOR</strong>) o bloco de texto claro atual com o <strong>bloco cifrado anterior</strong> antes da criptografia. Isso garante que blocos de texto claro idênticos resultem em blocos cifrados diferentes, ocultando padrões e introduzindo aleatoriedade. Requer um <strong>Vetor de Inicialização (IV)</strong> para o primeiro bloco.
+                O modo CBC introduz <strong class="text-green-300">encadeamento</strong> ao combinar (via <strong class="text-yellow-300">XOR</strong>) o bloco de texto claro atual com o <strong class="text-cyan-300">bloco cifrado anterior</strong> antes da criptografia. Isso oculta padrões. Requer um <strong class="text-yellow-300">Vetor de Inicialização (IV)</strong>, que deve ser aleatório e não repetido. É um modo amplamente utilizado.
             </p>
         </div>
 
         <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
             <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center">
-                <span class="text-2xl mr-3 font-mono text-green-400"></span> 3. Cipher Feedback (CFB) - Realimentação de Cifra
+                <span class="text-2xl mr-3 font-mono text-green-400">3.</span> Cipher Feedback (CFB)
             </h3>
             <p class="text-slate-300">
-                O CFB opera como uma <strong>cifra de fluxo</strong>, permitindo o processamento em unidades menores que o bloco (ex: 8 bits). O mecanismo usa o <strong>Texto Cifrado anterior</strong> ($C_{i-1}$) como entrada para o DES. Devido a essa realimentação, <strong>um erro de transmissão em um bloco cifrado se propagará</strong> e corrompe a descriptografia de vários blocos seguintes, sendo uma desvantagem em canais ruidosos.
+                O CFB opera como uma <strong class="text-green-300">cifra de fluxo</strong>, permitindo o processamento em unidades menores que o bloco. O mecanismo usa o <strong class="text-cyan-300">Texto Cifrado anterior</strong> (<code class="text-yellow-300">C<sub>i-1</sub></code>) como entrada para o DES. Uma desvantagem é que um <strong class="text-red-400">erro de transmissão se propaga</strong>, corrompendo a descriptografia de vários blocos seguintes.
             </p>
         </div>
 
         <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
             <h3 class="text-xl font-bold text-purple-400 mb-2 flex items-center">
-                <span class="text-2xl mr-3 font-mono text-purple-400"></span> 4. Output Feedback (OFB) - Realimentação de Saída
+                <span class="text-2xl mr-3 font-mono text-purple-400">4.</span> Output Feedback (OFB)
             </h3>
             <p class="text-slate-300">
-                O OFB também é uma cifra de fluxo, mas gera o <strong>fluxo de chave (keystream)</strong> de forma totalmente independente do texto claro e do texto cifrado. O que é realimentado é a <strong>saída da própria função DES</strong>. Por não depender do texto cifrado, <strong>erros de transmissão não se propagam</strong>: apenas o bloco onde o erro ocorreu será afetado, tornando-o ideal para canais ruidosos ou com alta taxa de erros.
+                O OFB também é uma <strong class="text-green-300">cifra de fluxo</strong>, mas gera o <strong class="text-cyan-300">fluxo de chave (keystream)</strong> independentemente dos dados. O que é realimentado é a <strong class="text-yellow-300">saída da própria função DES</strong>. Vantagem: <strong class="text-green-300">erros de transmissão não se propagam</strong>, afetando apenas o bloco onde o erro ocorreu.
             </p>
         </div>
     </div>
 </section>
 
-    <section id="simulacao-feistel" class="content-section-card">
-        <h2>DES Didático: Simulação da Rodada de Feistel</h2>
-        <p class="text-slate-300 mb-6">
-            O <strong>DES</strong> (Data Encryption Standard) é um exemplo de Cifra de Feistel. Seu processo envolve 16 rodadas, onde o bloco de dados é dividido em duas metades (L e R) e uma função de rodada é aplicada iterativamente.
+---
+
+<section id="simulacao-feistel" class="content-section-card">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        DES Didático: Simulação da Rodada de Feistel
+    </h2>
+    <p class="text-slate-300 mb-6">
+        O <strong class="text-yellow-300">DES</strong> é um exemplo clássico de <strong class="text-green-300">Cifra de Feistel</strong>. Seu processo de criptografia envolve <code class="text-yellow-300">16 rodadas</code>, onde o bloco de dados é dividido em duas metades (<code class="text-yellow-300">L</code> e <code class="text-yellow-300">R</code>) e uma função de rodada é aplicada iterativamente para criar confusão e difusão.
+    </p>
+
+    <div class="bg-slate-800 p-4 rounded-xl shadow-md border border-slate-700 mb-4">
+        <p class="text-sm text-slate-300">
+            <strong class="text-cyan-300">Foco da Simulação:</strong> Demonstração visual de como o bloco de dados é processado em uma rodada do DES, seguindo as fórmulas da Estrutura de Feistel:
+            <br>
+            <code class="text-yellow-300">L<sub>i</sub> = R<sub>i-1</sub></code>
+            <br>
+            <code class="text-yellow-300">R<sub>i</sub> = L<sub>i-1</sub> ⊕ f(R<sub>i-1</sub>, K<sub>i</sub>)</code>
         </p>
+    </div>
+    
+    
 
-        <p class="text-sm text-slate-400 mb-4">
-             <strong>Foco da Simulação:</strong> Demonstração visual de como o bloco de dados é processado em uma rodada do DES: $L_{i} = R_{i-1}$ e $R_{i} = L_{i-1} \oplus f(R_{i-1}, K_i)$.
-        </p>
+    <label for="msgInput" class="block mb-2 text-sm font-medium text-slate-200">Mensagem (Máx. 8 caracteres para um único bloco de 64 bits):</label>
+    <input type="text" id="msgInput" value="CRIPTDES" maxlength="8"
+        class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono text-cyan-300">
 
-        <label for="msgInput" class="block mb-2 text-sm font-medium">Mensagem (Máx. 8 caracteres para um único bloco de 64 bits):</label>
-        <input type="text" id="msgInput" value="CRIPTDES" maxlength="8"
-            class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono">
+    <button id="iniciarBtn" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
+        Executar Rodada 1 da Criptografia DES
+    </button>
 
-        <button id="iniciarBtn" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
-            Executar Rodada 1 da Criptografia DES
-        </button>
+    <div id="stepsArea" class="mt-8 p-4 bg-slate-700 rounded-lg shadow-inner">
+        <h3 class="text-xl font-bold text-cyan-400 mb-4">Saída da Simulação</h3>
+        <p class="text-slate-400">Insira a mensagem acima e clique em 'Executar' para ver os passos de uma Rodada Feistel.</p>
+    </div>
+</section>
 
-        <div id="stepsArea" class="mt-8 p-4 bg-slate-700 rounded-lg shadow-inner">
-            <h3 class="text-xl font-bold text-cyan-400 mb-4">Saída da Simulação</h3>
-            <p class="text-slate-400">Insira a mensagem acima e clique em 'Executar' para ver os passos de uma Rodada Feistel.</p>
+---
+
+<section id="demo-criptografia" class="content-section-card">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        Demo Interativa: Criptografia e Descriptografia DES
+    </h2>
+    <p class="text-slate-300 mb-6">
+        Utilize esta seção para demonstrar a criptografia e descriptografia de um bloco de dados usando a cifra <strong class="text-yellow-300">DES</strong> (via biblioteca <code class="text-green-300">CryptoJS</code>). Lembre-se que a <strong class="text-red-400">chave deve ter 8 caracteres</strong> (que correspondem aos 64 bits da chave DES).
+    </p>
+    
+    <div class="space-y-4">
+        <div>
+            <label for="entrada" class="block mb-2 text-sm font-medium text-slate-200">Texto de Entrada:</label>
+            <textarea id="entrada" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Digite a mensagem a ser criptografada/decriptografada."></textarea>
         </div>
-    </section>
-
-    <section id="demo-criptografia" class="content-section-card">
-        <h2>Teste a Criptografia DES</h2>
-        <p class="text-slate-300 mb-6">
-            Utilize esta seção para criptografar ou descriptografar textos usando a biblioteca <strong>CryptoJS</strong>. A chave deve ter 8 caracteres.
-        </p>
         
-        <div class="space-y-4">
-            <div>
-                <label for="entrada" class="block mb-2 text-sm font-medium">Texto de Entrada:</label>
-                <textarea id="entrada" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Digite a mensagem a ser criptografada/decriptografada."></textarea>
-            </div>
-            
-            <div>
-                <label for="chave" class="block mb-2 text-sm font-font-medium">Chave (8 caracteres ideal):</label>
-                <input type="text" id="chave" value="12345678" maxlength="8" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600">
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 pt-2">
-                <button onclick="criptografar()" class="button-with-shadow bg-cyan-600 hover:bg-cyan-500">
-                    Criptografar (Encrypt)
-                </button>
-                <button onclick="decriptografar()" class="button-with-shadow bg-blue-600 hover:bg-blue-500">
-                    Descriptografar (Decrypt)
-                </button>
-                <button onclick="limparCampos()" class="button-with-shadow bg-slate-600 hover:bg-slate-500 col-span-2">
-                    Limpar
-                </button>
-            </div>
-            
-            <div class="pt-4">
-                <label class="block mb-2 text-sm font-medium">Saída (Ciphertext / Plaintext):</label>
-                <div id="saida" class="w-full p-3 bg-slate-700 rounded-md h-24 overflow-y-auto border border-slate-600 break-words text-slate-200">
-                    (a saída aparecerá aqui)
-                </div>
-                <button onclick="copiarSaida()" class="button-with-shadow w-full mt-2 bg-slate-800 hover:bg-slate-700 text-sm">
-                    Copiar Saída
-                </button>
-            </div>
+        <div>
+            <label for="chave" class="block mb-2 text-sm font-medium text-slate-200">Chave (<strong class="text-red-400">8 caracteres</strong>):</label>
+            <input type="text" id="chave" value="12345678" maxlength="8" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 font-mono text-cyan-300">
         </div>
-    </section>
 
-    <footer class="des-page-footer">
-        <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
-    </footer>
+        <div class="grid grid-cols-2 gap-4 pt-2">
+            <button onclick="criptografar()" class="button-with-shadow bg-cyan-600 hover:bg-cyan-500">
+                Criptografar (<strong class="text-slate-900">Encrypt</strong>)
+            </button>
+            <button onclick="decriptografar()" class="button-with-shadow bg-blue-600 hover:bg-blue-500">
+                Descriptografar (<strong class="text-slate-900">Decrypt</strong>)
+            </button>
+            <button onclick="limparCampos()" class="button-with-shadow bg-slate-600 hover:bg-slate-500 col-span-2">
+                Limpar
+            </button>
+        </div>
+        
+        <div class="pt-4">
+            <label class="block mb-2 text-sm font-medium text-slate-200">Saída (<strong class="text-green-300">Ciphertext</strong> / <strong class="text-green-300">Plaintext</strong>):</label>
+            <div id="saida" class="w-full p-3 bg-slate-700 rounded-md h-24 overflow-y-auto border border-slate-600 break-words text-slate-200 font-mono">
+                (a saída aparecerá aqui)
+            </div>
+            <button onclick="copiarSaida()" class="button-with-shadow w-full mt-2 bg-slate-800 hover:bg-slate-700 text-sm">
+                Copiar Saída
+            </button>
+        </div>
+    </div>
+</section>
+
+<footer class="des-page-footer">
+    <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
+</footer>
 
 
 

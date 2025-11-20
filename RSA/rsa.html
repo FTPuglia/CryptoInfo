@@ -37,166 +37,174 @@
         <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
 
         <ul class="space-y-4 text-xl font-medium">
-            <li><a href="index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
-            <li><a href="Criptografia/criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 active">Conceitos Fundamentais</a></li>
+            <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
+            <li><a href="../Criptografia/criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 active">Conceitos Fundamentais</a></li>
             
             <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
-            <li><a href="DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
-            <li><a href="AES/main_aes.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
-            <li><a href="Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
+            <li><a href="../DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
+            <li><a href="../AES/main_aes.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
+            <li><a href="../Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
             
             <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
-            <li><a href="RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
-            <li><a href="Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
+            <li><a href="rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
+            <li><a href="../Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
 
             <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
-            <li><a href="Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
+            <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
         </ul>
     </div>
 
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
 
     
-    <section id="introducao" class="content-section-card bg-gray-800 p-6 rounded-lg shadow-2xl mb-8">
+<section id="introducao" class="content-section-card bg-gray-800 p-6 rounded-lg shadow-2xl mb-8">
     <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
         Introdução à Criptografia RSA
     </h2>
     
     <p class="text-slate-300 mb-4">
-        O algoritmo <strong>RSA</strong> (Rivest, Shamir e Adleman) representa o alicerce da <strong>criptografia de chave pública</strong>. Sua importância reside na capacidade de estabelecer comunicação segura sem a necessidade de uma chave secreta pré-compartilhada, um conceito que revolucionou a segurança digital (SSL/TLS, assinaturas).
+        O algoritmo <strong class="text-yellow-300">RSA</strong> (Rivest, Shamir e Adleman) representa o alicerce da <strong class="text-cyan-400">criptografia de chave pública</strong>. Sua importância reside na capacidade de estabelecer <strong class="text-green-300">comunicação segura</strong> sem a necessidade de uma chave secreta pré-compartilhada, um conceito que revolucionou a segurança digital (<code class="text-red-300">SSL/TLS</code>, assinaturas).
     </p>
 
     <p class="text-slate-300 mb-4">
-        Diferente dos sistemas simétricos, o RSA opera com um <b>par de chaves</b>. A <b>Chave Pública</b> (composta pelos valores <i>E</i> e <i>N</i>) é aberta e usada por qualquer pessoa para <strong>criptografar</strong> a mensagem (<i>M</i>). A <b>Chave Privada</b> (composta por <i>D</i> e <i>N</i>), no entanto, é mantida em total sigilo pelo destinatário e é a única capaz de <strong>descriptografar</strong> o texto cifrado (<i>C</i>).
+        Diferente dos sistemas simétricos, o RSA opera com um <strong class="text-green-300">par de chaves</strong>. A <strong class="text-cyan-400">Chave Pública</strong> (composta pelos valores $E$ e $N$) é aberta e usada por qualquer pessoa para <strong class="text-cyan-300">criptografar</strong> a mensagem ($M$). A <strong class="text-red-400">Chave Privada</strong> (composta por $D$ e $N$), no entanto, é mantida em total sigilo pelo destinatário e é a única capaz de <strong class="text-red-300">descriptografar</strong> o texto cifrado ($C$).
     </p>
     
     <p class="text-slate-300 mb-6">
-        A segurança do RSA baseia-se na matemática da <b>fatoração de números primos</b>. O processo de geração de chaves começa com a escolha de dois números primos grandes e secretos (<i>P</i> e <i>Q</i>). O Módulo <i>N</i> é o produto de <i>P</i> e <i>Q</i>. A dificuldade computacional em descobrir <i>P</i> e <i>Q</i> a partir do valor conhecido de <i>N</i> é o que protege a chave privada (<i>D</i>), que depende da função <i>\phi</i> (Totiente de Euler, calculado como <i>(P-1) \cdot (Q-1)</i>). Assim, a simulação demonstra o ciclo completo: desde a geração de todos esses elementos matemáticos (<i>P, Q, N, \phi, E, D</i>) até a aplicação da <strong>Exponenciação Modular</strong> para transformar a mensagem <i>M</i> no cifrado <i>C</i> e, por fim, a recuperação de <i>M</i> utilizando <i>D</i>.
+        A segurança do RSA baseia-se na matemática da <strong class="text-yellow-300">fatoração de números primos</strong>. O processo de geração de chaves começa com a escolha de dois números primos grandes e secretos ($P$ e $Q$). O <strong class="text-green-300">Módulo $N$</strong> é o produto de $P$ e $Q$. A dificuldade computacional em descobrir $P$ e $Q$ a partir do valor conhecido de $N$ é o que protege a chave privada ($D$), que depende da <strong class="text-cyan-300">Função Totiente de Euler $\phi$</strong>, calculada como $\phi(n) = (P-1) \cdot (Q-1)$. Assim, a simulação demonstra o ciclo completo: desde a geração de todos esses elementos matemáticos ($P, Q, N, \phi, E, D$) até a aplicação da <strong class="text-green-300">Exponenciação Modular</strong> para transformar a mensagem $M$ no cifrado $C$ e, por fim, a recuperação de $M$ utilizando $D$.
     </p>
 </section>
 
-    <section id="principios-matematicos" class="content-section-card">
-        <h2>A Fundo: Princípios Matemáticos (Geração de Chaves)</h2>
-        <p class="text-slate-300 mb-6">
-            O processo de geração de chaves RSA é a essência de sua segurança, dependendo de quatro passos fundamentais da teoria dos números:
-        </p>
+---
 
-        <div class="space-y-6">
-            
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    1. Escolha de Primos (p e q)
-                </h3>
-                <p class="text-slate-300">
-                    O usuário escolhe dois números primos grandes e distintos, <i>p</i> e <i>q</i>. Quanto maiores eles forem, mais segura será a criptografia.
-                </p>
-            </div>
+<section id="principios-matematicos" class="content-section-card">
+    <h2>A Fundo: Princípios Matemáticos (Geração de Chaves)</h2>
+    <p class="text-slate-300 mb-6">
+        O processo de geração de chaves RSA é a essência de sua segurança, dependendo de quatro passos fundamentais da <strong class="text-yellow-300">Teoria dos Números</strong>:
+    </p>
 
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    2. Cálculo do Módulo (n) e da Função Totiente (φ)
-                </h3>
-                <p class="text-slate-300">
-                    O <strong>Módulo</strong> <i>n</i> é calculado por <i>n = p \cdot q</i>. Ele será parte de ambas as chaves (pública e privada). A <strong>Função Totiente de Euler</strong> <i>\phi(n)</i> é calculada por <i>\phi(n) = (p-1)(q-1)</i>. Este valor é crucial para a chave privada e deve ser mantido em segredo.
-                </p>
-            </div>
-
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    3. Chave Pública (e)
-                </h3>
-                <p class="text-slate-300">
-                    O expoente público <i>e</i> é escolhido de forma que <i>1 < e < \phi(n)</i> e que <i>e</i> seja <strong>coprimo</strong> a <i>\phi(n)</i> (ou seja, <i>\text{mdc}(e, \phi(n)) = 1</i>). O par <i>(e, n)</i> é a <strong>Chave Pública</strong>.
-                </p>
-            </div>
-
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    4. Chave Privada (d)
-                </h3>
-                <p class="text-slate-300">
-                    O expoente privado <i>d</i> é o <strong>inverso multiplicativo</strong> de <i>e</i> no módulo <i>\phi(n)</i>. Ele é calculado através do Algoritmo Estendido de Euclides, satisfazendo a equação <i>d \cdot e \equiv 1 \pmod{\phi(n)}</i>. O par <i>(d, n)</i> é a <strong>Chave Privada</strong>.
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <section id="funcoes-rsa" class="content-section-card">
-        <h2>Funções Essenciais: Criptografia e Assinatura</h2>
+    <div class="space-y-6">
         
-        <p class="text-slate-300 mb-8 font-semibold">
-            O RSA não é usado apenas para confidencialidade (criptografia), mas também para garantir <strong>integridade</strong> e <strong>autenticidade</strong> (assinaturas digitais). As duas operações principais seguem a mesma lógica de exponenciação modular.
-        </p>
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                1. Escolha de Primos (<code class="text-red-300">p</code> e <code class="text-red-300">q</code>)
+            </h3>
+            <p class="text-slate-300">
+                O usuário escolhe dois números <strong class="text-yellow-300">primos grandes e distintos</strong>, $P$ e $Q$. Quanto maiores eles forem, mais segura será a criptografia.
+            </p>
+        </div>
 
-        <div class="space-y-8">
-            
-            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
-                <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
-                    <span class="text-2xl mr-3 font-mono text-cyan-400"></span> Confidencialidade (Criptografar)
-                </h3>
-                <p class="text-slate-300">
-                    Para criptografar uma mensagem <i>M</i> (onde <i>M < n</i>), utiliza-se a Chave Pública do destinatário <i>(e, n)</i>.
-                </p>
-                <div class="mt-3 p-3 bg-slate-800 rounded text-center text-lg font-mono text-white">
-                    <i><i>C = M^e \pmod{n}</i></i>
-                    <span class="text-xs text-slate-400 block mt-1">Onde <i>C</i> é o texto cifrado.</span>
-                </div>
-            </div>
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                2. Cálculo do Módulo (<code class="text-green-300">n</code>) e da Função Totiente ($\phi$)
+            </h3>
+            <p class="text-slate-300">
+                O <strong class="text-green-300">Módulo $N$</strong> é calculado por $N = P \cdot Q$. Ele será parte de ambas as chaves (pública e privada). A <strong class="text-cyan-300">Função Totiente de Euler $\phi(n)$</strong> é calculada por $\phi(n) = (P-1)(Q-1)$. Este valor é crucial para a chave privada e deve ser <strong class="text-red-400">mantido em segredo</strong>.
+            </p>
+        </div>
 
-            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
-                <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center">
-                    <span class="text-2xl mr-3 font-mono text-green-400"></span> Autenticidade (Descriptografar/Assinar)
-                </h3>
-                <p class="text-slate-300">
-                    Para descriptografar o texto cifrado <i>C</i>, o destinatário utiliza sua Chave Privada <i>(d, n)</i>.
-                </p>
-                <div class="mt-3 p-3 bg-slate-800 rounded text-center text-lg font-mono text-white">
-                    <i><i>M = C^d \pmod{n}</i></i>
-                    <span class="text-xs text-slate-400 block mt-1">Onde <i>M</i> é o texto original.</span>
-                </div>
-                <p class="text-slate-300 mt-4">
-                    <strong>Assinatura Digital:</strong> O processo de assinatura é idêntico à descriptografia, mas feito pelo remetente com sua própria chave privada. O receptor usa a chave pública do remetente para verificar.
-                </p>
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                3. Chave Pública (<code class="text-cyan-300">e</code>)
+            </h3>
+            <p class="text-slate-300">
+                O <strong class="text-cyan-300">expoente público $E$</strong> é escolhido de forma que $1 < E < \phi(N)$ e que $E$ seja <strong class="text-yellow-300">coprimo</strong> a $\phi(N)$ (ou seja, $\text{mdc}(E, \phi(N)) = 1$). O par $(E, N)$ é a <strong class="text-cyan-400">Chave Pública</strong>.
+            </p>
+        </div>
+
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                4. Chave Privada (<code class="text-red-400">d</code>)
+            </h3>
+            <p class="text-slate-300">
+                O <strong class="text-red-400">expoente privado $D$</strong> é o <strong class="text-yellow-300">inverso multiplicativo</strong> de $E$ no módulo $\phi(N)$. Ele é calculado através do <strong class="text-green-300">Algoritmo Estendido de Euclides</strong>, satisfazendo a equação $D \cdot E \equiv 1 \pmod{\phi(N)}$. O par $(D, N)$ é a <strong class="text-red-400">Chave Privada</strong>.
+            </p>
+        </div>
+        
+    </div>
+</section>
+
+---
+
+<section id="funcoes-rsa" class="content-section-card">
+    <h2>Funções Essenciais: Criptografia e Assinatura</h2>
+    
+    <p class="text-slate-300 mb-8 font-semibold">
+        O RSA não é usado apenas para confidencialidade (criptografia), mas também para garantir <strong class="text-yellow-300">integridade</strong> e <strong class="text-green-300">autenticidade</strong> (assinaturas digitais). As duas operações principais seguem a mesma lógica de <strong class="text-cyan-300">exponenciação modular</strong>.
+    </p>
+
+    <div class="space-y-8">
+        
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+            <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-cyan-400">&#128274;</span> Confidencialidade (Criptografar)
+            </h3>
+            <p class="text-slate-300">
+                Para criptografar uma mensagem $M$ (onde $M < N$), utiliza-se a <strong class="text-cyan-400">Chave Pública do destinatário $(E, N)$</strong>.
+            </p>
+            <div class="mt-3 p-3 bg-slate-800 rounded text-center text-lg font-mono text-white">
+                $$C = M^E \pmod{N}$$
+                <span class="text-xs text-slate-400 block mt-1">Onde $C$ é o texto cifrado.</span>
             </div>
         </div>
-    </section>
 
-    <section id="simulacao-rsa" class="content-section-card">
-        <h2>RSA Didático: Geração de Chaves e Teste Simples</h2>
-        <p class="text-slate-300 mb-6">
-            Para fins didáticos, utilizaremos números primos e mensagem (M) pequenos. <b>Estes números são inseguros</b> e servem apenas para demonstrar a matemática por trás do RSA.
-        </p>
-
-        <p class="text-sm text-slate-400 mb-4">
-             <strong>Foco da Simulação:</strong> Demonstrar o cálculo dos parâmetros <i>(n, \phi(n), e, d)</i> e como a exponenciação modular cifra e decifra a mensagem.
-        </p>
-
-        <label for="pInput" class="block mb-2 text-sm font-medium">Primo p (Ex: 17):</label>
-        <input type="number" id="pInput" value="17" min="1"
-            class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono mb-3">
-
-        <label for="qInput" class="block mb-2 text-sm font-medium">Primo q (Ex: 11):</label>
-        <input type="number" id="qInput" value="11" min="1"
-            class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono mb-3">
-            
-        <label for="mInput" class="block mb-2 text-sm font-medium">Mensagem M (Número, Ex: 88):</label>
-        <input type="number" id="mInput" value="88" min="1"
-            class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono">
-
-        <button id="iniciarBtn" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
-            Executar Geração de Chaves e Cripto
-        </button>
-
-        <div id="stepsArea" class="mt-8 p-4 bg-slate-700 rounded-lg shadow-inner">
-            <h3 class="text-xl font-bold text-cyan-400 mb-4">Saída da Simulação</h3>
-            <p class="text-slate-400">Insira os primos (p, q) e a mensagem (M) e clique em 'Executar' para ver os cálculos.</p>
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
+            <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-green-400">&#9997;</span> Autenticidade (Descriptografar/Assinar)
+            </h3>
+            <p class="text-slate-300">
+                Para descriptografar o texto cifrado $C$, o destinatário utiliza sua <strong class="text-red-400">Chave Privada $(D, N)$</strong>.
+            </p>
+            <div class="mt-3 p-3 bg-slate-800 rounded text-center text-lg font-mono text-white">
+                $$M = C^D \pmod{N}$$
+                <span class="text-xs text-slate-400 block mt-1">Onde $M$ é o texto original.</span>
+            </div>
+            <p class="text-slate-300 mt-4">
+                <strong class="text-green-300">Assinatura Digital:</strong> O processo de assinatura é <strong class="text-yellow-300">matematicamente idêntico</strong> à descriptografia, mas feito pelo remetente com sua <strong class="text-red-400">própria chave privada</strong> para garantir a autoria. O receptor usa a chave pública do remetente para verificar.
+            </p>
         </div>
-    </section>
+        
+    </div>
+</section>
+
+---
+
+<section id="simulacao-rsa" class="content-section-card">
+    <h2>RSA Didático: Geração de Chaves e Teste Simples</h2>
+    <p class="text-slate-300 mb-6">
+        Para fins didáticos, utilizaremos números primos e mensagem ($M$) pequenos. <strong class="text-red-400">Estes números são inseguros</strong> e servem apenas para demonstrar a matemática por trás do RSA.
+    </p>
+
+    <p class="text-sm text-slate-400 mb-4">
+        <strong class="text-cyan-400">Foco da Simulação:</strong> Demonstrar o cálculo dos parâmetros $(N, \phi(N), E, D)$ e como a exponenciação modular cifra e decifra a mensagem.
+    </p>
+
+    <label for="pInput" class="block mb-2 text-sm font-medium">Primo p (Ex: 17):</label>
+    <input type="number" id="pInput" value="17" min="1"
+        class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono mb-3">
+
+    <label for="qInput" class="block mb-2 text-sm font-medium">Primo q (Ex: 11):</label>
+    <input type="number" id="qInput" value="11" min="1"
+        class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono mb-3">
+        
+    <label for="mInput" class="block mb-2 text-sm font-medium">Mensagem M (Número, Ex: 88):</label>
+    <input type="number" id="mInput" value="88" min="1"
+        class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono">
+
+    <button id="iniciarBtn" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
+        Executar Geração de Chaves e Cripto
+    </button>
+
+    <div id="stepsArea" class="mt-8 p-4 bg-slate-700 rounded-lg shadow-inner">
+        <h3 class="text-xl font-bold text-cyan-400 mb-4">Saída da Simulação</h3>
+        <p class="text-slate-400">Insira os primos (p, q) e a mensagem (M) e clique em 'Executar' para ver os cálculos.</p>
+    </div>
+</section>
 
 
-    <footer class="des-page-footer">
-        <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
-    </footer>
+<footer class="des-page-footer">
+    <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
+</footer>
 
     <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
         <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">

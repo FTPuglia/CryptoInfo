@@ -121,74 +121,72 @@
 
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
 
+<section id="hashing-assinaturas" class="content-section-card max-w-7xl mx-auto mt-0">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        Introdução e Demonstração de Hashing (SHA-256)
+    </h2>
+    <p class="text-slate-300 mb-4">
+        O <strong class="text-cyan-400">Hashing Criptográfico</strong> é fundamental para garantir a <strong class="text-green-300">integridade</strong> e a <strong class="text-green-300">autenticidade</strong> dos dados. Uma <strong class="text-yellow-300">função hash</strong> (como a <code class="text-red-300">SHA-256</code>) recebe qualquer volume de dados (entrada) e o transforma em uma saída de tamanho fixo, conhecida como <strong class="text-yellow-300">Message Digest</strong> ou <strong class="text-yellow-300">Resumo Criptográfico</strong>.
+    </p>
+    <p class="text-slate-300 mb-6">
+        As propriedades essenciais de uma função hash segura são: <strong class="text-cyan-300">Resistência à Pré-Imagem</strong> (ser difícil reverter o hash para a mensagem original), <strong class="text-cyan-300">Resistência à Segunda Pré-Imagem</strong> (ser difícil encontrar outra mensagem que gere o mesmo hash) e <strong class="text-cyan-300">Resistência a Colisões</strong> (ser difícil encontrar duas mensagens diferentes que gerem o mesmo hash). O SHA-256 gera um hash de <strong class="text-red-400">256 bits</strong>, usualmente representado por 64 caracteres hexadecimais.
+    </p>
+    
 
-    <section id="hashing-assinaturas" class="content-section-card max-w-7xl mx-auto mt-0">
-        <h2>Demonstração de Hashing (SHA-256)</h2>
-        <p class="text-slate-300 mb-6">
-            O hashing é fundamental para a <b>integridade</b> e <b>autenticidade</b>. Uma função hash (como SHA-256) transforma qualquer entrada em um "resumo" de tamanho fixo.
-        </p>
+    <h3 class="text-2xl font-bold text-cyan-400 mt-10 mb-4 border-b border-slate-700 pb-2">1. Efeito Avalanche (A Propriedade de Confusão)</h3>
+    <p class="text-slate-400 mb-4">
+        O <strong class="text-green-300">Efeito Avalanche</strong> é a propriedade desejada onde uma alteração mínima na entrada (<strong class="text-red-400">ex: um único caractere</strong>) resulta em uma mudança drástica e imprevisível no hash de saída. Mude apenas um caractere em "Documento B" e observe como o hash de saída <strong class="text-yellow-300">muda completamente</strong>. Isso garante que o <code class="text-red-300">SHA-256</code> oferece um alto nível de <strong class="text-green-300">confusão</strong>.
+    </p>
 
-        <h3 class="text-2xl font-semibold text-cyan-400 mt-8 mb-4 border-b border-slate-600 pb-2">1. Efeito Avalanche</h3>
-        <p class="text-slate-400 mb-4">
-            Mude apenas um caractere em "Documento B" e observe como o hash de saída muda completamente (Efeito Avalanche). O SHA-256 garante um alto nível de confusão.
-        </p>
-
-        <div class="hash-input-group">
-            <div>
-                <label for="inputA" class="block mb-2 text-sm font-medium">Documento A (Original):</label>
-                <textarea id="inputA" rows="5" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" oninput="calculateHashes()" placeholder="A criptografia é essencial para a segurança.">A criptografia é essencial para a segurança.</textarea>
-                <div class="mt-2 text-sm text-slate-400">Hash de A:</div>
-                <div id="hashA" class="hash-output-box">...</div>
-            </div>
-            
-            <div>
-                <label for="inputB" class="block mb-2 text-sm font-medium">Documento B (Modificado):</label>
-                <textarea id="inputB" rows="5" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" oninput="calculateHashes()" placeholder="A criptografia é essencial para a segurança.">A criptografia é essencial para a segurança.</textarea>
-                <div class="mt-2 text-sm text-slate-400">Hash de B:</div>
-                <div id="hashB" class="hash-output-box">...</div>
-            </div>
-        </div>
-
-        <h3 class="text-2xl font-semibold text-cyan-400 mt-12 mb-4 border-b border-slate-600 pb-2">2. Verificação de Integridade (Simulada)</h3>
-        <p class="text-slate-400 mb-4">
-            Simule a verificação da integridade de uma mensagem. O emissor salva o hash original (Passo 1). O destinatário verifica se o hash da mensagem recebida (Passo 2) corresponde ao original.
-        </p>
-
-        <div class="hash-input-group">
-            <div>
-                <label for="integrityMsg" class="block mb-2 text-sm font-medium">Mensagem do Emissor (Antes do Envio):</label>
-                <textarea id="integrityMsg" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Mensagem secreta."></textarea>
-                
-                <button onclick="saveOriginalHash()" class="button-with-shadow w-full mt-4">1. Calcular e Salvar Hash Original</button>
-                <div id="originalHashDisplay" class="mt-2 text-sm text-slate-400 hash-output-box h-auto">Hash Original (SHA-256): Clique acima.</div>
-            </div>
-            
-            <div>
-                <label for="tamperMsg" class="block mb-2 text-sm font-medium">Mensagem Recebida (Destinatário):</label>
-                <textarea id="tamperMsg" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Mensagem secreta."></textarea>
-                
-                <button onclick="verifyIntegrity()" class="button-with-shadow w-full mt-4 bg-yellow-600 hover:bg-yellow-500">2. Verificar Integridade</button>
-                </div>
+    <div class="hash-input-group">
+        <div>
+            <label for="inputA" class="block mb-2 text-sm font-medium text-slate-200">Documento A (<strong class="text-cyan-300">Original</strong>):</label>
+            <textarea id="inputA" rows="5" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" oninput="calculateHashes()" placeholder="A criptografia é essencial para a segurança.">A criptografia é essencial para a segurança.</textarea>
+            <div class="mt-2 text-sm text-slate-300">Hash de A (<code class="text-yellow-300">256 bits</code>):</div>
+            <div id="hashA" class="hash-output-box text-cyan-400 font-mono break-all">...</div>
         </div>
         
-        <div id="integrityStatusContainer" class="mt-6">
-            <div id="integrityStatus" class="integrity-status">Aguardando Hash Original...</div>
-            <div id="hashComparisonDetails" class="mt-4 text-sm text-slate-400 hash-comparison-details hidden"></div>
-        </div>
-        
-    </section>
-
-    <footer class="des-page-footer">
-        <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
-    </footer>
-
-    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
-        <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
-            <h3 id="messageTitle" class="text-xl font-bold mb-3 text-cyan-400">Informação</h3>
-            <p id="messageText" class="text-slate-200 mb-4"></p>
-            <button onclick="document.getElementById('messageBox').classList.add('hidden')" class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
+        <div>
+            <label for="inputB" class="block mb-2 text-sm font-medium text-slate-200">Documento B (<strong class="text-red-400">Modificado</strong>):</label>
+            <textarea id="inputB" rows="5" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" oninput="calculateHashes()" placeholder="A criptografia é essencial para a segurança.">A criptografia é essencial para a segurança.</textarea>
+            <div class="mt-2 text-sm text-slate-300">Hash de B (<code class="text-yellow-300">256 bits</code>):</div>
+            <div id="hashB" class="hash-output-box text-red-400 font-mono break-all">...</div>
         </div>
     </div>
+
+    <h3 class="text-2xl font-bold text-cyan-400 mt-12 mb-4 border-b border-slate-700 pb-2">2. Verificação de Integridade (Comprovação de Dados)</h3>
+    <p class="text-slate-400 mb-4">
+        Simule a <strong class="text-green-300">verificação da integridade</strong> de uma mensagem. O emissor salva o <strong class="text-cyan-300">hash original</strong> (Passo 1). O destinatário verifica se o hash da <strong class="text-red-400">mensagem recebida</strong> (Passo 2) corresponde ao original. Qualquer alteração (mesmo um espaço) irá falhar na verificação.
+    </p>
+    
+
+    <div class="hash-input-group">
+        <div>
+            <label for="integrityMsg" class="block mb-2 text-sm font-medium text-slate-200">Mensagem do Emissor (<strong class="text-cyan-300">Antes do Envio</strong>):</label>
+            <textarea id="integrityMsg" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Mensagem secreta."></textarea>
+            
+            <button onclick="saveOriginalHash()" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">1. Calcular e Salvar Hash Original</button>
+            <div id="originalHashDisplay" class="mt-2 text-sm text-slate-300 hash-output-box h-auto font-mono text-cyan-400 break-all">Hash Original (SHA-256): Clique acima.</div>
+        </div>
+        
+        <div>
+            <label for="tamperMsg" class="block mb-2 text-sm font-medium text-slate-200">Mensagem Recebida (<strong class="text-red-400">Destinatário</strong>):</label>
+            <textarea id="tamperMsg" rows="3" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600" placeholder="Mensagem secreta."></textarea>
+            
+            <button onclick="verifyIntegrity()" class="button-with-shadow w-full mt-4 bg-yellow-600 hover:bg-yellow-500">2. Verificar Integridade</button>
+            </div>
+    </div>
+    
+    <div id="integrityStatusContainer" class="mt-6">
+        <div id="integrityStatus" class="integrity-status text-lg font-bold">Aguardando Hash Original...</div>
+        <div id="hashComparisonDetails" class="mt-4 text-sm text-slate-400 hash-comparison-details hidden"></div>
+    </div>
+    
+</section>
+
+<footer class="des-page-footer">
+    <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
+</footer>
 
     <script>
         // Variável global para armazenar o hash original para o demo de integridade
