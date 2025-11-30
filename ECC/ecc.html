@@ -64,151 +64,167 @@
 
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
 
-    <section id="introducao" class="content-section-card max-w-7xl mx-auto mt-0">
-        <h2>Introdução à Criptografia de Curvas Elípticas (ECC)</h2>
-        <p class="text-slate-300 mb-4">
-            A <span class="font-semibold">ECC</span> (Elliptic Curve Cryptography) é um algoritmo de <span class="font-semibold">criptografia de chave pública</span> que, assim como o RSA, utiliza um par de chaves (pública e privada). No entanto, sua segurança não depende da fatoração de números primos grandes, mas sim do <span class="font-semibold">Problema do Logaritmo Discreto em Curvas Elípticas (ECDLP)</span>.
-        </p>
-        <p class="text-slate-300 mb-4">
-            Matematicamente, a ECC utiliza a álgebra de pontos em uma curva elíptica sobre um corpo finito. A chave privada é um número escalar <span class="font-semibold">k</span> e a chave pública é um ponto <span class="font-semibold">Q</span> na curva, obtido pela multiplicação escalar <span class="font-semibold">Q = k * P</span>, onde <span class="font-semibold">P</span> é um ponto base conhecido. Encontrar <span class="font-semibold">k</span> (a chave privada) a partir de <span class="font-semibold">Q</span> e <span class="font-semibold">P</span> é o problema matemático que protege a criptografia. 
-
-
+<section id="introducao" class="content-section-card max-w-7xl mx-auto mt-0">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        Introdução à Criptografia de Curvas Elípticas (ECC)
+    </h2>
+    <p class="text-slate-300 mb-4">
+        A <span class="font-bold text-cyan-400">ECC</span> (Elliptic Curve Cryptography) é um algoritmo de <span class="font-bold text-cyan-400">criptografia de chave pública</span> que, assim como o RSA, utiliza um par de chaves (pública e privada). No entanto, sua segurança não depende da fatoração de números primos grandes, mas sim do <span class="font-bold text-yellow-300">Problema do Logaritmo Discreto em Curvas Elípticas (ECDLP)</span>.
+    </p>
+    <p class="text-slate-300 mb-4">
+        Matematicamente, a ECC utiliza a álgebra de pontos em uma curva elíptica sobre um corpo finito. A chave privada é um número escalar <span class="font-mono text-white">k</span> e a chave pública é um ponto <span class="font-mono text-white">Q</span> na curva, obtido pela multiplicação escalar <span class="font-mono text-white">Q = k * P</span>, onde <span class="font-mono text-white">P</span> é um ponto base conhecido. Encontrar <span class="font-mono text-white">k</span> (a chave privada) a partir de <span class="font-mono text-white">Q</span> e <span class="font-mono text-white">P</span> é o problema matemático que protege a criptografia. 
+        
 
 [Image of an elliptic curve on a graph]
 
-
-        </p>
-        <p class="text-slate-300 mb-6">
-            A principal vantagem da ECC é sua <span class="font-semibold">eficiência</span>. Ela oferece o mesmo nível de segurança que o RSA com chaves significativamente menores. Por exemplo, uma chave ECC de <span class="font-semibold">256 bits</span> fornece uma segurança equivalente a uma chave RSA de <span class="font-semibold">3072 bits</span>. Isso resulta em transferências de dados mais rápidas, menor consumo de energia e é ideal para dispositivos móveis, navegadores e criptografia em IoT.
-        </p>
+    </p>
+    <p class="text-slate-300 mb-6">
+        A principal vantagem da ECC é sua <span class="font-bold text-green-400">eficiência</span>. Ela oferece o mesmo nível de segurança que o RSA com chaves significativamente menores. Por exemplo, uma chave ECC de <span class="font-bold text-white">256 bits</span> fornece uma segurança equivalente a uma chave RSA de <span class="font-bold text-white">3072 bits</span>. Isso resulta em transferências de dados mais rápidas, menor consumo de energia e é ideal para dispositivos móveis, navegadores e criptografia em IoT.
+    </p>
+    <blockquote class="bg-slate-700/50 p-4 rounded-lg border-l-4 border-cyan-500 text-slate-200">
         <p class="font-semibold">
-            Recomendação: A ECC é o padrão moderno de criptografia de chave pública, sendo essencial para protocolos como <span class="font-semibold">TLS 1.3</span> e assinaturas digitais, oferecendo forte segurança com performance superior.
+            Recomendação: A ECC é o padrão moderno de criptografia de chave pública, sendo essencial para protocolos como <span class="font-bold text-cyan-400">TLS 1.3</span> e assinaturas digitais, oferecendo forte segurança com performance superior.
         </p>
-    </section>
+    </blockquote>
+</section>
 
-    <section id="operacoes-chave" class="content-section-card max-w-7xl mx-auto">
-        <h2>A Fundo: As Operações-Chave da ECC</h2>
-        <p class="text-slate-300 mb-6">
-            A segurança e a funcionalidade da Criptografia de Curvas Elípticas baseiam-se em quatro componentes matemáticos essenciais: o campo finito, a curva, a adição de pontos e a multiplicação escalar.
-        </p>
+---
 
-        <div class="space-y-6">
-            
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500"></span> 1. A Curva Elíptica e o Campo Finito
-                </h3>
-                <p class="text-slate-300">
-                    Uma curva elíptica é definida pela equação <span class="font-mono">y² = x³ + ax + b</span>. Para fins criptográficos, ela é definida sobre um <span class="font-semibold">Campo Finito</span> (em módulo <span class="font-semibold">p</span>, onde <span class="font-semibold">p</span> é um número primo grande). Isso significa que os pontos na curva (coordenadas x, y) são limitados a valores inteiros dentro desse campo, transformando a curva contínua em um conjunto finito de pontos discretos.
-                </p>
-            </div>
+<section id="operacoes-chave" class="content-section-card max-w-7xl mx-auto">
+    <h2 class="text-3xl font-extrabold text-white mb-6 border-b-2 border-cyan-500 pb-2">
+        A Fundo: As Operações-Chave da ECC
+    </h2>
+    <p class="text-slate-300 mb-6 text-lg">
+        A segurança e a funcionalidade da Criptografia de Curvas Elípticas baseiam-se em quatro componentes matemáticos essenciais: o corpo finito, a curva, a adição de pontos e a multiplicação escalar.
+    </p>
 
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500"></span> 2. Adição de Pontos (<span class="font-mono">P + Q</span>)
-                </h3>
-                <p class="text-slate-300">
-                    A operação fundamental da ECC é a <span class="font-semibold">adição de pontos</span>. Ela é geometricamente definida: para somar dois pontos <span class="font-semibold">P</span> e <span class="font-semibold">Q</span>, traça-se uma linha reta através deles. Onde essa linha intercepta a curva novamente, um terceiro ponto <span class="font-semibold">R'</span> é encontrado. A soma <span class="font-mono">P + Q</span> é definida como o reflexo desse ponto <span class="font-semibold">R'</span> sobre o eixo x, resultando no ponto <span class="font-semibold">R</span>. A chave privada <span class="font-semibold">k</span> não é usada nesta operação.
-                </p>
-            </div>
-
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500"></span> 3. Multiplicação Escalar (<span class="font-mono">k * P</span>)
-                </h3>
-                <p class="text-slate-300">
-                    A <span class="font-semibold">Multiplicação Escalar</span> é como a multiplicação é feita na ECC: é a operação de adição repetida. Por exemplo, <span class="font-mono">2 * P = P + P</span>, <span class="font-mono">3 * P = P + P + P</span>, e assim por diante. Esta é a operação usada para gerar a chave pública <span class="font-semibold">Q</span> a partir da chave privada <span class="font-semibold">k</span> e do ponto base <span class="font-semibold">P</span> (<span class="font-mono">Q = k * P</span>). O cálculo é eficiente em uma direção, mas impossível de reverter.
-                </p>
-            </div>
-
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500"></span> 4. O Problema do Logaritmo Discreto (ECDLP)
-                </h3>
-                <p class="text-slate-300">
-                    O <span class="font-semibold">ECDLP</span> é a base da segurança. Se lhe for dado o ponto base <span class="font-semibold">P</span> e o resultado final <span class="font-mono">Q = k * P</span>, é computacionalmente inviável calcular o valor do escalar <span class="font-semibold">k</span> (a chave privada), se <span class="font-semibold">k</span> e o campo finito forem grandes o suficiente. A ausência de um atalho para este cálculo é o que torna o ECC seguro, mesmo com chaves menores que o RSA.
-                </p>
-            </div>
-        </div>
-    </section>
+    <div class="space-y-6">
         
-    <section id="modos-operacao" class="content-section-card max-w-7xl mx-auto">
-        <h2>Algoritmos ECC: Como a ECC é Aplicada</h2>
-        
-        <p class="text-slate-300 mb-4 font-semibold">
-            A ECC, sendo um algoritmo de chave pública, é geralmente utilizada para o <span class="font-semibold">acordo de chaves</span> (Key Exchange) e para <span class="font-semibold">assinaturas digitais</span>, não para a criptografia de mensagens longas. Os algoritmos que usam a matemática das Curvas Elípticas são conhecidos por ter o prefixo 'EC'.
-        </p>
-
-        <p class="text-slate-300 mb-8">
-            Os principais algoritmos de chave pública baseados em ECC são o ECDH e o ECDSA, amplamente utilizados em protocolos de internet e blockchain.
-        </p>
-
-        <div class="space-y-8">
-            
-            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
-                <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
-                    <span class="text-2xl mr-3 font-mono text-cyan-400"></span> 1. Elliptic Curve Diffie-Hellman (ECDH) - Acordo de Chaves
-                </h3>
-                <p class="text-slate-300">
-                    O <span class="font-semibold">ECDH</span> é usado para permitir que duas partes (Alice e Bob) que nunca se encontraram concordem secretamente em uma <span class="font-semibold">chave simétrica</span> compartilhada através de um canal inseguro. Ele é a espinha dorsal de protocolos como o TLS. O processo envolve a troca de suas chaves públicas (pontos na curva) para que cada um possa calcular o mesmo ponto secreto (a chave simétrica) usando sua própria chave privada.
-                </p>
-            </div>
-
-            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
-                <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
-                    <span class="text-2xl mr-3 font-mono text-cyan-400"></span> 2. Elliptic Curve Digital Signature Algorithm (ECDSA) - Assinaturas
-                </h3>
-                <p class="text-slate-300">
-                    O <span class="font-semibold">ECDSA</span> é o algoritmo padrão para <span class="font-semibold">assinaturas digitais</span> baseado em ECC, amplamente utilizado em Bitcoin e Ethereum. Ele permite que uma parte prove a posse de uma chave privada (por exemplo, para autorizar uma transação) sem nunca revelá-la. Ele usa a função Hash do conteúdo e a chave privada para gerar uma assinatura compacta.
-                </p>
-            </div>
-
-            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
-                <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center">
-                    <span class="text-2xl mr-3 font-mono text-green-400"></span> 3. ECIES (Elliptic Curve Integrated Encryption Scheme) - Criptografia Híbrida
-                </h3>
-                <p class="text-slate-300">
-                    O <span class="font-semibold">ECIES</span> é um esquema de criptografia <span class="font-semibold">híbrida</span> que usa a ECC para criptografar uma chave simétrica (usando a chave pública do destinatário) e, em seguida, usa essa chave simétrica para criptografar a mensagem real (texto claro). É um método robusto para criptografar dados longos usando a segurança do ECC para proteger a chave de sessão.
-                </p>
-            </div>
-
-            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
-                <h3 class="text-xl font-bold text-purple-400 mb-2 flex items-center">
-                    <span class="text-2xl mr-3 font-mono text-purple-400"></span> 4. Curvas de Parâmetros Nomeados (NIST P-256)
-                </h3>
-                <p class="text-slate-300">
-                    Na prática, a ECC requer que todos concordem com um conjunto de <span class="font-semibold">parâmetros de domínio</span>, que definem a curva, o campo finito, o ponto base <span class="font-semibold">P</span>, e outros valores. O uso de <span class="font-semibold">Curvas de Parâmetros Nomeados</span> (como a <span class="font-semibold">NIST P-256</span> ou <span class="font-semibold">secp256k1</span> - usada no Bitcoin) garante que a segurança seja consistente e o processo de chave seja padronizado e confiável para todos os usuários.
-                </p>
-            </div>
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border-l-4 border-cyan-500">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                <span class="text-2xl mr-3 text-cyan-500">1.</span> A Curva Elíptica e o Campo Finito
+            </h3>
+            <p class="text-slate-300">
+                Uma curva elíptica é definida pela equação: <span class="font-mono text-white text-lg">y<sup>2</sup> = x<sup>3</sup> + ax + b</span>. Para fins criptográficos, ela é definida sobre um <span class="font-bold text-white">Campo Finito</span> (em módulo <span class="font-mono text-white">p</span>, onde <span class="font-mono text-white">p</span> é um número primo grande). Isso significa que os pontos na curva (coordenadas x, y) são limitados a valores inteiros dentro desse campo, transformando a curva contínua em um <span class="font-bold text-white">conjunto finito de pontos discretos</span>.
+            </p>
         </div>
-    </section>
 
-    <section id="simulacao-ecc" class="content-section-card max-w-7xl mx-auto">
-        <h2>ECC Didático: Simulação Conceitual e Comparação de Chaves</h2>
-        <p class="text-slate-300 mb-6">
-            Uma simulação matemática completa de ECC em JavaScript puro é inviável, mas podemos ilustrar sua principal vantagem: <span class="font-semibold">chaves privadas muito menores</span>. Esta seção demonstra o tamanho comparativo das chaves ECC vs. RSA para o mesmo nível de segurança.
-        </p>
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border-l-4 border-cyan-500">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                <span class="text-2xl mr-3 text-cyan-500">2.</span> Adição de Pontos (<span class="font-mono text-white">P + Q</span>)
+            </h3>
+            <p class="text-slate-300">
+                A operação fundamental da ECC é a <span class="font-bold text-white">adição de pontos</span>. Geometricamente, traça-se uma linha reta através dos pontos <span class="font-mono text-white">P</span> e <span class="font-mono text-white">Q</span>. Onde essa linha intercepta a curva novamente, um terceiro ponto <span class="font-mono text-white">R'</span> é encontrado. A soma <span class="font-mono text-white">P + Q</span> é definida como o reflexo desse ponto <span class="font-mono text-white">R'</span> sobre o eixo x, resultando no ponto <span class="font-mono text-white">R</span>. A chave privada <span class="font-mono text-white">k</span> não é usada nesta operação.
+            </p>
+        </div>
 
-        <p class="text-sm text-slate-400 mb-4 font-semibold">
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border-l-4 border-cyan-500">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                <span class="text-2xl mr-3 text-cyan-500">3.</span> Multiplicação Escalar (<span class="font-mono text-white">k * P</span>)
+            </h3>
+            <p class="text-slate-300">
+                A <span class="font-bold text-white">Multiplicação Escalar</span> é a operação de adição repetida. Por exemplo, <span class="font-mono text-white">2 * P = P + P</span>, e assim por diante. Esta é a operação usada para gerar a chave pública <span class="font-mono text-white">Q</span> a partir da chave privada <span class="font-mono text-white">k</span> e do ponto base <span class="font-mono text-white">P</span> (<span class="font-mono text-white">Q = k * P</span>). O cálculo é <span class="font-bold text-green-400">eficiente</span> em uma direção, mas <span class="font-bold text-red-400">impossível de reverter</span>.
+            </p>
+        </div>
+
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border-l-4 border-yellow-500">
+            <h3 class="text-xl font-bold text-yellow-300 mb-3 flex items-center">
+                <span class="text-2xl mr-3 text-yellow-300">4.</span> O Problema do Logaritmo Discreto (ECDLP)
+            </h3>
+            <p class="text-slate-300">
+                O <span class="font-bold text-yellow-300">ECDLP</span> é a base da segurança. Se lhe for dado o ponto base <span class="font-mono text-white">P</span> e o resultado final <span class="font-mono text-white">Q = k * P</span>, é <span class="font-bold text-white">computacionalmente inviável</span> calcular o valor do escalar <span class="font-mono text-white">k</span> (a chave privada), se <span class="font-mono text-white">k</span> e o corpo finito forem grandes o suficiente.
+            </p>
+        </div>
+    </div>
+</section>
+
+---
+
+<section id="modos-operacao" class="content-section-card max-w-7xl mx-auto">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        Algoritmos ECC: Como a ECC é Aplicada
+    </h2>
+    
+    <p class="text-slate-300 mb-4 font-semibold text-lg">
+        A ECC é geralmente utilizada para o <span class="font-bold text-cyan-400">acordo de chaves</span> (Key Exchange) e para <span class="font-bold text-cyan-400">assinaturas digitais</span>. Os algoritmos baseados em Curvas Elípticas usam o prefixo 'EC'.
+    </p>
+
+    <p class="text-slate-300 mb-8">
+        Os principais algoritmos de chave pública baseados em ECC são o **ECDH** e o **ECDSA**.
+    </p>
+
+    <div class="space-y-8">
+        
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border-l-4 border-cyan-600">
+            <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-cyan-400">1.</span> Elliptic Curve Diffie-Hellman (ECDH) - Acordo de Chaves
+            </h3>
+            <p class="text-slate-300">
+                O <span class="font-bold text-white">ECDH</span> é usado para permitir que duas partes concordem secretamente em uma <span class="font-bold text-green-400">chave simétrica</span> compartilhada através de um canal inseguro. Ele é a espinha dorsal de protocolos como o <span class="font-bold text-white">TLS</span>.
+            </p>
+        </div>
+
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border-l-4 border-purple-600">
+            <h3 class="text-xl font-bold text-purple-400 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-purple-400">2.</span> Elliptic Curve Digital Signature Algorithm (ECDSA) - Assinaturas
+            </h3>
+            <p class="text-slate-300">
+                O <span class="font-bold text-white">ECDSA</span> é o algoritmo padrão para <span class="font-bold text-purple-400">assinaturas digitais</span> baseado em ECC, utilizado em <i>Bitcoin</i> e <i>Ethereum</i>. Ele permite que uma parte prove a posse de uma chave privada sem revelá-la.
+            </p>
+        </div>
+
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border-l-4 border-green-600">
+            <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-green-400">3.</span> ECIES (Elliptic Curve Integrated Encryption Scheme) - Criptografia Híbrida
+            </h3>
+            <p class="text-slate-300">
+                O <span class="font-bold text-white">ECIES</span> é um esquema de criptografia <span class="font-bold text-green-400">híbrida</span> que usa a ECC para criptografar uma chave simétrica de sessão e, em seguida, usa essa chave para criptografar a mensagem real.
+            </p>
+        </div>
+
+        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border-l-4 border-white">
+            <h3 class="text-xl font-bold text-slate-200 mb-2 flex items-center">
+                <span class="text-2xl mr-3 font-mono text-slate-200">4.</span> Curvas de Parâmetros Nomeados (NIST P-256)
+            </h3>
+            <p class="text-slate-300">
+                A ECC exige que todos concordem com um conjunto de <span class="font-bold text-white">parâmetros de domínio</span>. O uso de <span class="font-bold text-white">Curvas de Parâmetros Nomeados</span> (como a <span class="font-bold text-cyan-400">NIST P-256</span> ou <span class="font-bold text-cyan-400">secp256k1</span>) garante que a segurança e o processo de chave sejam padronizados.
+            </p>
+        </div>
+    </div>
+</section>
+
+---
+
+<section id="simulacao-ecc" class="content-section-card max-w-7xl mx-auto">
+    <h2 class="text-3xl font-extrabold text-white mb-4 border-b-2 border-cyan-500 pb-2">
+        ECC Didático: Simulação Conceitual e Comparação de Chaves
+    </h2>
+    <p class="text-slate-300 mb-6">
+        Uma simulação matemática completa de ECC em JavaScript puro é inviável, mas podemos ilustrar sua principal vantagem: <span class="font-bold text-green-400">chaves privadas muito menores</span>. Esta seção demonstra o tamanho comparativo das chaves ECC vs. RSA para o mesmo nível de segurança.
+    </p>
+
+    <div class="p-4 bg-slate-700/50 rounded-lg border-l-4 border-yellow-300 mb-6">
+        <p class="text-sm text-slate-200 font-semibold">
             Foco da Simulação: Comparação do tamanho das chaves ECC (em bits) versus RSA (em bits) para alcançar segurança equivalente.
         </p>
+    </div>
 
-        <label for="chaveTamanho" class="block mb-2 text-sm font-medium">Nível de Segurança Desejado (Tamanho da Chave ECC em bits):</label>
-        <select id="chaveTamanho" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono">
-            <option value="128">128 bits (ECC 256 bits)</option>
-            <option value="192">192 bits (ECC 384 bits)</option>
-            <option value="256">256 bits (ECC 512 bits)</option>
-        </select>
-            
-        <button id="iniciarBtn" onclick="mostrarComparacaoECC()" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
-            Comparar Tamanho de Chaves
-        </button>
+    <label for="chaveTamanho" class="block mb-2 text-sm font-medium text-slate-300">Nível de Segurança Desejado (Tamanho da Chave ECC em bits):</label>
+    <select id="chaveTamanho" onchange="resetECCComparison()" class="w-full p-2 bg-slate-800 rounded-md focus:ring-cyan-500 focus:border-cyan-500 border-slate-600 text-center font-mono text-white">
+        <option value="128">128 bits (ECC 256 bits)</option>
+        <option value="192">192 bits (ECC 384 bits)</option>
+        <option value="256">256 bits (ECC 512 bits)</option>
+    </select>
+        
+    <button id="iniciarBtn" onclick="mostrarComparacaoECC()" class="button-with-shadow w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
+        Comparar Tamanho de Chaves
+    </button>
 
-        <div id="stepsArea" class="mt-8 p-4 bg-slate-700 rounded-lg shadow-inner">
-            <h3 class="text-xl font-bold text-cyan-400 mb-4">Comparativo de Tamanho</h3>
-            <p class="text-slate-400">Selecione o nível de segurança e clique em 'Comparar Tamanho de Chaves'.</p>
-        </div>
-    </section>
+    <div id="stepsArea" class="mt-8 p-4 bg-slate-700 rounded-lg shadow-inner border border-slate-600">
+        <h3 class="text-xl font-bold text-cyan-400 mb-4">Comparativo de Tamanho</h3>
+        <p class="text-slate-400">Selecione o nível de segurança e clique em 'Comparar Tamanho de Chaves'.</p>
+    </div>
+</section>
     
     <footer class="des-page-footer">
         <p>© 2024 Projeto CryptoInfo</p>
