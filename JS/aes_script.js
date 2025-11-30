@@ -142,7 +142,7 @@
         
         let content = `
             <strong>Passo 1: Bloco de Entrada e Inicialização do Estado</strong>
-            <p>A mensagem (128 bits) é carregada em uma matriz 4x4, o **Estado**.</p>
+            <p>A mensagem (128 bits) é carregada em uma matriz 4x4.</p>
             ${msg.length < 16 ? `<p class="warning">Mensagem menor que 16 caracteres. O bloco de 128 bits (16 bytes) foi completado com <strong>padding</strong> (bytes 0x00).</p>` : ''}
             
             ${formatMatrix(currentMatrix, "Estado Inicial (Entrada na Rodada)")}
@@ -150,10 +150,10 @@
             <hr style="border-color: #1E252C; margin: 15px 0;">
             
             <strong>Passo 2: AddRoundKey Inicial</strong>
-            <p>O estado inicial é combinado via **XOR** com a Subchave Zero ($K_0$) (simulada aqui com a chave principal).</p>
+            <p>O estado inicial é combinado via XOR com a Subchave Zero (simulada aqui com a chave principal).</p>
             
             <div class="sub-key-box">
-                <span class="font-semibold text-slate-300 block mb-2">Subchave $K_0$ (128 bits):</span>
+                <span class="font-semibold text-slate-300 block mb-2">Subchave (128 bits):</span>
                 ${formatBytes(roundKey)}
             </div>
             
@@ -193,7 +193,7 @@
         // 3d. AddRoundKey Final da Rodada
         content += `
             <strong>Passo 3d: AddRoundKey (Adição da Chave de Rodada)</strong>
-            <p>O estado é combinado via **XOR** com a Subchave da Rodada ($K_i$) para finalizar a rodada.</p>
+            <p>O estado é combinado via XOR com a Subchave da Rodada para finalizar a rodada.</p>
         `;
         // Usando a chave K0 novamente para simplificação didática
         currentMatrix = addRoundKey(currentMatrix, roundKey);

@@ -41,22 +41,24 @@
 
         <ul class="space-y-4 text-xl font-medium">
             <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
+            <li><a href="../Criptografia/criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Criptografia</a></li>
             
             <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Cifras Simétricas</span></li>
-            <li><a href="../DES/main_des_unificado.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
-            <li><a href="../AES/main_aes_unificado.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
+            <li><a href="../DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
+            <li><a href="../AES/main_aes.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
             <li><a href="../Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
             
             <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Criptografia de Chave Pública</span></li>
             <li><a href="../RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
-            <li><a href="ecc.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Criptografia ECC</a></li>
+            <li><a href="ecc.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia ECC</a></li>
             <li><a href="../Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
 
             <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Ferramentas de Integridade</span></li>
             <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
 
             <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Informações Adicionais</span></li>
-            <li><a href="#" onclick="mostrarAviso('Sobre')" class="text-slate-400 hover:text-cyan-400 transition block py-2 ml-4 text-base">Sobre (Placeholder)</a></li>
+            <li><a href="../SOBRE/sobre.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Sobre o Projeto</a></li>
+
         </ul>
     </div>
 
@@ -94,7 +96,7 @@
             
             <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
                 <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500">&#x222B;</span> 1. A Curva Elíptica e o Campo Finito
+                    <span class="text-2xl mr-3 text-cyan-500"></span> 1. A Curva Elíptica e o Campo Finito
                 </h3>
                 <p class="text-slate-300">
                     Uma curva elíptica é definida pela equação <span class="font-mono">y² = x³ + ax + b</span>. Para fins criptográficos, ela é definida sobre um <span class="font-semibold">Campo Finito</span> (em módulo <span class="font-semibold">p</span>, onde <span class="font-semibold">p</span> é um número primo grande). Isso significa que os pontos na curva (coordenadas x, y) são limitados a valores inteiros dentro desse campo, transformando a curva contínua em um conjunto finito de pontos discretos.
@@ -103,7 +105,7 @@
 
             <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
                 <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500">&#x2295;</span> 2. Adição de Pontos (<span class="font-mono">P + Q</span>)
+                    <span class="text-2xl mr-3 text-cyan-500"></span> 2. Adição de Pontos (<span class="font-mono">P + Q</span>)
                 </h3>
                 <p class="text-slate-300">
                     A operação fundamental da ECC é a <span class="font-semibold">adição de pontos</span>. Ela é geometricamente definida: para somar dois pontos <span class="font-semibold">P</span> e <span class="font-semibold">Q</span>, traça-se uma linha reta através deles. Onde essa linha intercepta a curva novamente, um terceiro ponto <span class="font-semibold">R'</span> é encontrado. A soma <span class="font-mono">P + Q</span> é definida como o reflexo desse ponto <span class="font-semibold">R'</span> sobre o eixo x, resultando no ponto <span class="font-semibold">R</span>. A chave privada <span class="font-semibold">k</span> não é usada nesta operação.
@@ -112,7 +114,7 @@
 
             <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
                 <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500">&#x229E;</span> 3. Multiplicação Escalar (<span class="font-mono">k * P</span>)
+                    <span class="text-2xl mr-3 text-cyan-500"></span> 3. Multiplicação Escalar (<span class="font-mono">k * P</span>)
                 </h3>
                 <p class="text-slate-300">
                     A <span class="font-semibold">Multiplicação Escalar</span> é como a multiplicação é feita na ECC: é a operação de adição repetida. Por exemplo, <span class="font-mono">2 * P = P + P</span>, <span class="font-mono">3 * P = P + P + P</span>, e assim por diante. Esta é a operação usada para gerar a chave pública <span class="font-semibold">Q</span> a partir da chave privada <span class="font-semibold">k</span> e do ponto base <span class="font-semibold">P</span> (<span class="font-mono">Q = k * P</span>). O cálculo é eficiente em uma direção, mas impossível de reverter.
@@ -121,7 +123,7 @@
 
             <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
                 <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500">&#x1F510;</span> 4. O Problema do Logaritmo Discreto (ECDLP)
+                    <span class="text-2xl mr-3 text-cyan-500"></span> 4. O Problema do Logaritmo Discreto (ECDLP)
                 </h3>
                 <p class="text-slate-300">
                     O <span class="font-semibold">ECDLP</span> é a base da segurança. Se lhe for dado o ponto base <span class="font-semibold">P</span> e o resultado final <span class="font-mono">Q = k * P</span>, é computacionalmente inviável calcular o valor do escalar <span class="font-semibold">k</span> (a chave privada), se <span class="font-semibold">k</span> e o campo finito forem grandes o suficiente. A ausência de um atalho para este cálculo é o que torna o ECC seguro, mesmo com chaves menores que o RSA.

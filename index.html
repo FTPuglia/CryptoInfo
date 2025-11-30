@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- TÍTULO ATUALIZADO para "CryptoInfo" -->
     <title>CryptoInfo</title>
     <!-- Carrega Tailwind CSS para classes utilitárias (grid, flex, cores) -->
 
-    <!-- FAVICON: logo_azul.png icon -->
+    <!-- logo_azul.png icon -->
     <link rel="icon" type="image/png" href="logo_azul.png">
 
     <script src="CSS/tailwind_local.js"></script>
@@ -16,7 +15,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <!-- LINK CORRIGIDO: Assumindo index.html está em /Páginas/ e estilo_main.css está em /CSS/ -->
     <link rel="stylesheet" href="CSS/estilo_main.css">
 </head>
 <!-- A classe 'index-body' está definida em estilo_main.css para gerenciar o padding superior e o layout -->
@@ -27,9 +25,9 @@
     <div id="three-canvas"></div>
 
     <!-- Barra de Navegação (Fixo no topo) -->
-    <!-- CLASSE ATUALIZADA: Usando navbar-transparent do estilo_main.css para 75% de transparência -->
+    <!-- Usando navbar-transparent do estilo_main.css para 75% de transparência -->
     <div class="navbar fixed top-0 left-0 right-0 z-20 shadow-lg navbar-transparent">
-        <!-- Alteração para colocar o menu hamburguer à direita -->
+        <!-- hamburguer à direita -->
         <div class="navbar-content max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative z-10">
             <!-- 1. Logo/Título Principal (LEFT SIDE) -->
             <a href="index.html"
@@ -50,45 +48,30 @@
             </button>
         </div>
     </div>
-
-    <!-- Drawer/Sidebar (Hidden by default, controlled by JS) -->
-    <!-- ADICIONADO duration-300 para transição suave de abertura/fechamento. -->
-    <div id="mobile-menu-drawer"
-        class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
+    <!-- Menu Lateral para Mobile (Hidden by default, controlled by JS) -->
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
         <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
 
         <ul class="space-y-4 text-xl font-medium">
             <li><a href="index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
-            <li><a href="Criptografia/criptografia.html"
-                    class="text-slate-200 hover:text-cyan-400 transition block py-2 active">Conceitos Fundamentais</a>
-            </li>
+            <li><a href="Criptografia/criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Criptografia</a></li>
+            
+            <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Cifras Simétricas</span></li>
+            <li><a href="DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
+            <li><a href="AES/main_aes.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
+            <li><a href="Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
+            
+            <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Criptografia de Chave Pública</span></li>
+            <li><a href="RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
+            <li><a href="ECC/ecc.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia ECC</a></li>
+            <li><a href="Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
 
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras
-                    Simétricas</strong></li>
-            <li><a href="DES/main_des.html"
-                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a>
-            </li>
-            <li><a href="AES/main_aes.html"
-                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a>
-            </li>
-            <li><a href="Vigenere/vigenere.html"
-                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de
-                    Vigenère</a></li>
+            <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Ferramentas de Integridade</span></li>
+            <li><a href="Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
 
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de
-                    Chave Pública</strong></li>
-            <li><a href="RSA/rsa.html"
-                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a>
-            </li>
-            <li><a href="Extra/extra.html"
-                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman
-                    (DHKE)</a></li>
+            <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Informações Adicionais</span></li>
+            <li><a href="SOBRE/sobre.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Sobre o Projeto</a></li>
 
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de
-                    Integridade</strong></li>
-            <li><a href="Hashing/hashing.html"
-                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash
-                    (SHA/MD5)</a></li>
         </ul>
     </div>
 
@@ -112,49 +95,61 @@
 
         <!-- Grid class is defined in style_main.css for responsiveness -->
         <main class="grid card-grid">
-            <!-- Card 1: Criptografia DES -->
+            <!-- Card 1: Criptografia -->
             <a href="Criptografia/criptografia.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Criptografia</h3>
                 <p>Introdução sobre conceitos gerais de criptografia</p>
             </a>
-            <!-- Card 1: Criptografia DES -->
+            <!-- Card 2: Criptografia DES -->
             <a href="DES/main_des.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">DES (Data Encryption Standard)</h3>
                 <p>Entenda a estrutura de Feistel, as rodadas de criptografia e a história de um dos algoritmos
                     simétricos mais influentes.</p>
             </a>
 
-            <!-- Card 2: Simulação DES -->
+            <!-- Card 3: Criptografia AES -->
             <a href="AES/main_aes.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">AES (Advanced Encryption Standard)</h3>
                 <p>Aprenda sobre a criptografia simétrica mais forte e utilizada no mundo.</p>
             </a>
 
-            <!-- Card 3: Cifra de Vigenère -->
+            <!-- Card 4: Cifra de Vigenère -->
             <a href="Vigenere/vigenere.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Cifra de Vigenère</h3>
                 <p>Explore esta cifra polialfabética clássica e seu uso de palavras-chave para criptografia simétrica.
                 </p>
             </a>
 
-            <!-- Card 4: Funções Hash -->
+            <!-- Card 5: Funções Hash -->
             <a href="Hashing/hashing.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Funções Hash (SHA/MD5)</h3>
                 <p>Conheça os conceitos de hashing e colisões. Demonstrações de integridade e assinatura digital.</p>
             </a>
 
-            <!-- Card 5: Criptografia RSA -->
+            <!-- Card 6: Criptografia RSA -->
             <a href="RSA/rsa.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Criptografia RSA</h3>
                 <p>O algoritmo de chave pública mais famoso. Entenda a geração de chaves e o processo de
                     criptografia/decriptografia.</p>
             </a>
 
-            <!-- Card 6: Diffie-Hellman -->
+            <!-- Card 7: Criptografia ECC -->
+            <a href="ECC/ecc.html" class="content-snippet-card block group">
+                <h3 class="text-2xl font-bold mb-2">Criptografia de Curvas Elípticas (ECC) </h3>
+                <p>Descubra a Criptografia ECC: chaves menores (256 bits) para a segurança e velocidade de um RSA de 3072 bits. Performance superior garantida.</p>
+            </a>
+
+            <!-- Card 8: Diffie-Hellman -->
             <a href="Extra/extra.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Diffie-Hellman (DHKE)</h3>
                 <p>Simulação da troca de chaves que permite o estabelecimento de um segredo compartilhado sobre canais
                     não seguros.</p>
+            </a>
+
+            <!-- Card 9: Sobre -->
+            <a href="SOBRE/sobre.html" class="content-snippet-card block group">
+                <h3 class="text-2xl font-bold mb-2">Sobre o site</h3>
+                <p>Informações sobre o projeto CryptoInfo</p>
             </a>
 
         </main>

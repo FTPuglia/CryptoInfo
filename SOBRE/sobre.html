@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introdução à Criptografia - Conceitos Fundamentais</title>
+    <title>CryptoInfo - Sobre o Projeto</title>
 
     <link rel="icon" type="image/png" href="../logo_azul.png">
     
     <script src="../CSS/tailwind_local.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <link rel="stylesheet" href="../CSS/inter_local.css">
+
     <link rel="stylesheet" href="../CSS/estilo_main.css">
+    
 </head>
 <body class="index-body">
 
@@ -36,7 +40,7 @@
 
         <ul class="space-y-4 text-xl font-medium">
             <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
-            <li><a href="criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Criptografia</a></li>
+            <li><a href="../Criptografia/criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Criptografia</a></li>
             
             <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Cifras Simétricas</span></li>
             <li><a href="../DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
@@ -52,7 +56,7 @@
             <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
 
             <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Informações Adicionais</span></li>
-            <li><a href="../SOBRE/sobre.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Sobre o Projeto</a></li>
+            <li><a href="sobre.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Sobre o Projeto</a></li>
 
         </ul>
     </div>
@@ -60,76 +64,47 @@
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
 
 
-    <section id="introducao" class="content-section-card max-w-7xl mx-auto mt-0">
-        <h2>Criptografia: O que é?</h2>
+    <section id="main-content" class="content-section-card max-w-7xl mx-auto mt-0">
+        
+        <h2 class="text-3xl font-bold text-cyan-400 mb-6 border-b border-slate-700 pb-2">Sobre os Desenvolvedores e o Projeto CryptoInfo</h2>
+
         <p class="text-slate-300 mb-6">
-            A criptografia é o estudo e a aplicação de técnicas que permitem transformar uma informação legível em algo ilegível para qualquer pessoa não autorizada. O objetivo principal é garantir a <strong class="text-cyan-400">confidencialidade</strong> da comunicação.
+            Esta plataforma digital foi concebida e desenvolvida por um grupo de estudantes da Fatec de São Bernardo do Campo (SP), como parte de um projeto acadêmico focado em disseminar conhecimento especializado.
         </p>
 
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700 mb-6">
-            <h3 class="text-xl font-bold text-cyan-400 mb-3">Mensagem Original vs. Mensagem Oculta</h3>
+            <h3 class="text-xl font-bold text-cyan-400 mb-3">Objetivo da Plataforma</h3>
             <p class="text-slate-300">
-                O processo começa com o <strong class="text-green-300">Texto Simples</strong> (Plaintext), que é a mensagem que você pode ler. Ao aplicar a criptografia (também chamada de cifragem), ele se torna o <strong class="text-red-300">Texto Cifrado</strong> (Ciphertext). O Texto Cifrado é o resultado embaralhado que, se interceptado, não fará sentido.<br/><br/>
-                Para voltar o Texto Cifrado ao Texto Claro, é necessário o processo de <strong class="text-cyan-400">decriptação</strong>.
+                O principal objetivo do projeto CryptoInfo é atuar como uma fonte de informação clara e acessível sobre Criptografia e sua relevância fundamental para a Cibersegurança moderna. Acreditamos que o entendimento desses mecanismos é essencial tanto para estudantes da área de tecnologia quanto para qualquer indivíduo interessado em compreender a segurança digital no cotidiano. O site visa desmistificar algoritmos complexos e ilustrar sua aplicação prática no mundo real.
             </p>
         </div>
-    </section>
 
-    <section id="componentes" class="content-section-card max-w-7xl mx-auto">
-        <h2>Os Pilares da Criptografia</h2>
-        <p class="text-slate-300 mb-6">
-            Toda operação de criptografia moderna depende de dois componentes críticos.
-        </p>
-
-        <div class="space-y-6">
-            
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500"></span> O Algoritmo
-                </h3>
-                <p class="text-slate-300">
-                    O algoritmo é a <strong class="text-cyan-300">fórmula ou regra matemática</strong> usada para misturar o texto claro e transformá-lo em texto cifrado. É o método de cifragem em si (por exemplo, <b>AES, RSA</b>). Na criptografia moderna, o tipo de algoritmo é público e conhecido por todos. A segurança não depende do algoritmo ser secreto.
-                </p>
+        <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700 mb-6">
+            <h3 class="text-xl font-bold text-cyan-400 mb-3">Tecnologias Utilizadas no Desenvolvimento</h3>
+            <p class="text-slate-300 mb-4">
+                O CryptoInfo foi construído integralmente utilizando o ambiente de desenvolvimento Visual Studio Code (VS Code), empregando uma pilha de tecnologias focada na leveza, acessibilidade e robustez da interface.
+            </p>
+            <div class="space-y-2 text-slate-300">
+                <p>As principais linguagens e bibliotecas que compõem o código-fonte incluem:</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li><span class="font-semibold text-cyan-300">HTML5:</span> Estrutura fundamental de todo o conteúdo da plataforma.</li>
+                    <li><span class="font-semibold text-cyan-300">CSS3 (Tailwind CSS):</span> Estilização e responsividade da interface. O <span class="font-italic">framework</span> Tailwind CSS foi essencial para a aplicação de um design moderno e consistente.</li>
+                    <li><span class="font-semibold text-cyan-300">JavaScript (JS):</span> Linguagem responsável por toda a interatividade e a lógica de simulação didática.</li>
+                </ul>
+                <p class="mt-4">Para funcionalidades avançadas e gráficos, foram integradas as seguintes bibliotecas:</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li><span class="font-semibold text-cyan-300">Three.js:</span> Utilizada para a criação de elementos 3D e experiências visuais imersivas (como o plano de fundo do canvas).</li>
+                    <li><span class="font-semibold text-cyan-300">Crypto-js:</span> Implementada nas seções de simulação, fornecendo uma base para as operações de <span class="font-italic">hashing</span> e manipulação de cifras simétricas (como DES e AES) de forma didática.</li>
+                </ul>
             </div>
-
-            <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
-                <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                    <span class="text-2xl mr-3 text-cyan-500"></span> A Chave (Key)
-                </h3>
-                <p class="text-slate-300">
-                    A chave é o <strong class="text-cyan-300">valor secreto</strong>, uma sequência de números ou caracteres, que é inserida no algoritmo. É como a senha que desbloqueia o processo de decriptação. Se o algoritmo é o cadeado, a chave é o segredo para abri-lo. A segurança da criptografia depende <strong class="text-red-300">exclusivamente</strong> da chave ser mantida em segredo.
-                </p>
-            </div>
+            <p class="text-slate-300 mt-4">
+                O projeto demonstra a aplicação prática de conceitos de Desenvolvimento Web na criação de ferramentas educativas de alto valor.
+            </p>
         </div>
+
     </section>
-
-    <section id="tipos" class="content-section-card max-w-7xl mx-auto">
-        <h2>Tipos de Criptografia</h2>
-        
-        <div class="space-y-8 mt-6">
-            
-            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
-                <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
-                    <span class="text-2xl mr-3 font-mono text-cyan-400"></span> Criptografia Simétrica (Chave Única)
-                </h3>
-                <p class="text-slate-300">
-                    Neste modelo, o emissor e o receptor usam a <strong class="text-cyan-300">mesma chave secreta</strong> tanto para cifrar quanto para decifrar a mensagem. É um sistema muito rápido e eficiente, ideal para proteger grandes quantidades de dados, sua vulnerabilidade principal é como compartilhar essa chave única de forma segura entre as duas partes.
-                </p>
-            </div>
-
-            <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600">
-                <h3 class="text-xl font-bold text-purple-400 mb-2 flex items-center">
-                    <span class="text-2xl mr-3 font-mono text-purple-400"></span> Criptografia Assimétrica (Par de Chaves)
-                </h3>
-                <p class="text-slate-300">
-                    Também conhecida como Criptografia de Chave Pública, ela utiliza <strong class="text-purple-300">duas chaves diferentes</strong>: uma <strong class="text-green-300">Pública</strong> (que pode ser compartilhada) e uma <strong class="text-red-300">Privada</strong> (que deve ser mantida secreta). O que é cifrado com uma só pode ser decifrado com a outra, resolvendo o problema de compartilhamento da chave e é essencial para a autenticação e troca segura de variados tipos de informação.
-                </p>
-            </div>
-        </div>
-    </section>
-
     <footer class="des-page-footer">
-        <p>2025 Projeto Cryptoinfo, para fins educacionais</p>
+        <p>© 2024 Projeto CryptoInfo</p>
     </footer>
 
     <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
@@ -144,15 +119,14 @@
     <script src="../JS/main.js"></script> 
     
     <script>
-        // Função de toggle menu principal (Reutilizada do template)
+        // Funções para o Menu Hambúrguer e o Aviso (Message Box)
+        
         function toggleMenu(show) {
             const drawer = document.getElementById('mobile-menu-drawer');
             const overlay = document.getElementById('mobile-menu-overlay');
-            
             if (show === undefined) {
                 show = drawer.classList.contains('transform-translate-x-full');
             }
-
             if (show) {
                 drawer.classList.remove('hidden');
                 overlay.classList.remove('hidden');
@@ -177,7 +151,7 @@
             toggleMenu();
         };
 
-        // Função de placeholder para os itens do menu, se necessário.
+        // Função de placeholder (usada para links inativos no menu)
         function mostrarAviso(titulo) {
             toggleMenu(false); 
             document.getElementById('messageTitle').textContent = titulo;

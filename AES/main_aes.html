@@ -42,17 +42,21 @@
             <li><a href="../index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
             <li><a href="../Criptografia/criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Criptografia</a></li>
             
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
+            <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Cifras Simétricas</span></li>
             <li><a href="../DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
-            <li><a href="main_aes.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Criptografia AES</a></li>
+            <li><a href="main_aes.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
             <li><a href="../Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
             
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
+            <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Criptografia de Chave Pública</span></li>
             <li><a href="../RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
+            <li><a href="../ECC/ecc.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia ECC</a></li>
             <li><a href="../Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
 
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
+            <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Ferramentas de Integridade</span></li>
             <li><a href="../Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
+
+            <li class="pt-4"><span class="text-lg text-cyan-400 block border-t border-slate-600 pt-3 font-semibold">Informações Adicionais</span></li>
+            <li><a href="../SOBRE/sobre.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base active">Sobre o Projeto</a></li>
 
         </ul>
     </div>
@@ -95,10 +99,7 @@
         </p>
     </div>
     <p class="text-slate-300 mb-6">
-        A combinação da sua arquitetura SPN robusta com o Key Schedule eficiente e as longas chaves fazem do AES o <strong class="text-green-300">padrão ouro</strong> para a maioria das aplicações de segurança, de comunicações sem fio (Wi-Fi) a protocolos de rede (TLS/SSL) e criptografia de disco.
-    </p>
-    <p class="text-slate-400 font-semibold italic">
-        <span class="text-yellow-400">&#9733; Recomendação:</span> Para segurança moderna, utilize o modo <strong class="text-purple-400">AES-256</strong> com o modo de operação <strong class="text-purple-400">GCM</strong> (Galois/Counter Mode), que oferece autenticação integrada, pois este modo garante a <strong class="text-purple-400">integridade e autenticidade</strong> além da confidencialidade.
+        A combinação da sua arquitetura SPN robusta com o Key Schedule eficiente e as longas chaves fazem do AES o <strong class="text-green-300">ideal</strong> para a maioria das aplicações de segurança, de comunicações sem fio (Wi-Fi) a protocolos de rede (TLS/SSL) e criptografia de disco.
     </p>
 </section>
 
@@ -114,7 +115,7 @@
         
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
             <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                <span class="text-2xl mr-3 text-cyan-500">&#x273F;</span> 1. SubBytes (Substituição de Bytes)
+                <span class="text-2xl mr-3 text-cyan-500"></span> 1. SubBytes (Substituição de Bytes)
             </h3>
             <p class="text-slate-300">
                 Esta é a camada de <strong class="text-green-300">confusão</strong>. Cada byte do estado é substituído por um byte correspondente em uma tabela de busca fixa (a <strong class="text-cyan-400">S-Box</strong>). Essa substituição é <strong class="text-green-300">não-linear</strong> e serve para obscurecer a relação entre o texto claro e o texto cifrado.
@@ -123,7 +124,7 @@
 
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
             <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                <span class="text-2xl mr-3 text-cyan-500">&#x21C9;</span> 2. ShiftRows (Deslocamento de Linhas)
+                <span class="text-2xl mr-3 text-cyan-500"></span> 2. ShiftRows (Deslocamento de Linhas)
             </h3>
             <p class="text-slate-300">
                 Esta é a camada de <strong class="text-red-300">difusão</strong>. As linhas da matriz de estado são ciclicamente deslocadas para a esquerda em diferentes offsets. Isso garante que os bytes de uma coluna se <strong class="text-red-300">espalhem por colunas diferentes</strong> na próxima rodada.
@@ -132,7 +133,7 @@
 
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
             <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                <span class="text-2xl mr-3 text-cyan-500">&#x271B;</span> 3. MixColumns (Mistura de Colunas)
+                <span class="text-2xl mr-3 text-cyan-500"></span> 3. MixColumns (Mistura de Colunas)
             </h3>
             <p class="text-slate-300">
                 Esta é a principal operação de <strong class="text-red-300">difusão</strong>. As colunas do estado são transformadas através de uma multiplicação matricial em um campo finito (<span class="font-mono text-yellow-300">GF(2^8)</span>). Isso garante que cada byte de saída dependa de <strong class="text-red-300">todos os quatro bytes de entrada</strong> da coluna. É omitida na última rodada.
@@ -141,7 +142,7 @@
 
         <div class="bg-slate-800 p-5 rounded-xl shadow-xl border border-slate-700">
             <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
-                <span class="text-2xl mr-3 text-cyan-500">&#x2295;</span> 4. AddRoundKey (Adição da Chave de Rodada)
+                <span class="text-2xl mr-3 text-cyan-500"></span> 4. AddRoundKey (Adição da Chave de Rodada)
             </h3>
             <p class="text-slate-300">
                 Esta é a única operação que usa a chave. O estado é combinado com a <strong class="text-cyan-400">Subchave de Rodada</strong> de 128 bits, usando a operação <strong class="text-green-300">XOR</strong>. A Subchave é gerada a partir da chave principal através do Key Schedule.
@@ -152,59 +153,7 @@
 
 <hr class="border-slate-700 mt-12 mb-12">
 
-<section id="modos-operacao" class="content-section-card max-w-7xl mx-auto py-8">
-    <h2>Modos de Operação: Como o AES Criptografa Mensagens Longas</h2>
-    
-    <p class="text-slate-300 mb-4 font-semibold">
-        Um <strong class="text-cyan-400">Modo de Operação</strong> é um esquema algorítmico que permite a uma cifra de bloco (como o AES) criptografar dados de tamanho arbitrário. Ele define como a segurança é mantida, controlando o <strong class="text-green-300">encadeamento</strong> dos blocos.
-    </p>
-    
 
-    <p class="text-slate-300 mb-8">
-        A escolha do modo é crucial para a segurança final.
-    </p>
-
-    <div class="space-y-8">
-        
-        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-red-500">
-            <h3 class="text-xl font-bold text-red-300 mb-2 flex items-center">
-                <span class="text-2xl mr-3 font-mono text-red-400">&#9888;</span> 1. Electronic Codebook (ECB)
-            </h3>
-            <p class="text-slate-300">
-                O modo mais simples. Cada bloco é criptografado <strong class="text-red-300">independentemente</strong>. Sua principal desvantagem é a <strong class="text-red-300">falta de aleatoriedade</strong>: blocos idênticos de entrada produzem saídas idênticas, permitindo a detecção de padrões. <strong class="text-red-300">Não é seguro para a maioria dos dados longos e deve ser evitado.</strong>
-            </p>
-        </div>
-
-        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-cyan-500">
-            <h3 class="text-xl font-bold text-cyan-400 mb-2 flex items-center">
-                <span class="text-2xl mr-3 font-mono text-cyan-400">&#x2713;</span> 2. Cipher Block Chaining (CBC)
-            </h3>
-            <p class="text-slate-300">
-                O modo CBC introduz encadeamento ao combinar (via <strong class="text-green-300">XOR</strong>) o bloco de texto claro atual com o <strong class="text-cyan-300">bloco cifrado anterior</strong>. Isso oculta padrões e requer um <strong class="text-cyan-300">Vetor de Inicialização (IV)</strong>. É seguro, mas não pode ser facilmente paralelizado na decriptografia.
-            </p>
-        </div>
-
-        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-green-500">
-            <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center">
-                <span class="text-2xl mr-3 font-mono text-green-400">&#9658;</span> 3. Counter Mode (CTR)
-            </h3>
-            <p class="text-slate-300">
-                O modo <strong class="text-green-300">CTR</strong> transforma a cifra de bloco em uma cifra de fluxo, gerando um <strong class="text-green-300">keystream</strong> criptografando um contador único. O texto claro é combinado com o keystream via <strong class="text-green-300">XOR</strong>. É rápido, eficiente e permite a <strong class="text-green-300">paralelização</strong> da criptografia e decriptografia.
-            </p>
-        </div>
-
-        <div class="p-5 bg-slate-700/50 rounded-xl shadow-lg border border-purple-500">
-            <h3 class="text-xl font-bold text-purple-400 mb-2 flex items-center">
-                <span class="text-2xl mr-3 font-mono text-purple-400">&#10003;</span> 4. Galois/Counter Mode (GCM) - Recomendado
-            </h3>
-            <p class="text-slate-300">
-                O <strong class="text-purple-400">GCM</strong> é o modo de <strong class="text-purple-400">Criptografia Autenticada</strong> mais utilizado. Ele usa o CTR para criptografia e, simultaneamente, calcula uma <strong class="text-purple-400">tag de autenticação (MAC)</strong>. Isso garante <strong class="text-purple-400">confidencialidade, integridade e autenticidade</strong>. É o modo <strong class="text-purple-400">padrão moderno</strong> para TLS/SSL e outras aplicações críticas.
-            </p>
-        </div>
-    </div>
-</section>
-
-<hr class="border-slate-700 mt-12 mb-12">
 
 <section id="simulacao-aes" class="content-section-card max-w-7xl mx-auto py-8">
     <h2>AES Didático: Simulação da Rodada de Transformação</h2>
@@ -246,7 +195,7 @@
         
         <div>
             <label for="chave" class="block mb-2 text-sm font-font-medium text-slate-200">Chave AES (16, 24 ou 32 caracteres - 128/192/256 bits):</label>
-            <input type="text" id="chave" value="16caractereschave" maxlength="32" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-md text-slate-100 focus:ring-cyan-500 focus:border-cyan-500">
+            <input type="text" id="chave" value="16caracterechave" maxlength="32" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-md text-slate-100 focus:ring-cyan-500 focus:border-cyan-500">
         </div>
 
         <div class="grid grid-cols-2 gap-4 pt-2">
@@ -266,7 +215,7 @@
             <div id="saida" class="w-full p-3 bg-slate-900 rounded-md h-24 overflow-y-auto border border-cyan-500/50 break-words text-green-300 font-mono">
                 (a saída aparecerá aqui)
             </div>
-            <button onclick="copiarSaidaAES()" class="button-with-shadow w-full mt-2 p-2 rounded-md font-bold transition duration-300 bg-slate-800 hover:bg-slate-700 text-sm text-slate-300 border border-slate-600">
+            <button onclick="copiarSaida()" class="button-with-shadow w-full mt-2 bg-slate-800 hover:bg-slate-700 text-sm">
                 Copiar Saída
             </button>
         </div>
@@ -345,7 +294,7 @@
 
         function limparCamposAES() {
             document.getElementById('entrada').value = '';
-            document.getElementById('chave').value = '16caractereschave'; // Valor padrão de 16 caracteres
+            document.getElementById('chave').value = '16caracterechave'; // Valor padrão de 16 caracteres
             document.getElementById('saida').textContent = '(a saída aparecerá aqui)';
         }
 
