@@ -1,5 +1,5 @@
-
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +15,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    
+
     <!-- LINK CORRIGIDO: Assumindo index.html está em /Páginas/ e estilo_main.css está em /CSS/ -->
     <link rel="stylesheet" href="CSS/estilo_main.css">
 </head>
 <!-- A classe 'index-body' está definida em estilo_main.css para gerenciar o padding superior e o layout -->
+
 <body class="index-body">
 
     <!-- Canvas 3D (Background) -->
@@ -31,16 +32,20 @@
         <!-- Alteração para colocar o menu hamburguer à direita -->
         <div class="navbar-content max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative z-10">
             <!-- 1. Logo/Título Principal (LEFT SIDE) -->
-            <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition">
+            <a href="index.html"
+                class="flex items-center space-x-2 text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition">
                 <img src="logo_azul.png" alt="Logo" class="h-8 w-8">
                 <span>CryptoInfo</span>
             </a>
 
             <!-- 2. Botão Hamburguer (RIGHT SIDE) -->
             <!-- O botão está sempre presente para todas as resoluções -->
-            <button id="mobile-menu-toggle" class="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
-                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            <button id="mobile-menu-toggle"
+                class="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
                 </svg>
             </button>
         </div>
@@ -48,29 +53,48 @@
 
     <!-- Drawer/Sidebar (Hidden by default, controlled by JS) -->
     <!-- ADICIONADO duration-300 para transição suave de abertura/fechamento. -->
-    <div id="mobile-menu-drawer" class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
+    <div id="mobile-menu-drawer"
+        class="mobile-menu-drawer transform transform-translate-x-full transition-transform duration-300 hidden">
         <h3 class="text-2xl font-bold mb-8 text-cyan-400 border-b border-slate-600 pb-2">Menu Principal</h3>
 
         <ul class="space-y-4 text-xl font-medium">
             <li><a href="index.html" class="text-slate-200 hover:text-cyan-400 transition block py-2">Home</a></li>
-            <li><a href="Criptografia/criptografia.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 active">Conceitos Fundamentais</a></li>
-            
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras Simétricas</strong></li>
-            <li><a href="DES/main_des.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a></li>
-            <li><a href="AES/main_aes.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a></li>
-            <li><a href="Vigenere/vigenere.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de Vigenère</a></li>
-            
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de Chave Pública</strong></li>
-            <li><a href="RSA/rsa.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a></li>
-            <li><a href="Extra/extra.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman (DHKE)</a></li>
+            <li><a href="Criptografia/criptografia.html"
+                    class="text-slate-200 hover:text-cyan-400 transition block py-2 active">Conceitos Fundamentais</a>
+            </li>
 
-            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de Integridade</strong></li>
-            <li><a href="Hashing/hashing.html" class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash (SHA/MD5)</a></li>
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Cifras
+                    Simétricas</strong></li>
+            <li><a href="DES/main_des.html"
+                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia DES</a>
+            </li>
+            <li><a href="AES/main_aes.html"
+                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia AES</a>
+            </li>
+            <li><a href="Vigenere/vigenere.html"
+                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Cifra de
+                    Vigenère</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Criptografia de
+                    Chave Pública</strong></li>
+            <li><a href="RSA/rsa.html"
+                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Criptografia RSA</a>
+            </li>
+            <li><a href="Extra/extra.html"
+                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Diffie-Hellman
+                    (DHKE)</a></li>
+
+            <li class="pt-4"><strong class="text-lg text-cyan-400 block border-t border-slate-600 pt-3">Ferramentas de
+                    Integridade</strong></li>
+            <li><a href="Hashing/hashing.html"
+                    class="text-slate-200 hover:text-cyan-400 transition block py-2 ml-4 text-base">Funções Hash
+                    (SHA/MD5)</a></li>
         </ul>
     </div>
 
     <!-- Overlay (Hidden by default, controlled by JS) -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden opacity-0 transition-opacity duration-300"
+        onclick="toggleMenu(false)"></div>
 
 
     <!-- Conteúdo Principal -->
@@ -96,7 +120,8 @@
             <!-- Card 1: Criptografia DES -->
             <a href="DES/main_des.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">DES (Data Encryption Standard)</h3>
-                <p>Entenda a estrutura de Feistel, as rodadas de criptografia e a história de um dos algoritmos simétricos mais influentes.</p>
+                <p>Entenda a estrutura de Feistel, as rodadas de criptografia e a história de um dos algoritmos
+                    simétricos mais influentes.</p>
             </a>
 
             <!-- Card 2: Simulação DES -->
@@ -104,13 +129,14 @@
                 <h3 class="text-2xl font-bold mb-2">AES (Advanced Encryption Standard)</h3>
                 <p>Aprenda sobre a criptografia simétrica mais forte e utilizada no mundo.</p>
             </a>
-            
+
             <!-- Card 3: Cifra de Vigenère -->
             <a href="Vigenere/vigenere.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Cifra de Vigenère</h3>
-                <p>Explore esta cifra polialfabética clássica e seu uso de palavras-chave para criptografia simétrica.</p>
+                <p>Explore esta cifra polialfabética clássica e seu uso de palavras-chave para criptografia simétrica.
+                </p>
             </a>
-            
+
             <!-- Card 4: Funções Hash -->
             <a href="Hashing/hashing.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Funções Hash (SHA/MD5)</h3>
@@ -120,37 +146,38 @@
             <!-- Card 5: Criptografia RSA -->
             <a href="RSA/rsa.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Criptografia RSA</h3>
-                <p>O algoritmo de chave pública mais famoso. Entenda a geração de chaves e o processo de criptografia/decriptografia.</p>
+                <p>O algoritmo de chave pública mais famoso. Entenda a geração de chaves e o processo de
+                    criptografia/decriptografia.</p>
             </a>
 
             <!-- Card 6: Diffie-Hellman -->
             <a href="Extra/extra.html" class="content-snippet-card block group">
                 <h3 class="text-2xl font-bold mb-2">Diffie-Hellman (DHKE)</h3>
-                <p>Simulação da troca de chaves que permite o estabelecimento de um segredo compartilhado sobre canais não seguros.</p>
+                <p>Simulação da troca de chaves que permite o estabelecimento de um segredo compartilhado sobre canais
+                    não seguros.</p>
             </a>
-            
+
         </main>
 
-        
+
 
     </div>
-    
+
     <!-- Modal Personalizado para Mensagens (Tailwind classes kept, updated to cyan) -->
-    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4" onclick="this.classList.add('hidden')">
+    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4"
+        onclick="this.classList.add('hidden')">
         <div class="bg-slate-700 p-6 rounded-lg shadow-xl max-w-sm w-full" onclick="event.stopPropagation()">
             <!-- Modal title cor de destaque atualizada para cyan-400 -->
             <h3 id="messageTitle" class="text-xl font-bold mb-3 text-cyan-400">Informação</h3>
             <p id="messageText" class="text-slate-200 mb-4"></p>
             <!-- Modal button cor de destaque atualizada para cyan-400/cyan-300 -->
-            <button onclick="document.getElementById('messageBox').classList.add('hidden')" class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
+            <button onclick="document.getElementById('messageBox').classList.add('hidden')"
+                class="w-full bg-cyan-400 text-slate-900 font-bold py-2 rounded-md hover:bg-cyan-300 transition">Fechar</button>
         </div>
     </div>
-    
+
     <!-- NOVO: Referência ao arquivo JS centralizado, assumindo o caminho ../JS/main.js -->
     <script src="JS/main.js"></script>
-
 </body>
+
 </html>
-
-
-
